@@ -5,7 +5,7 @@ AOS.init({
 });
 
 $(function(){
-
+	
 	'use strict';
 
 	$(".loader").delay(50).fadeOut("slow");
@@ -251,7 +251,9 @@ $(function(){
 
 	}
 	counter();
+	
 
+	
 	// jarallax
 	var jarallaxPlugin = function() {
 		if ( $('.jarallax').length > 0 ) {
@@ -464,7 +466,6 @@ var OnePageNavigation = function() {
 };
 OnePageNavigation();
 
-
 // load ajax page
 var portfolioItemClick = function() {
 	$('.ajax-load-page').on('click', function(e) {
@@ -478,31 +479,14 @@ var portfolioItemClick = function() {
 
 		TweenMax.to('.loader-portfolio-wrap', 1, { top: '-50px', autoAlpha: 1, display: 'block', ease: Power4.easeOut });
 
-		setTimeout(function() {
-			$('html, body').animate({
-				scrollTop: $('#portfolio-section').offset().top - 50
-
-			}, 700, 'easeInOutExpo', function() {
-			});
-		}, 200);
-		
-
 		setTimeout(function(){
 			loadPortfolioSinglePage(id, href);
 		}, 100);
-
-		e.preventDefault();
 
 	});
 
 	// Close
 	$('body').on('click', '.js-close-portfolio', function() {
-
-		setTimeout(function(){
-			$('html, body').animate({
-				scrollTop: $('#portfolio-section').offset().top - 50
-			}, 700, 'easeInOutExpo');
-		}, 200);
 
 		TweenMax.set('.portfolio-wrapper', { visibility: 'visible', height: 'auto' });
 		TweenMax.to('.portfolio-single-inner', 1, { marginTop: '50px', opacity: 0,  display: 'none', onComplete() {
@@ -540,11 +524,6 @@ var loadPortfolioSinglePage = function(id, href) {
 
 			setTimeout(function() {
 				owlSingleSlider();
-				$('html, body').animate({
-					scrollTop: $('#portfolio-section').offset().top - 50
-
-				}, 700, 'easeInOutExpo', function() {
-				});
 			}, 10);
 
 			setTimeout(function() {
@@ -562,7 +541,6 @@ var loadPortfolioSinglePage = function(id, href) {
 };
 
 portfolioItemClick();
-
 
 
 var owlSingleSlider = function () {
@@ -597,10 +575,5 @@ var owlSingleSlider = function () {
 
 
 })
-
-
-
-
-
 
 
