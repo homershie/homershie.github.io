@@ -124,11 +124,6 @@ const router = useRouter()
 const imagesPreloaded = ref(false)
 const { toWebP } = useImageFormat()
 
-// 取得WebP格式的圖片路徑
-const getWebpImage = imagePath => {
-  return toWebP(imagePath)
-}
-
 const article = ref(null)
 const articleIds = Object.keys(articles)
 

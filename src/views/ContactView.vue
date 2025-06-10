@@ -138,14 +138,6 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
-import { useImageFormat } from '@/composables/useImageFormat.js'
-
-const { toWebP } = useImageFormat()
-
-// 將圖片路徑轉換為WebP格式
-const getWebpImage = imagePath => {
-  return toWebP(imagePath)
-}
 
 const isSubmitting = ref(false)
 const formMessage = ref('')
