@@ -1,17 +1,23 @@
 <template>
   <div class="gallery">
     <div class="row">
-      <div v-for="work in sortedWorks" :key="work.id" class="col-lg-4 items">
+      <div
+        v-for="(work, index) in displayedWorks"
+        :key="work.id"
+        class="col-lg-4 items masonry-item"
+        :data-index="index"
+      >
         <div class="item">
           <div class="img">
-            <img :src="work.image" :alt="work.title" />
+            <img :src="work.image" :alt="work.title" class="radius-5 w-100" />
             <a href="#0" class="link" @click.prevent="viewDetails(work)"></a>
           </div>
           <div class="cont d-flex align-items-center">
             <div>
               <h6>{{ work.title }}</h6>
-              <!-- 修改這裡，迭代 category 陣列 -->
-              <span v-for="(tag, index) in work.category" :key="index" class="tag">{{ tag }}</span>
+              <span v-for="(tag, tagIndex) in work.category" :key="tagIndex" class="tag">{{
+                tag
+              }}</span>
             </div>
             <div class="ml-auto">
               <div class="arrow">
@@ -37,7 +43,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Masonry from 'masonry-layout'
@@ -57,128 +63,149 @@ function viewDetails(work) {
   emit('view-details', work)
 }
 
+const displayedWorks = ref([])
 const sortedWorks = computed(() => {
   return [...props.works].sort((a, b) => b.id - a.id)
 })
 
-onMounted(() => {
-  let masonryInstance = null
+let masonryInstance = null
+let resizeHandler = null
 
-  // 等待 DOM 完全渲染
-  nextTick(() => {
-    const container = document.querySelector('.gallery')
-    const items = document.querySelectorAll('.items')
+// 初始化 Masonry
+const initMasonry = () => {
+  const container = document.querySelector('.gallery')
+  if (!container) return
 
-    if (!container || items.length === 0) return
+  if (masonryInstance) {
+    masonryInstance.destroy()
+  }
 
-    // 設定初始狀態（移除 scale 避免影響布局）
-    items.forEach(item => {
+  masonryInstance = new Masonry(container, {
+    itemSelector: '.items',
+    columnWidth: '.items',
+    percentPosition: true,
+    gutter: 0,
+    transitionDuration: 0,
+    stagger: 30,
+    initLayout: true,
+  })
+}
+
+// 等待短暫延遲，用於確保 DOM 更新
+const waitForDomUpdate = () => {
+  return new Promise(resolve => {
+    // 短暫延遲，讓瀏覽器有時間處理布局
+    setTimeout(resolve, 50)
+  })
+}
+
+// 為新項目設置動畫
+const setupAnimationsForNewItems = (specificItems = null) => {
+  // 選擇要設置動畫的項目
+  const items = specificItems || document.querySelectorAll('.items')
+  const itemsToAnimate = Array.isArray(items) ? items : Array.from(items)
+
+  // 僅為未動畫的項目設定初始狀態
+  itemsToAnimate.forEach(item => {
+    if (!item.classList.contains('animated')) {
       gsap.set(item, { opacity: 0, y: 50 })
-    })
-
-    // 初始化 Masonry（等所有圖片載入完成）
-    const initMasonry = () => {
-      if (masonryInstance) {
-        masonryInstance.destroy()
-      }
-
-      masonryInstance = new Masonry(container, {
-        itemSelector: '.items',
-        columnWidth: '.items',
-        percentPosition: true,
-        gutter: 0,
-        transitionDuration: 0, // 禁用 Masonry 內建動畫
-      })
-    }
-
-    // 等待所有圖片載入完成
-    const images = container.querySelectorAll('img')
-    let loadedCount = 0
-    const totalImages = images.length
-
-    const checkAllImagesLoaded = () => {
-      loadedCount++
-      if (loadedCount === totalImages) {
-        // 所有圖片載入完成後初始化 Masonry
-        setTimeout(() => {
-          initMasonry()
-          setupAnimations()
-        }, 100)
-      }
-    }
-
-    // 監聽圖片載入
-    if (totalImages === 0) {
-      // 沒有圖片時直接初始化
-      setTimeout(() => {
-        initMasonry()
-        setupAnimations()
-      }, 100)
-    } else {
-      images.forEach(img => {
-        if (img.complete) {
-          checkAllImagesLoaded()
-        } else {
-          img.addEventListener('load', checkAllImagesLoaded)
-          img.addEventListener('error', checkAllImagesLoaded) // 即使載入失敗也要計算
-        }
-      })
-    }
-
-    // 設置動畫
-    const setupAnimations = () => {
-      // 使用 Intersection Observer 但不改變 scale
-      const observer = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              gsap.to(entry.target, {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                ease: 'power2.out',
-                onComplete: () => {
-                  // 動畫完成後重新布局 Masonry
-                  if (masonryInstance) {
-                    masonryInstance.layout()
-                  }
-                },
-              })
-
-              observer.unobserve(entry.target)
-            }
-          })
-        },
-        {
-          threshold: 0.1,
-          rootMargin: '0px 0px -10% 0px',
-        }
-      )
-
-      // 開始觀察所有項目
-      items.forEach(item => {
-        observer.observe(item)
-      })
-    }
-
-    // 窗口大小改變時重新布局
-    const handleResize = () => {
-      if (masonryInstance) {
-        setTimeout(() => {
-          masonryInstance.layout()
-        }, 100)
-      }
-    }
-
-    window.addEventListener('resize', handleResize)
-
-    // 清理函數
-    return () => {
-      if (masonryInstance) {
-        masonryInstance.destroy()
-      }
-      window.removeEventListener('resize', handleResize)
     }
   })
+
+  // 使用 Intersection Observer
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+          entry.target.classList.add('animated')
+
+          gsap.to(entry.target, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power2.out',
+            onComplete: () => {
+              // 動畫完成後重新布局 Masonry
+              if (masonryInstance) {
+                masonryInstance.layout()
+              }
+            },
+          })
+
+          observer.unobserve(entry.target)
+        }
+      })
+    },
+    {
+      threshold: 0.1,
+      rootMargin: '0px 0px -10% 0px',
+    }
+  )
+
+  // 開始觀察未動畫的項目
+  itemsToAnimate.forEach(item => {
+    if (!item.classList.contains('animated')) {
+      observer.observe(item)
+    }
+  })
+}
+
+onMounted(() => {
+  // 直接加載所有作品
+  displayedWorks.value = sortedWorks.value
+
+  // 等待 DOM 更新
+  waitForDomUpdate().then(() => {
+    // 初始化 Masonry 和動畫
+    initMasonry()
+    setupAnimationsForNewItems()
+  })
+
+  // 窗口大小改變時重新布局
+  resizeHandler = () => {
+    if (masonryInstance) {
+      setTimeout(() => {
+        masonryInstance.layout()
+      }, 100)
+    }
+  }
+
+  window.addEventListener('resize', resizeHandler)
+})
+
+onUnmounted(() => {
+  if (masonryInstance) {
+    masonryInstance.destroy()
+  }
+  if (resizeHandler) {
+    window.removeEventListener('resize', resizeHandler)
+  }
 })
 </script>
+
+<style scoped>
+.img {
+  position: relative;
+  overflow: hidden;
+}
+
+.img img {
+  width: 100%;
+  height: auto;
+  transition: opacity 0.6s ease;
+}
+
+/* 禁用所有元素的動畫，避免初始加載時的閃爍 */
+.items {
+  will-change: transform, opacity;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+</style>

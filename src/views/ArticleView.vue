@@ -117,10 +117,17 @@ import { articles } from '@/data/articleData.js'
 import { preloadImages } from '@/composables/useImagePreloader.js'
 import { useHead } from '@vueuse/head'
 import { enableImageLightbox } from '@/composables/useLightBox.js'
+import { useImageFormat } from '@/composables/useImageFormat.js'
 
 const route = useRoute()
 const router = useRouter()
 const imagesPreloaded = ref(false)
+const { toWebP } = useImageFormat()
+
+// 取得WebP格式的圖片路徑
+const getWebpImage = imagePath => {
+  return toWebP(imagePath)
+}
 
 const article = ref(null)
 const articleIds = Object.keys(articles)
@@ -221,7 +228,21 @@ watch(article, async a => {
 
   imagesPreloaded.value = true
 
-  // 5. 圖片載完後才開 lightbox
+  // 5. 轉換所有文章內圖片為WebP格式
+  const imageElements = document.querySelectorAll('.cont .image img')
+  imageElements.forEach(img => {
+    // 記錄原始圖片路徑作為後備
+    const originalSrc = img.src
+    // 設置WebP路徑
+    img.src = toWebP(originalSrc)
+    // 如果WebP載入失敗，使用原始圖片
+    img.onerror = function () {
+      this.onerror = null
+      this.src = originalSrc
+    }
+  })
+
+  // 6. 圖片載完後才開 lightbox
   enableImageLightbox()
 })
 

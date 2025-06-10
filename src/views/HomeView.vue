@@ -120,7 +120,7 @@
             <div class="author-img">
               <div class="img">
                 <img
-                  src="/assets/imgs/header/profile.jpg"
+                  :src="getWebpImage('/assets/imgs/header/profile.jpg')"
                   alt="荷馬桑 Homer Shie 個人照片"
                   loading="lazy"
                 />
@@ -232,6 +232,14 @@
 <script setup>
 import { computed } from 'vue'
 import { portfolio } from '@/data/portfolioData.js'
+import { useImageFormat } from '@/composables/useImageFormat.js'
+
+const { toWebP } = useImageFormat()
+
+// 將圖片路徑轉換為WebP格式
+const getWebpImage = imagePath => {
+  return toWebP(imagePath)
+}
 
 const experienceYear = computed(() => {
   const startYear = 2018 // 假設從2018年開始工作

@@ -26,7 +26,7 @@
             >
               <router-link :to="`/article/${post.id}`">
                 <div class="img">
-                  <img :src="post.image" :alt="post.title" />
+                  <img :src="getWebpImage(post.image)" :alt="post.title" />
                 </div>
               </router-link>
               <div class="cont mt-30">
@@ -87,7 +87,7 @@
                 <div class="valign">
                   <div class="img">
                     <router-link :to="`/article/${post.id}`">
-                      <img :src="post.thumbnail" :alt="post.title" />
+                      <img :src="getWebpImage(post.thumbnail)" :alt="post.title" />
                     </router-link>
                   </div>
                 </div>
@@ -116,9 +116,16 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { articles } from '@/data/articleData.js'
+import { useImageFormat } from '@/composables/useImageFormat.js'
 
 const searchQuery = ref('')
 const selectedCategory = ref('all')
+const { toWebP } = useImageFormat()
+
+// 取得WebP格式的圖片路徑
+const getWebpImage = imagePath => {
+  return toWebP(imagePath)
+}
 
 const toLocalString = isoDate => {
   return new Date(isoDate).toLocaleDateString()
