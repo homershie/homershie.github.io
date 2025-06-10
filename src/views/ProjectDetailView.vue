@@ -14,7 +14,7 @@
               ></iframe>
             </template>
             <template v-else>
-              <img :src="project.mainImage" :alt="project.title" class="radius-5 w-50" />
+              <img :src="project.mainImage" :alt="project.title" class="radius-5 project-image" />
             </template>
           </div>
           <div class="row justify-content-center">
@@ -152,5 +152,13 @@ a:hover {
 .break-link {
   word-break: break-all;
   overflow-wrap: anywhere;
+}
+.project-image {
+  width: 100%;
+}
+@media (min-width: 992px) {
+  .project-image {
+    width: 50% !important;
+  }
 }
 </style>

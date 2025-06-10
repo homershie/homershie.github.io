@@ -9,7 +9,7 @@
       >
         <div class="item">
           <div class="img">
-            <img :src="work.image" :alt="work.title" />
+            <img :src="work.image" :alt="work.title" class="radius-5 w-100" />
             <a href="#0" class="link" @click.prevent="viewDetails(work)"></a>
           </div>
           <div class="cont d-flex align-items-center">
