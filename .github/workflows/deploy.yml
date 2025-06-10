@@ -6,8 +6,8 @@ on:
 
 permissions:
   contents: write
-  pages: write # ← 一定要加這行，否則沒法發佈 Pages
-  id-token: write # （若需要 OIDC 可留，否則可刪）
+  pages: write
+  id-token: write
 
 jobs:
   build-and-deploy:
@@ -16,21 +16,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          persist-credentials: true # 保留 GITHUB_TOKEN
+          persist-credentials: true
 
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+          cache: 'npm'
 
-      - name: Install & Build
-        run: |
-          npm ci
-          npm run build
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          NODE_ENV: production
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages # 或者你自己的發佈分支
+          publish_branch: gh-pages
           publish_dir: ./dist
+          commit_message: 'Deploy: ${{ github.event.head_commit.message }}'
+          force_orphan: true
