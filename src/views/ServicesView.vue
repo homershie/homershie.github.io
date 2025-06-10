@@ -22,7 +22,7 @@
               <div class="d-flex align-items-center mb-30">
                 <div>
                   <span class="icon-img-50 mr-40">
-                    <img src="/assets/imgs/serv-img/1.png" alt="平面設計" />
+                    <img :src="getWebpImage('/assets/imgs/serv-img/1.png')" alt="平面設計" />
                   </span>
                 </div>
                 <div>
@@ -42,7 +42,7 @@
               <div class="d-flex align-items-center mb-30">
                 <div>
                   <span class="icon-img-50 mr-40">
-                    <img src="/assets/imgs/serv-img/2.png" alt="動態設計" />
+                    <img :src="getWebpImage('/assets/imgs/serv-img/2.png')" alt="動態設計" />
                   </span>
                 </div>
                 <div>
@@ -62,7 +62,7 @@
               <div class="d-flex align-items-center mb-30">
                 <div>
                   <span class="icon-img-50 mr-40">
-                    <img src="/assets/imgs/serv-img/3.png" alt="插畫創作" />
+                    <img :src="getWebpImage('/assets/imgs/serv-img/3.png')" alt="插畫創作" />
                   </span>
                 </div>
                 <div>
@@ -82,7 +82,7 @@
               <div class="d-flex align-items-center mb-30">
                 <div>
                   <span class="icon-img-50 mr-40">
-                    <img src="/assets/imgs/serv-img/4.png" alt="3D動畫" />
+                    <img :src="getWebpImage('/assets/imgs/serv-img/4.png')" alt="3D動畫" />
                   </span>
                 </div>
                 <div>
@@ -102,7 +102,7 @@
               <div class="d-flex align-items-center mb-30">
                 <div>
                   <span class="icon-img-50 mr-40">
-                    <img src="/assets/imgs/serv-img/5.png" alt="品牌設計" />
+                    <img :src="getWebpImage('/assets/imgs/serv-img/5.png')" alt="品牌設計" />
                   </span>
                 </div>
                 <div>
@@ -123,7 +123,7 @@
               <div class="d-flex align-items-center mb-30">
                 <div>
                   <span class="icon-img-50 mr-40">
-                    <img src="/assets/imgs/serv-img/6.png" alt="UI設計" />
+                    <img :src="getWebpImage('/assets/imgs/serv-img/6.png')" alt="UI設計" />
                   </span>
                 </div>
                 <div>
@@ -256,7 +256,7 @@
           <div class="item">
             <div class="img w-25">
               <img
-                src="/assets/imgs/brands/garmin.png"
+                :src="getWebpImage('/assets/imgs/brands/garmin.png')"
                 style="filter: brightness(0.5)"
                 alt="garmin-logo"
               />
@@ -273,8 +273,15 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { portfolio } from '@/data/portfolioData.js'
+import { useImageFormat } from '@/composables/useImageFormat.js'
 
 const portfolioData = ref(portfolio)
+const { toWebP } = useImageFormat()
+
+// 將圖片路徑轉換為WebP格式
+const getWebpImage = imagePath => {
+  return toWebP(imagePath)
+}
 
 // 計算總專案數量
 const totalProjectCount = computed(() => portfolioData.value.length)
