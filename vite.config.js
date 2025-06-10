@@ -18,11 +18,11 @@ export default defineConfig({
     assetsDir: 'assets',
     rollupOptions: {
       output: {
-        manualChunks: {
-          vue: ['vue'],
-          'vue-router': ['vue-router'],
-          pinia: ['pinia'],
-        },
+        manualChunks: undefined,
+        format: 'es',
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]',
       },
     },
   },
