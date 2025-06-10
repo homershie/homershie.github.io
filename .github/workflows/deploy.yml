@@ -5,7 +5,7 @@ on:
       - main
 
 permissions:
-  contents: read # 用來拉取程式碼
+  contents: write
   pages: write # ← 一定要加這行，否則沒法發佈 Pages
   id-token: write # （若需要 OIDC 可留，否則可刪）
 
