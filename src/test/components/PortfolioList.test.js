@@ -1,6 +1,16 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import PortfolioList from '@/components/PortfolioList.vue'
+
+// 模擬 Masonry
+vi.mock('masonry-layout', () => {
+  return {
+    default: vi.fn().mockImplementation(() => ({
+      layout: vi.fn(),
+      destroy: vi.fn(),
+    })),
+  }
+})
 
 const mockWorks = [
   {
@@ -19,17 +29,42 @@ const mockWorks = [
   },
 ]
 
+// 模擬gsap和ScrollTrigger，這些在測試環境中可能無法正常工作
+vi.mock('gsap', () => ({
+  gsap: {
+    registerPlugin: vi.fn(),
+    set: vi.fn(),
+    to: vi.fn(),
+  },
+  ScrollTrigger: {},
+}))
+
 describe('PortfolioList', () => {
-  it('should render portfolio works correctly', () => {
+  beforeEach(() => {
+    // 清除所有模擬的實現
+    vi.clearAllMocks()
+    // 重置DOM
+    document.body.innerHTML = ''
+  })
+
+  it('should render portfolio works correctly', async () => {
     const wrapper = mount(PortfolioList, {
       props: {
         works: mockWorks,
       },
+      attachTo: document.body,
     })
 
-    expect(wrapper.findAll('.items')).toHaveLength(2)
+    // 等待異步渲染完成
+    await new Promise(resolve => setTimeout(resolve, 100))
+
+    // 由於displayedWorks是基於sortedWorks的，sortedWorks按id降序排列
+    // 因此檢查是否包含工作標題而不是依賴DOM中的順序
     expect(wrapper.text()).toContain('Test Work 1')
     expect(wrapper.text()).toContain('Test Work 2')
+
+    // 檢查具有.masonry-item類的元素的數量
+    expect(wrapper.findAll('.masonry-item').length).toBe(2)
   })
 
   it('should emit view-details event when clicked', async () => {
@@ -37,13 +72,25 @@ describe('PortfolioList', () => {
       props: {
         works: mockWorks,
       },
+      attachTo: document.body,
     })
 
-    // 觸發第一個作品的 .link 點擊
-    await wrapper.find('.link').trigger('click')
+    // 等待異步渲染完成
+    await new Promise(resolve => setTimeout(resolve, 100))
 
+    // 使用第一個.link元素
+    const linkElement = wrapper.find('.link')
+    // 確保找到了元素
+    expect(linkElement.exists()).toBe(true)
+
+    // 觸發點擊
+    await linkElement.trigger('click')
+
+    // 檢查事件
     expect(wrapper.emitted('view-details')).toBeTruthy()
-    // 由於 sortedWorks 按 id 降序排列，第一個會是 id: 2 的項目
+    expect(wrapper.emitted('view-details')[0]).toBeTruthy()
+
+    // 由於是按id降序排列，所以第一個元素應該是id為2的
     expect(wrapper.emitted('view-details')[0][0].id).toBe(2)
   })
 
@@ -54,6 +101,6 @@ describe('PortfolioList', () => {
       },
     })
 
-    expect(wrapper.findAll('.items')).toHaveLength(0)
+    expect(wrapper.findAll('.masonry-item').length).toBe(0)
   })
 })

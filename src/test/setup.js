@@ -24,3 +24,40 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: vi.fn(),
   })),
 })
+
+// Mock IntersectionObserver
+class MockIntersectionObserver {
+  constructor(callback) {
+    this.callback = callback
+    this.observables = new Set()
+  }
+
+  observe(element) {
+    this.observables.add(element)
+  }
+
+  unobserve(element) {
+    this.observables.delete(element)
+  }
+
+  disconnect() {
+    this.observables.clear()
+  }
+
+  // 模擬觸發 Intersection Observer 回調
+  triggerAll(isIntersecting) {
+    const entries = [...this.observables].map(element => ({
+      isIntersecting,
+      target: element,
+      boundingClientRect: element.getBoundingClientRect(),
+      intersectionRatio: isIntersecting ? 1 : 0,
+      intersectionRect: isIntersecting ? element.getBoundingClientRect() : null,
+      rootBounds: null,
+      time: Date.now(),
+    }))
+
+    this.callback(entries, this)
+  }
+}
+
+global.IntersectionObserver = MockIntersectionObserver
