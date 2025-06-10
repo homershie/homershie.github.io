@@ -14,7 +14,7 @@
               ></iframe>
             </template>
             <template v-else>
-              <img :src="project.mainImage" :alt="project.title" class="radius-5 project-image" />
+              <img :src="webpMainImage" :alt="project.title" class="radius-5 project-image" />
             </template>
           </div>
           <div class="row justify-content-center">
@@ -32,7 +32,11 @@
                   <div class="row md-marg">
                     <div v-for="(image, index) in project.gallery" :key="index" class="col-md-6">
                       <div class="img sm-mb30">
-                        <img v-if="image" :src="image" :alt="`${project.title} ${index + 1}`" />
+                        <img
+                          v-if="image"
+                          :src="webpGallery[index]"
+                          :alt="`${project.title} ${index + 1}`"
+                        />
                       </div>
                     </div>
                   </div>
@@ -79,6 +83,7 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { usePortfolio } from '@/composables/usePortfolio.js'
+import { useImageFormat } from '@/composables/useImageFormat.js'
 import Preloader from '@/components/PreLoader.vue'
 import { enableImageLightbox } from '@/composables/useLightBox.js'
 import { watch } from 'vue'
@@ -86,6 +91,20 @@ import { watch } from 'vue'
 const route = useRoute()
 const project = ref(null)
 const { getWorkById } = usePortfolio()
+const { toWebP } = useImageFormat()
+
+// 獲取WebP格式的圖片路徑
+const webpMainImage = computed(() => {
+  return project.value?.mainImage ? toWebP(project.value.mainImage) : ''
+})
+
+// 獲取WebP格式的畫廊圖片
+const webpGallery = computed(() => {
+  if (!project.value?.gallery || !Array.isArray(project.value.gallery)) {
+    return []
+  }
+  return project.value.gallery.map(img => (img ? toWebP(img) : null))
+})
 
 // 格式化描述文字，將 \n 轉換為 <br>
 const formattedDescription = computed(() => {
@@ -108,7 +127,7 @@ watch(
   () => project.value,
   newProject => {
     if (newProject) {
-      // 收集主圖與 gallery 圖片
+      // 收集主圖與 gallery 圖片（使用原始圖片路徑）
       const images = []
       if (newProject.mainImage) images.push(newProject.mainImage)
       if (Array.isArray(newProject.gallery)) {

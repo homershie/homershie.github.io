@@ -15,7 +15,9 @@
           <div class="cont d-flex align-items-center">
             <div>
               <h6>{{ work.title }}</h6>
-              <span v-for="(tag, index) in work.category" :key="index" class="tag">{{ tag }}</span>
+              <span v-for="(tag, tagIndex) in work.category" :key="tagIndex" class="tag">{{
+                tag
+              }}</span>
             </div>
             <div class="ml-auto">
               <div class="arrow">
