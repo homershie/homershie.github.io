@@ -1,0 +1,13 @@
+node_modules/
+dist/
+dist-ssr/
+coverage/
+*.d.ts
+.DS_Store
+.env.local
+.env.*.local
+public/
+vite.config.js.timestamp-*
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
