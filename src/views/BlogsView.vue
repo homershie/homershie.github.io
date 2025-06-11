@@ -15,6 +15,73 @@
           </div>
         </div>
       </div>
+
+      <!-- 小螢幕設備上顯示在頂部的側邊欄內容 -->
+      <div class="row mb-50 d-lg-none">
+        <div class="col-12">
+          <div class="sidebar">
+            <div class="search-box">
+              <input
+                v-model="searchQuery"
+                type="text"
+                placeholder="搜尋文章"
+                @input="filterPosts"
+              />
+              <span class="icon pe-7s-search"></span>
+            </div>
+            <div class="widget catogry">
+              <h6 class="title-widget">分類</h6>
+              <ul class="rest">
+                <li>
+                  <span>
+                    <a href="#0" @click.prevent="filterByCategory('all')"> 全部文章 </a>
+                  </span>
+                  <span class="ml-auto">{{ allPosts.length }}</span>
+                </li>
+                <li>
+                  <span>
+                    <a href="#0" @click.prevent="filterByCategory('GraphicStyle')">
+                      視覺風格大全
+                    </a>
+                  </span>
+                  <span class="ml-auto">{{ getPostCountByCategory('GraphicStyle') }}</span>
+                </li>
+                <li>
+                  <span>
+                    <a href="#0" @click.prevent="filterByCategory('WorldVision')"> 世界視界 </a>
+                  </span>
+                  <span class="ml-auto">{{ getPostCountByCategory('WorldVision') }}</span>
+                </li>
+              </ul>
+            </div>
+            <div class="widget last-post-thum">
+              <h6 class="title-widget">最新文章</h6>
+              <div v-for="post in latestPosts" :key="post.id" class="item">
+                <div class="valign">
+                  <div class="img">
+                    <router-link :to="`/article/${post.id}`">
+                      <img :src="getWebpImage(post.thumbnail)" :alt="post.title" />
+                    </router-link>
+                  </div>
+                </div>
+                <div class="cont">
+                  <h6>
+                    <router-link :to="`/article/${post.id}`">
+                      {{ post.title }}
+                    </router-link>
+                  </h6>
+                  <span>
+                    <router-link :to="`/article/${post.id}`">
+                      {{ toLocalString(post.date) }}
+                    </router-link>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="row lg-marg justify-content-center">
         <div class="col-lg-7">
           <div class="md-mb80">
@@ -45,7 +112,7 @@
           </div>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-4 d-none d-lg-block">
           <div class="sidebar">
             <div class="search-box">
               <input
@@ -399,6 +466,30 @@ function filterPosts() {
 
   .post-content {
     padding: 20px;
+  }
+
+  /* 手機版側邊欄樣式優化 */
+  .d-lg-none .sidebar {
+    margin-bottom: 30px;
+  }
+
+  .d-lg-none .search-box {
+    margin-bottom: 25px;
+  }
+
+  .d-lg-none .last-post-thum .item {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+  }
+
+  .d-lg-none .title-widget {
+    font-size: 16px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+  }
+
+  .d-lg-none .catogry ul li {
+    padding: 8px 0;
   }
 }
 </style>

@@ -61,7 +61,7 @@
         </div>
         <div class="col-lg-7 valign">
           <div class="full-width">
-            <form ref="contactForm" @submit.prevent="submitForm">
+            <form @submit.prevent="submitForm">
               <div v-if="formMessage" class="messages">
                 <div :class="messageClass">{{ formMessage }}</div>
               </div>
@@ -71,12 +71,26 @@
                   <div class="form-group mb-30">
                     <label>你的名字 *</label>
                     <input
-                      v-model="form.name"
-                      type="text"
+                      v-model="name"
                       name="name"
+                      type="text"
                       required
                       :disabled="isSubmitting"
+                      class="form-control"
+                      :class="{
+                        'is-invalid': touched.name && errors.name,
+                        'is-valid': touched.name && name && !errors.name,
+                      }"
+                      @blur="
+                        () => {
+                          nameBlur()
+                          touched.name = true
+                        }
+                      "
                     />
+                    <div v-if="touched.name && errors.name" class="error-message">
+                      {{ errors.name }}
+                    </div>
                   </div>
                 </div>
 
@@ -84,12 +98,26 @@
                   <div class="form-group mb-30">
                     <label>你的電子信箱 *</label>
                     <input
-                      v-model="form.email"
-                      type="email"
+                      v-model="email"
                       name="email"
+                      type="email"
                       required
                       :disabled="isSubmitting"
+                      class="form-control"
+                      :class="{
+                        'is-invalid': touched.email && errors.email,
+                        'is-valid': touched.email && email && !errors.email,
+                      }"
+                      @blur="
+                        () => {
+                          emailBlur()
+                          touched.email = true
+                        }
+                      "
                     />
+                    <div v-if="touched.email && errors.email" class="error-message">
+                      {{ errors.email }}
+                    </div>
                   </div>
                 </div>
 
@@ -97,11 +125,25 @@
                   <div class="form-group mb-30">
                     <label>主旨</label>
                     <input
-                      v-model="form.subject"
-                      type="text"
+                      v-model="subject"
                       name="subject"
+                      type="text"
                       :disabled="isSubmitting"
+                      class="form-control"
+                      :class="{
+                        'is-invalid': touched.subject && errors.subject,
+                        'is-valid': touched.subject && subject && !errors.subject,
+                      }"
+                      @blur="
+                        () => {
+                          subjectBlur()
+                          touched.subject = true
+                        }
+                      "
                     />
+                    <div v-if="touched.subject && errors.subject" class="error-message">
+                      {{ errors.subject }}
+                    </div>
                   </div>
                 </div>
 
@@ -109,14 +151,40 @@
                   <div class="form-group">
                     <label>你的訊息 *</label>
                     <textarea
-                      v-model="form.message"
+                      v-model="message"
                       name="message"
                       rows="6"
                       required
                       :disabled="isSubmitting"
                       placeholder="請詳細描述您的需求、預算範圍、專案時程等資訊..."
+                      class="form-control"
+                      :class="{
+                        'is-invalid': touched.message && errors.message,
+                        'is-valid': touched.message && message && !errors.message,
+                      }"
+                      @blur="
+                        () => {
+                          messageBlur()
+                          touched.message = true
+                        }
+                      "
                     ></textarea>
+                    <div v-if="touched.message && errors.message" class="error-message">
+                      {{ errors.message }}
+                    </div>
                   </div>
+
+                  <!-- 蜜罐欄位 - 用於防止機器人 -->
+                  <div style="display: none">
+                    <input
+                      v-model="honeypot"
+                      type="text"
+                      name="website"
+                      tabindex="-1"
+                      autocomplete="off"
+                    />
+                  </div>
+
                   <div class="mt-30">
                     <button type="submit" :disabled="isSubmitting" class="submit-btn">
                       <span v-if="!isSubmitting" class="text">傳送訊息</span>
@@ -137,33 +205,106 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useForm, useField } from 'vee-validate'
+import { useReCaptcha } from 'vue-recaptcha-v3'
+import { useFormValidation } from '@/composables/useFormValidation.js'
 
 const isSubmitting = ref(false)
 const formMessage = ref('')
 const messageClass = ref('')
+const recaptchaToken = ref('')
+const honeypot = ref('') // 蜜罐欄位
 
-const form = reactive({
-  name: '',
-  email: '',
-  subject: '',
-  message: '',
+// 追蹤欄位是否已被觸碰
+const touched = ref({
+  name: false,
+  email: false,
+  subject: false,
+  message: false,
 })
 
-async function submitForm() {
+// 引入表單驗證
+const { formSchema, isBot, checkSpam, updateSubmitStats, initFormStartTime } = useFormValidation()
+
+// 使用 VeeValidate
+const { handleSubmit, resetForm, errors } = useForm({
+  validationSchema: formSchema,
+  validateOnMount: false, // 禁止在掛載時驗證
+  validateOnBlur: true, // 在失去焦點時驗證
+  validateOnChange: true, // 在值改變時驗證
+  validateOnInput: false, // 禁止在輸入時驗證
+})
+
+// 使用 useField 處理各個欄位
+const { value: name, handleBlur: nameBlur } = useField('name')
+const { value: email, handleBlur: emailBlur } = useField('email')
+const { value: subject, handleBlur: subjectBlur } = useField('subject')
+const { value: message, handleBlur: messageBlur } = useField('message')
+
+// 使用 reCAPTCHA
+const { executeRecaptcha, recaptchaLoaded } = useReCaptcha()
+
+// 初始化
+onMounted(() => {
+  initFormStartTime()
+})
+
+// 提交表單
+const submitForm = handleSubmit(async formValues => {
+  // 在提交時將所有欄位標記為已觸碰
+  Object.keys(touched.value).forEach(key => {
+    touched.value[key] = true
+  })
+
+  if (isSubmitting.value) return
+
+  // 檢查是否為機器人
+  if (isBot() || honeypot.value) {
+    // 若為機器人，假裝成功但不實際發送
+    formMessage.value = '訊息已成功發送！'
+    messageClass.value = 'alert alert-success'
+    resetForm()
+    return
+  }
+
+  // 防垃圾訊息檢查
+  if (!checkSpam()) {
+    formMessage.value = '提交過於頻繁，請稍後再試'
+    messageClass.value = 'alert alert-danger'
+    return
+  }
+
   isSubmitting.value = true
   formMessage.value = ''
 
   try {
+    // 獲取 reCAPTCHA token
+    await recaptchaLoaded()
+    recaptchaToken.value = await executeRecaptcha('contact')
+
+    // 提交表單
     const res = await fetch('https://portfolio-backend-pky9.onrender.com/api/send-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
+      body: JSON.stringify({
+        ...formValues,
+        recaptchaToken: recaptchaToken.value,
+      }),
     })
+
     if (!res.ok) throw new Error()
+
+    // 更新提交統計
+    updateSubmitStats()
+
     formMessage.value = '訊息已成功發送！'
     messageClass.value = 'alert alert-success'
-    Object.keys(form).forEach(k => (form[k] = ''))
+    resetForm()
+    // 重置觸碰狀態
+    Object.keys(touched.value).forEach(key => {
+      touched.value[key] = false
+    })
   } catch {
     formMessage.value = '發送失敗，請稍後再試。'
     messageClass.value = 'alert alert-danger'
@@ -171,7 +312,7 @@ async function submitForm() {
     isSubmitting.value = false
     setTimeout(() => (formMessage.value = ''), 5000)
   }
-}
+})
 </script>
 
 <style scoped>
@@ -358,6 +499,20 @@ async function submitForm() {
 .contact-link:hover {
   color: #333;
   text-decoration: underline;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.is-invalid {
+  border-color: #dc3545 !important;
+}
+
+.form-control.is-valid {
+  border-color: #198754 !important;
 }
 
 @media (max-width: 768px) {
