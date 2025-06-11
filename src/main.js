@@ -3,7 +3,6 @@ import './assets/scripts.js'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import { VueReCaptcha } from 'vue-recaptcha-v3'
 
 import App from './App.vue'
 import router from './router'
@@ -52,16 +51,7 @@ const app = createApp(App)
 // 註冊 FontAwesome 組件
 app.component('FontAwesomeIcon', FontAwesomeIcon)
 
-// 使用pinia和router
 app.use(createPinia())
 app.use(router)
-
-// 註冊 reCAPTCHA
-app.use(VueReCaptcha, {
-  siteKey: import.meta.env.VITE_RECAPTCHA_SITE_KEY || '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', // 測試金鑰
-  loaderOptions: {
-    autoHideBadge: true,
-  },
-})
 
 app.mount('#app')
