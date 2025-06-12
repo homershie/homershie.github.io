@@ -25,23 +25,31 @@ export default defineConfig({
       registerType: 'autoUpdate',
       workbox: {
         cleanupOutdatedCaches: true,
-        // 排除大圖片檔案
-        globPatterns: ['**/*.{js,css,html,ico}', '**/imgs/**/*.{png,jpg,jpeg,svg,webp}'],
-        globIgnores: [
-          '**/imgs/works/work_*.{jpg,png}', // 排除作品大圖
-          '**/imgs/blog/**/*.png', // 排除部落格大圖
-        ],
+        // 只快取核心檔案，完全不預快取圖片
+        globPatterns: ['**/*.{js,css,html,ico,svg}'],
         ignoreURLParametersMatching: [/.*/],
         runtimeCaching: [
           {
-            // 所有圖片都用執行時快取
-            urlPattern: /\.(?:png|jpg|jpeg|svg|webp)$/,
+            // 所有圖片都只用執行時快取
+            urlPattern: /\.(?:png|jpg|jpeg|webp)$/,
             handler: 'CacheFirst',
             options: {
               cacheName: 'images',
               expiration: {
-                maxEntries: 50, // 減少快取數量
-                maxAgeSeconds: 60 * 60 * 24 * 7, // 7天
+                maxEntries: 50,
+                maxAgeSeconds: 60 * 60 * 24 * 7,
+              },
+            },
+          },
+          {
+            // SVG 圖示可以預快取
+            urlPattern: /\.svg$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'icons',
+              expiration: {
+                maxEntries: 20,
+                maxAgeSeconds: 60 * 60 * 24 * 30,
               },
             },
           },
