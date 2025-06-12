@@ -186,6 +186,9 @@
     </div>
     <div class="progress-text">載入中... {{ loadingProgress }}%</div>
   </div>
+
+  <!-- Back to Top 元件 -->
+  <BackToTop />
 </template>
 
 <script setup>
@@ -193,6 +196,7 @@ import { ref, computed, onMounted } from 'vue'
 import { articles } from '@/data/articleData.js'
 import { useImageFormat } from '@/composables/useImageFormat.js'
 import { useImagePreloader } from '@/composables/useImagePreloader.js'
+import BackToTop from '@/components/BackToTop.vue'
 
 const searchQuery = ref('')
 const selectedCategory = ref('all')
