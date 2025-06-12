@@ -1,38 +1,49 @@
 <template>
-  <div class="gallery">
-    <div class="row">
-      <div
-        v-for="(work, index) in displayedWorks"
-        :key="work.id"
-        class="col-lg-4 items masonry-item"
-        :data-index="index"
-      >
-        <div class="item">
-          <div class="img">
-            <img :src="work.image" :alt="work.title" class="radius-5 w-100" />
-            <a href="#0" class="link" @click.prevent="viewDetails(work)"></a>
-          </div>
-          <div class="cont d-flex align-items-center">
-            <div>
-              <h6>{{ work.title }}</h6>
-              <span v-for="(tag, tagIndex) in work.category" :key="tagIndex" class="tag">{{
-                tag
-              }}</span>
+  <div class="portfolio">
+    <!-- 載入進度顯示 -->
+    <div v-if="isPreloading" class="loading-progress">
+      <div class="progress-bar">
+        <div class="progress" :style="{ width: `${loadingProgress}%` }"></div>
+      </div>
+      <div class="progress-text">載入中... {{ loadingProgress }}%</div>
+    </div>
+
+    <!-- 作品列表 -->
+    <div class="gallery">
+      <div class="row">
+        <div
+          v-for="(work, index) in displayedWorks"
+          :key="work.id"
+          class="col-lg-4 items masonry-item"
+          :data-index="index"
+        >
+          <div class="item">
+            <div class="img">
+              <img :src="work.image" :alt="work.title" class="radius-5 w-100" />
+              <a href="#0" class="link" @click.prevent="viewDetails(work)"></a>
             </div>
-            <div class="ml-auto">
-              <div class="arrow">
-                <a href="#0" @click.prevent="viewDetails(work)">
-                  <svg
-                    class="arrow-right"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 34.2 32.3"
-                    style="stroke-width: 2"
-                  >
-                    <line x1="0" y1="16" x2="33" y2="16"></line>
-                    <line x1="17.3" y1="0.7" x2="33.2" y2="16.5"></line>
-                    <line x1="17.3" y1="31.6" x2="33.5" y2="15.4"></line>
-                  </svg>
-                </a>
+            <div class="cont d-flex align-items-center">
+              <div>
+                <h6>{{ work.title }}</h6>
+                <span v-for="(tag, tagIndex) in work.category" :key="tagIndex" class="tag">{{
+                  tag
+                }}</span>
+              </div>
+              <div class="ml-auto">
+                <div class="arrow">
+                  <a href="#0" @click.prevent="viewDetails(work)">
+                    <svg
+                      class="arrow-right"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 34.2 32.3"
+                      style="stroke-width: 2"
+                    >
+                      <line x1="0" y1="16" x2="33" y2="16"></line>
+                      <line x1="17.3" y1="0.7" x2="33.2" y2="16.5"></line>
+                      <line x1="17.3" y1="31.6" x2="33.5" y2="15.4"></line>
+                    </svg>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -47,6 +58,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Masonry from 'masonry-layout'
+import { useImagePreloader } from '@/composables/useImagePreloader'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -67,6 +79,8 @@ const displayedWorks = ref([])
 const sortedWorks = computed(() => {
   return [...props.works].sort((a, b) => b.id - a.id)
 })
+
+const { preloadImages, loadingProgress, isPreloading } = useImagePreloader()
 
 let masonryInstance = null
 let resizeHandler = null
@@ -150,16 +164,25 @@ const setupAnimationsForNewItems = (specificItems = null) => {
   })
 }
 
-onMounted(() => {
+onMounted(async () => {
   // 直接加載所有作品
   displayedWorks.value = sortedWorks.value
 
+  // 收集所有需要預載入的圖片URL
+  const imageUrls = displayedWorks.value
+    .map(work => [work.image, ...(work.gallery || [])])
+    .flat()
+    .filter(Boolean)
+
+  // 預載入圖片
+  await preloadImages(imageUrls)
+
   // 等待 DOM 更新
-  waitForDomUpdate().then(() => {
-    // 初始化 Masonry 和動畫
-    initMasonry()
-    setupAnimationsForNewItems()
-  })
+  await waitForDomUpdate()
+
+  // 初始化 Masonry 和動畫
+  initMasonry()
+  setupAnimationsForNewItems()
 
   // 窗口大小改變時重新布局
   resizeHandler = () => {
@@ -207,5 +230,37 @@ onUnmounted(() => {
   to {
     opacity: 1;
   }
+}
+
+.loading-progress {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 200px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress {
+  height: 100%;
+  background: var(--maincolor);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  color: #fff;
+  font-size: 14px;
 }
 </style>

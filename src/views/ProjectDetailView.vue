@@ -1,6 +1,14 @@
 <template>
   <section class="project section-padding radius-15">
     <div class="container">
+      <!-- 載入進度顯示 -->
+      <div v-if="isPreloading" class="loading-progress">
+        <div class="progress-bar">
+          <div class="progress" :style="{ width: `${loadingProgress}%` }"></div>
+        </div>
+        <div class="progress-text">{{ Math.round(loadingProgress) }}%</div>
+      </div>
+
       <div v-if="project" class="row justify-content-center">
         <div class="col-lg-12">
           <div class="img mb-80 text-center">
@@ -84,6 +92,7 @@ import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { usePortfolio } from '@/composables/usePortfolio.js'
 import { useImageFormat } from '@/composables/useImageFormat.js'
+import { useImagePreloader } from '@/composables/useImagePreloader.js'
 import Preloader from '@/components/PreLoader.vue'
 import { enableImageLightbox } from '@/composables/useLightBox.js'
 import { watch } from 'vue'
@@ -92,6 +101,7 @@ const route = useRoute()
 const project = ref(null)
 const { getWorkById } = usePortfolio()
 const { toWebP } = useImageFormat()
+const { preloadImages, loadingProgress, isPreloading } = useImagePreloader()
 
 // 獲取WebP格式的圖片路徑
 const webpMainImage = computed(() => {
@@ -125,15 +135,19 @@ const formatDate = dateString => {
 
 watch(
   () => project.value,
-  newProject => {
+  async newProject => {
     if (newProject) {
-      // 收集主圖與 gallery 圖片（使用原始圖片路徑）
+      // 收集主圖與 gallery 圖片
       const images = []
       if (newProject.mainImage) images.push(newProject.mainImage)
       if (Array.isArray(newProject.gallery)) {
         images.push(...newProject.gallery.filter(Boolean))
       }
+
       if (images.length) {
+        // 預載入圖片
+        await preloadImages(images)
+        // 啟用 lightbox
         enableImageLightbox(images)
       }
     }
@@ -162,6 +176,36 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.loading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  text-align: center;
+}
+
+.progress-bar {
+  height: 4px;
+  background: #eee;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.progress {
+  height: 100%;
+  background: var(--maincolor);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 12px;
+  color: #666;
+}
+
 a {
   transition: all 0.3s;
 }

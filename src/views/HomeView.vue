@@ -120,7 +120,7 @@
             <div class="author-img">
               <div class="img">
                 <img
-                  :src="getWebpImage('/assets/imgs/header/profile.jpg')"
+                  :src="toWebP('/assets/imgs/header/profile.jpg')"
                   alt="荷馬桑 Homer Shie 個人照片"
                   loading="lazy"
                 />
@@ -227,29 +227,91 @@
     </div>
   </section>
   <!-- ==================== End Hero ==================== -->
+
+  <!-- 載入進度顯示 -->
+  <div v-if="isPreloading" class="loading-progress">
+    <div class="progress-bar">
+      <div class="progress" :style="{ width: `${loadingProgress}%` }"></div>
+    </div>
+    <div class="progress-text">載入中... {{ loadingProgress }}%</div>
+  </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { portfolio } from '@/data/portfolioData.js'
+import { useImagePreloader } from '@/composables/useImagePreloader.js'
 import { useImageFormat } from '@/composables/useImageFormat.js'
 
+const { preloadImages, loadingProgress, isPreloading } = useImagePreloader()
 const { toWebP } = useImageFormat()
 
-// 將圖片路徑轉換為WebP格式
-const getWebpImage = imagePath => {
-  return toWebP(imagePath)
-}
-
+// 計算工作年資
 const experienceYear = computed(() => {
-  const startYear = 2018 // 假設從2018年開始工作
+  const startYear = 2020
   const currentYear = new Date().getFullYear()
   return currentYear - startYear
 })
 
-const projectCount = computed(() => portfolio.length)
+// 計算專案數量
+const projectCount = computed(() => {
+  return portfolio.length
+})
+
+onMounted(async () => {
+  // 收集首頁所有圖片URL
+  const imageUrls = [
+    // 主視覺圖片
+    '/src/assets/imgs/hero/1.jpg',
+    // 個人照片
+    '/src/assets/imgs/header/profile.jpg',
+    // 作品集縮圖
+    ...portfolio.slice(0, 6).map(work => work.image),
+    // 其他首頁圖片
+    '/src/assets/imgs/about/1.jpg',
+    '/src/assets/imgs/about/2.jpg',
+    '/src/assets/imgs/about/3.jpg',
+  ]
+    .filter(Boolean)
+    .map(url => toWebP(url))
+
+  // 預載入圖片
+  await preloadImages(imageUrls)
+})
 </script>
 
 <style scoped>
 /* 主要樣式會從全局 CSS 載入 */
+
+.loading-progress {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 200px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress {
+  height: 100%;
+  background: var(--maincolor);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  color: #fff;
+  font-size: 14px;
+}
 </style>

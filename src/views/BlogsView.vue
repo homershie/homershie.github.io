@@ -60,7 +60,7 @@
                 <div class="valign">
                   <div class="img">
                     <router-link :to="`/article/${post.id}`">
-                      <img :src="getWebpImage(post.thumbnail)" :alt="post.title" />
+                      <img :src="toWebP(post.thumbnail)" :alt="post.title" />
                     </router-link>
                   </div>
                 </div>
@@ -93,7 +93,7 @@
             >
               <router-link :to="`/article/${post.id}`">
                 <div class="img">
-                  <img :src="getWebpImage(post.image)" :alt="post.title" />
+                  <img :src="toWebP(post.image)" :alt="post.title" />
                 </div>
               </router-link>
               <div class="cont mt-30">
@@ -154,7 +154,7 @@
                 <div class="valign">
                   <div class="img">
                     <router-link :to="`/article/${post.id}`">
-                      <img :src="getWebpImage(post.thumbnail)" :alt="post.title" />
+                      <img :src="toWebP(post.thumbnail)" :alt="post.title" />
                     </router-link>
                   </div>
                 </div>
@@ -178,64 +178,90 @@
     </div>
   </section>
   <!-- ==================== End Blogs ==================== -->
+
+  <!-- 載入進度顯示 -->
+  <div v-if="isPreloading" class="loading-progress">
+    <div class="progress-bar">
+      <div class="progress" :style="{ width: `${loadingProgress}%` }"></div>
+    </div>
+    <div class="progress-text">載入中... {{ loadingProgress }}%</div>
+  </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { articles } from '@/data/articleData.js'
 import { useImageFormat } from '@/composables/useImageFormat.js'
+import { useImagePreloader } from '@/composables/useImagePreloader.js'
 
 const searchQuery = ref('')
 const selectedCategory = ref('all')
 const { toWebP } = useImageFormat()
-
-// 取得WebP格式的圖片路徑
-const getWebpImage = imagePath => {
-  return toWebP(imagePath)
-}
-
-const toLocalString = isoDate => {
-  return new Date(isoDate).toLocaleDateString()
-}
+const { preloadImages, loadingProgress, isPreloading } = useImagePreloader()
 
 // 將 articles 轉換為陣列格式
 const allPosts = ref(Object.values(articles).sort((a, b) => new Date(b.date) - new Date(a.date)))
 
+// 計算過濾後的文章列表
 const filteredPosts = computed(() => {
   let posts = allPosts.value
 
+  // 根據搜尋關鍵字過濾
+  if (searchQuery.value) {
+    const query = searchQuery.value.toLowerCase()
+    posts = posts.filter(
+      post => post.title.toLowerCase().includes(query) || post.excerpt.toLowerCase().includes(query)
+    )
+  }
+
+  // 根據分類過濾
   if (selectedCategory.value !== 'all') {
     posts = posts.filter(post => post.category === selectedCategory.value)
   }
 
-  if (searchQuery.value) {
-    posts = posts.filter(
-      post =>
-        post.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-        post.excerpt.toLowerCase().includes(searchQuery.value.toLowerCase())
-    )
-  }
-
-  // 依照日期新到舊排序
-  return posts.sort((a, b) => new Date(b.date) - new Date(a.date))
+  return posts
 })
 
+// 計算最新文章列表
 const latestPosts = computed(() => {
-  // 取最新的三篇
-  return allPosts.value.slice(0, 3)
+  return [...allPosts.value].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3)
 })
 
-function getPostCountByCategory(category) {
+// 根據分類獲取文章數量
+const getPostCountByCategory = category => {
   return allPosts.value.filter(post => post.category === category).length
 }
 
-function filterByCategory(category) {
+// 過濾文章
+const filterPosts = () => {
+  // 搜尋功能已通過 computed 屬性實現
+}
+
+// 根據分類過濾
+const filterByCategory = category => {
   selectedCategory.value = category
 }
 
-function filterPosts() {
-  // 搜尋功能通過 computed 自動觸發
+// 格式化日期
+const toLocalString = date => {
+  return new Date(date).toLocaleDateString('zh-TW', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
 }
+
+onMounted(async () => {
+  // 收集所有文章圖片URL
+  const imageUrls = allPosts.value
+    .map(post => [post.image, post.thumbnail])
+    .flat()
+    .filter(Boolean)
+    .map(url => toWebP(url))
+
+  // 預載入圖片
+  await preloadImages(imageUrls)
+})
 </script>
 
 <style scoped>
@@ -491,5 +517,37 @@ function filterPosts() {
   .d-lg-none .catogry ul li {
     padding: 8px 0;
   }
+}
+
+.loading-progress {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 200px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress {
+  height: 100%;
+  background: var(--maincolor);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  color: #fff;
+  font-size: 14px;
 }
 </style>

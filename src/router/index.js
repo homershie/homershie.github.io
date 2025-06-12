@@ -53,12 +53,53 @@ const router = createRouter({
 
     // 如果目標路由有指定滾動位置的 hash，則滾動到該元素
     if (to.hash) {
-      return { el: to.hash, behavior: 'smooth' }
+      return {
+        el: to.hash,
+        behavior: 'smooth',
+        top: 0,
+      }
+    }
+
+    // 如果目標路由與來源路由相同，則不滾動
+    if (to.path === from.path) {
+      return false
     }
 
     // 否則滾動到頁面頂部
-    return { top: 0, behavior: 'smooth' }
+    return {
+      top: 0,
+      behavior: 'smooth',
+    }
   },
+})
+
+// 添加全局前置守衛
+router.beforeEach(async (to, from, next) => {
+  try {
+    // 確保組件已經加載
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+      // 這裡可以添加身份驗證邏輯
+    }
+
+    // 等待組件加載完成
+    const component = to.matched[to.matched.length - 1]?.components?.default
+    if (component && typeof component === 'function') {
+      await component()
+    }
+
+    next()
+  } catch (error) {
+    console.error('路由導航錯誤:', error)
+    next(false) // 取消導航
+  }
+})
+
+// 添加全局後置守衛
+router.afterEach((to, _from) => {
+  // 確保組件已經正確加載
+  if (!to.matched.length) {
+    console.error('找不到匹配的路由:', to.path)
+  }
 })
 
 export default router

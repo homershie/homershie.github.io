@@ -1,6 +1,14 @@
 <template>
   <section v-if="article" class="main-post section-padding">
     <div class="container with-pad">
+      <!-- 載入進度顯示 -->
+      <div v-if="isPreloading" class="loading-progress">
+        <div class="progress-bar">
+          <div class="progress" :style="{ width: `${loadingProgress}%` }"></div>
+        </div>
+        <div class="progress-text">{{ Math.round(loadingProgress) }}%</div>
+      </div>
+
       <div class="row justify-content-center">
         <div class="col-lg-10">
           <div class="caption text-center">
@@ -114,14 +122,14 @@
 import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { articles } from '@/data/articleData.js'
-import { preloadImages } from '@/composables/useImagePreloader.js'
+import { useImagePreloader } from '@/composables/useImagePreloader.js'
 import { useHead } from '@vueuse/head'
 import { enableImageLightbox } from '@/composables/useLightBox.js'
 import { useImageFormat } from '@/composables/useImageFormat.js'
 
 const route = useRoute()
 const router = useRouter()
-const imagesPreloaded = ref(false)
+const { preloadImages, loadingProgress, isPreloading } = useImagePreloader()
 const { toWebP } = useImageFormat()
 
 const article = ref(null)
@@ -218,10 +226,8 @@ watch(article, async a => {
   // 3. 收集所有文章內圖片 URL
   const urls = Array.from(document.querySelectorAll('.cont .image img')).map(img => img.src)
 
-  // 4. 預載前 10 張
+  // 4. 預載入圖片
   await preloadImages(urls)
-
-  imagesPreloaded.value = true
 
   // 5. 轉換所有文章內圖片為WebP格式
   const imageElements = document.querySelectorAll('.cont .image img')
@@ -490,6 +496,36 @@ article {
   }
   .cont .image-gallery-3 {
     grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.loading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  text-align: center;
+
+  .progress-bar {
+    height: 4px;
+    background: #eee;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 5px;
+
+    .progress {
+      height: 100%;
+      background: var(--maincolor);
+      transition: width 0.3s ease;
+    }
+  }
+
+  .progress-text {
+    font-size: 12px;
+    color: #666;
   }
 }
 </style>
