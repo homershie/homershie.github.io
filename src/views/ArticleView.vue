@@ -1,5 +1,7 @@
 <template>
   <section v-if="article" class="main-post section-padding">
+    <ReadingProgress />
+    <BackToTop />
     <div class="container with-pad">
       <!-- 載入進度顯示 -->
       <div v-if="isPreloading" class="loading-progress">
@@ -126,6 +128,8 @@ import { useImagePreloader } from '@/composables/useImagePreloader.js'
 import { useHead } from '@vueuse/head'
 import { enableImageLightbox } from '@/composables/useLightBox.js'
 import { useImageFormat } from '@/composables/useImageFormat.js'
+import ReadingProgress from '@/components/ReadingProgress.vue'
+import BackToTop from '@/components/BackToTop.vue'
 
 const route = useRoute()
 const router = useRouter()
