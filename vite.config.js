@@ -3,11 +3,21 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
+import { VitePluginRadar } from 'vite-plugin-radar'
 
 // https://vite.dev/config/
 export default defineConfig({
   base: './',
-  plugins: [vue(), vueDevTools()],
+  plugins: [
+    vue(),
+    vueDevTools(),
+    VitePluginRadar({
+      // Google Analytics tag injection
+      analytics: {
+        id: 'G-8YSG21XKMM',
+      },
+    }),
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
