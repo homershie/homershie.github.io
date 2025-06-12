@@ -3,10 +3,18 @@ import { useImagePreloader } from '@/composables/useImagePreloader'
 
 describe('useImagePreloader', () => {
   let preloadImages
+  let loadingProgress
+  let resetProgress
 
   beforeEach(() => {
-    const { preloadImages: preload } = useImagePreloader()
+    const {
+      preloadImages: preload,
+      loadingProgress: progress,
+      resetProgress: reset,
+    } = useImagePreloader()
     preloadImages = preload
+    loadingProgress = progress
+    resetProgress = reset
   })
 
   it('should preload images successfully', async () => {
@@ -19,6 +27,7 @@ describe('useImagePreloader', () => {
           setTimeout(callback, 0)
         }
       }),
+      removeEventListener: vi.fn(),
       src: '',
     }
 
@@ -26,11 +35,13 @@ describe('useImagePreloader', () => {
 
     const result = await preloadImages(imageUrls)
     expect(result).toEqual(imageUrls)
-  }, 10000) // 增加超時時間
+    expect(loadingProgress.value).toBe(100)
+  }, 10000)
 
   it('should handle empty array', async () => {
     const result = await preloadImages([])
     expect(result).toEqual([])
+    expect(loadingProgress.value).toBe(0)
   })
 
   it('should handle image load errors gracefully', async () => {
@@ -43,6 +54,7 @@ describe('useImagePreloader', () => {
           setTimeout(callback, 0)
         }
       }),
+      removeEventListener: vi.fn(),
       src: '',
     }
 
@@ -50,5 +62,12 @@ describe('useImagePreloader', () => {
 
     const result = await preloadImages(imageUrls)
     expect(result).toEqual(imageUrls)
-  }, 10000) // 增加超時時間
+    expect(loadingProgress.value).toBe(100)
+  }, 10000)
+
+  it('should reset progress correctly', () => {
+    loadingProgress.value = 50
+    resetProgress()
+    expect(loadingProgress.value).toBe(0)
+  })
 })
