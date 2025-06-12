@@ -13,6 +13,7 @@ export default [
     ignores: [
       '**/dist/**',
       '**/dist-ssr/**',
+      '**/dev-dist/**',
       '**/coverage/**',
       '**/node_modules/**',
       '**/*.d.ts',
