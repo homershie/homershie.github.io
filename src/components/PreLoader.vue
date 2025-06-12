@@ -13,16 +13,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted, defineEmits } from 'vue'
+import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
-const emit = defineEmits(['loaded'])
 const visible = ref(true)
 
 onMounted(() => {
   const tl = gsap.timeline({
     onComplete() {
       visible.value = false
-      emit('loaded')
     },
   })
   // 1. 文字往上淡出

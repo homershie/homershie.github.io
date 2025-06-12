@@ -1,202 +1,217 @@
 <template>
   <!-- ==================== Start About ==================== -->
-  <section class="about section-padding">
-    <div class="container with-pad">
-      <div class="row lg-marg">
-        <div class="col-lg-5 valign">
-          <div class="profile-img">
-            <div class="img">
-              <img src="/assets/imgs/header/profile.jpg" alt="荷馬桑個人照片" />
-            </div>
-            <span class="icon">
-              <img src="/assets/imgs/header/icon1.png" alt="" />
-            </span>
-            <span class="icon">
-              <img src="/assets/imgs/header/icon2.png" alt="" />
-            </span>
-            <span class="icon">
-              <img src="/assets/imgs/header/icon3.png" alt="" />
-            </span>
-            <span class="icon">
-              <img src="/assets/imgs/header/icon4.png" alt="" />
-            </span>
-          </div>
-        </div>
-        <div class="col-lg-7 valign">
-          <div class="cont">
-            <div class="sub-title-icon d-flex align-items-center">
-              <span class="icon fas fa-lightbulb"></span>
-              <h6>關於</h6>
-            </div>
-            <div class="text">
-              <h4 class="mb-30">
-                我是荷馬桑，來自台灣的 <span class="main-color"> 視覺和動態設計師 </span> 。
-                <br />
-                專注於平面媒體工作和思考如何平面媒體轉換為活潑的動畫，擅長將複雜的概念轉化為直覺且吸引人的視覺呈現。
-              </h4>
-              <p>
-                我利用平面和動態的設計元素，結合我日常的興趣，
-                如插畫、動畫、遊戲、音樂和動漫，創造出獨特且具有個人風格的設計作品。同時，致力於從多元包容的視角出發，有效地傳達行銷訊息和塑造品牌形象。
-                我在設計領域累積了豐富的經驗，並且在商業界創作了大量的設計作品。
-                <br />
-                在閒暇之餘，我會更新部落格，發表我對視覺美感的見解，並整理出視覺風格和一些厲害的巨巨給視覺視覺麻瓜們認識。
-                我認為視覺美感也需要普及，不管是提案還是喜歡視覺藝術，我希望我的文章能對你有所幫助。有時間的話，可以幫我點一下LikeCoin，
-                你們的支持也許能成為我前進的動力。
-                <br />
-                感謝你們！
-              </p>
-
-              <div class="feat mt-30">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="item mb-15">
-                      <h6 class="sub-title ls1">
-                        <span class="fz-13 mr-10 main-color">
-                          <i class="fas fa-check"></i>
-                        </span>
-                        平面設計
-                      </h6>
-                    </div>
-                    <div class="item sm-mb15">
-                      <h6 class="sub-title ls1">
-                        <span class="fz-13 mr-10 main-color">
-                          <i class="fas fa-check"></i>
-                        </span>
-                        動態設計
-                      </h6>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="item mb-15">
-                      <h6 class="sub-title ls1">
-                        <span class="fz-13 mr-10 main-color">
-                          <i class="fas fa-check"></i>
-                        </span>
-                        3D動畫
-                      </h6>
-                    </div>
-                    <div class="item">
-                      <h6 class="sub-title ls1">
-                        <span class="fz-13 mr-10 main-color">
-                          <i class="fas fa-check"></i>
-                        </span>
-                        插畫
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="info mt-50">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="item d-flex align-items-center sm-mb30">
-                      <div class="mr-15">
-                        <font-awesome-icon :icon="['far', 'envelope']" class="icon main-color" />
-                      </div>
-                      <div>
-                        <span class="opacity-7 mb-5">電子信箱</span>
-                        <h6>homerxworkshop@gmail.com</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div>
+    <!-- 載入進度顯示 -->
+    <div v-if="isPreloading" class="loading-progress">
+      <div class="progress-bar">
+        <div class="progress" :style="{ width: `${loadingProgress}%` }"></div>
       </div>
+      <div class="progress-text">載入中... {{ loadingProgress }}%</div>
     </div>
-  </section>
 
-  <!-- ==================== End About ==================== -->
-  <!-- ==================== Start Skills ==================== -->
-  <section class="skills section-padding pt-0">
-    <div class="container with-pad">
-      <div class="sec-head mb-80">
-        <div class="row justify-content-center">
-          <div class="col-lg-6 text-center">
-            <div class="sub-title-icon d-flex align-items-center mx-auto">
-              <font-awesome-icon :icon="['fas', 'dumbbell']" class="icon" />
-              <h6>我的技能</h6>
-            </div>
-            <h3>優勢</h3>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <!-- 使用 v-for 重構技能列表 -->
-        <div v-for="skill in skills" :key="skill.id" class="col-lg-4 col-md-6">
-          <div class="item mb-30">
-            <div class="d-flex align-items-center mb-30">
-              <div class="mr-30">
-                <div class="img icon-img-40">
-                  <img :src="skill.icon" :alt="skill.name" />
-                </div>
+    <section class="about section-padding">
+      <div class="container with-pad">
+        <div class="row lg-marg">
+          <div class="col-lg-5 valign">
+            <div class="profile-img">
+              <div class="img">
+                <img :src="toWebP('/assets/imgs/header/profile.jpg')" alt="荷馬桑個人照片" />
               </div>
-              <div>
-                <h6 class="fz-18">{{ skill.name }}</h6>
-              </div>
+              <span class="icon">
+                <img :src="toWebP('/assets/imgs/header/icon1.png')" alt="" />
+              </span>
+              <span class="icon">
+                <img :src="toWebP('/assets/imgs/header/icon2.png')" alt="" />
+              </span>
+              <span class="icon">
+                <img :src="toWebP('/assets/imgs/header/icon3.png')" alt="" />
+              </span>
+              <span class="icon">
+                <img :src="toWebP('/assets/imgs/header/icon4.png')" alt="" />
+              </span>
             </div>
-            <div class="skill-progress">
-              <span
-                class="progres"
-                :data-value="skill.percentage + '%'"
-                :style="{ width: animatedSkills ? skill.percentage + '%' : '0%' }"
-              ></span>
-            </div>
-            <span class="value">{{ skill.percentage }}%</span>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== Start Resume ==================== -->
-  <section class="resume section-padding pt-0">
-    <div class="container with-pad">
-      <div class="sec-head mb-80">
-        <div class="row justify-content-center">
-          <div class="col-lg-6 text-center">
-            <div class="d-inline-block">
+          <div class="col-lg-7 valign">
+            <div class="cont">
               <div class="sub-title-icon d-flex align-items-center">
-                <font-awesome-icon :icon="['fas', 'file-alt']" class="icon" />
-                <h6>我的簡歷</h6>
+                <span class="icon fas fa-lightbulb"></span>
+                <h6>關於</h6>
               </div>
-            </div>
-            <h3>學歷和工作經驗</h3>
-          </div>
-        </div>
-      </div>
+              <div class="text">
+                <h4 class="mb-30">
+                  我是荷馬桑，來自台灣的 <span class="main-color"> 視覺和動態設計師 </span> 。
+                  <br />
+                  專注於平面媒體工作和思考如何平面媒體轉換為活潑的動畫，擅長將複雜的概念轉化為直覺且吸引人的視覺呈現。
+                </h4>
+                <p>
+                  我利用平面和動態的設計元素，結合我日常的興趣，
+                  如插畫、動畫、遊戲、音樂和動漫，創造出獨特且具有個人風格的設計作品。同時，致力於從多元包容的視角出發，有效地傳達行銷訊息和塑造品牌形象。
+                  我在設計領域累積了豐富的經驗，並且在商業界創作了大量的設計作品。
+                  <br />
+                  在閒暇之餘，我會更新部落格，發表我對視覺美感的見解，並整理出視覺風格和一些厲害的巨巨給視覺視覺麻瓜們認識。
+                  我認為視覺美感也需要普及，不管是提案還是喜歡視覺藝術，我希望我的文章能對你有所幫助。有時間的話，可以幫我點一下LikeCoin，
+                  你們的支持也許能成為我前進的動力。
+                  <br />
+                  感謝你們！
+                </p>
 
-      <div>
-        <div class="resume-swiper" data-carousel="swiper" data-space="50" data-speed="1000">
-          <div
-            id="content-carousel-container-unq-resume"
-            class="swiper-container"
-            data-swiper="container"
-          >
-            <div class="swiper-wrapper">
-              <!-- 使用 v-for 重構履歷列表 -->
-              <div v-for="experience in experiences" :key="experience.id" class="swiper-slide">
-                <div class="item text-center">
-                  <h6 class="main-color date fz-15 mb-60">{{ experience.period }}</h6>
-                  <h5>{{ experience.title }}</h5>
-                  <span class="opacity-8 fw-500 mt-10">[ {{ experience.company }} ]</span>
-                  <p class="fz-13 mt-15">{{ experience.description }}</p>
+                <div class="feat mt-30">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="item mb-15">
+                        <h6 class="sub-title ls1">
+                          <span class="fz-13 mr-10 main-color">
+                            <i class="fas fa-check"></i>
+                          </span>
+                          平面設計
+                        </h6>
+                      </div>
+                      <div class="item sm-mb15">
+                        <h6 class="sub-title ls1">
+                          <span class="fz-13 mr-10 main-color">
+                            <i class="fas fa-check"></i>
+                          </span>
+                          動態設計
+                        </h6>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="item mb-15">
+                        <h6 class="sub-title ls1">
+                          <span class="fz-13 mr-10 main-color">
+                            <i class="fas fa-check"></i>
+                          </span>
+                          3D動畫
+                        </h6>
+                      </div>
+                      <div class="item">
+                        <h6 class="sub-title ls1">
+                          <span class="fz-13 mr-10 main-color">
+                            <i class="fas fa-check"></i>
+                          </span>
+                          插畫
+                        </h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="info mt-50">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="item d-flex align-items-center sm-mb30">
+                        <div class="mr-15">
+                          <font-awesome-icon :icon="['far', 'envelope']" class="icon main-color" />
+                        </div>
+                        <div>
+                          <span class="opacity-7 mb-5">電子信箱</span>
+                          <h6>homerxworkshop@gmail.com</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="swiper-pagination"></div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- ==================== End About ==================== -->
+    <!-- ==================== Start Skills ==================== -->
+    <section class="skills section-padding pt-0">
+      <div class="container with-pad">
+        <div class="sec-head mb-80">
+          <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+              <div class="sub-title-icon d-flex align-items-center mx-auto">
+                <font-awesome-icon :icon="['fas', 'dumbbell']" class="icon" />
+                <h6>我的技能</h6>
+              </div>
+              <h3>優勢</h3>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- 使用 v-for 重構技能列表 -->
+          <div v-for="skill in skills" :key="skill.id" class="col-lg-4 col-md-6">
+            <div class="item mb-30">
+              <div class="d-flex align-items-center mb-30">
+                <div class="mr-30">
+                  <div class="img icon-img-40">
+                    <img :src="skill.icon" :alt="skill.name" />
+                  </div>
+                </div>
+                <div>
+                  <h6 class="fz-18">{{ skill.name }}</h6>
+                </div>
+              </div>
+              <div class="skill-progress">
+                <span
+                  class="progres"
+                  :data-value="skill.percentage + '%'"
+                  :style="{ width: animatedSkills ? skill.percentage + '%' : '0%' }"
+                ></span>
+              </div>
+              <span class="value">{{ skill.percentage }}%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== Start Resume ==================== -->
+    <section class="resume section-padding pt-0">
+      <div class="container with-pad">
+        <div class="sec-head mb-80">
+          <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+              <div class="d-inline-block">
+                <div class="sub-title-icon d-flex align-items-center">
+                  <font-awesome-icon :icon="['fas', 'file-alt']" class="icon" />
+                  <h6>我的簡歷</h6>
+                </div>
+              </div>
+              <h3>學歷和工作經驗</h3>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="resume-swiper" data-carousel="swiper" data-space="50" data-speed="1000">
+            <div
+              id="content-carousel-container-unq-resume"
+              class="swiper-container"
+              data-swiper="container"
+            >
+              <div class="swiper-wrapper">
+                <!-- 使用 v-for 重構履歷列表 -->
+                <div v-for="experience in experiences" :key="experience.id" class="swiper-slide">
+                  <div class="item text-center">
+                    <h6 class="main-color date fz-15 mb-60">{{ experience.period }}</h6>
+                    <h5>{{ experience.title }}</h5>
+                    <span class="opacity-8 fw-500 mt-10">[ {{ experience.company }} ]</span>
+                    <p class="fz-13 mt-15">{{ experience.description }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue'
+import { useImagePreloader } from '@/composables/useImagePreloader.js'
+import { useImageFormat } from '@/composables/useImageFormat.js'
+
+const { preloadImages, loadingProgress, isPreloading } = useImagePreloader()
+const { toWebP } = useImageFormat()
 
 // 響應式資料
 const animatedSkills = ref(false)
@@ -301,19 +316,29 @@ const addExperience = newExperience => {
   })
 }
 
-onMounted(() => {
-  // 使用 IntersectionObserver 監測技能區域是否進入視窗範圍
-  const skillsSection = document.querySelector('.skills')
-  const observer = new IntersectionObserver(
-    entries => {
-      if (entries[0].isIntersecting) {
-        animatedSkills.value = true
-        observer.disconnect() // 監測到後停止監測
-      }
-    },
-    { threshold: 0.5 } // 50% 可見時觸發
-  )
-  observer.observe(skillsSection)
+onMounted(async () => {
+  // 收集所有圖片URL
+  const imageUrls = [
+    // 個人照片
+    '/assets/imgs/header/profile.jpg',
+    // 圖示
+    '/assets/imgs/header/icon1.png',
+    '/assets/imgs/header/icon2.png',
+    '/assets/imgs/header/icon3.png',
+    '/assets/imgs/header/icon4.png',
+    // 技能圖示
+    ...skills.value.map(skill => skill.icon),
+  ]
+    .filter(Boolean)
+    .map(url => toWebP(url))
+
+  // 預載入圖片
+  await preloadImages(imageUrls)
+
+  // 啟動技能動畫
+  setTimeout(() => {
+    animatedSkills.value = true
+  }, 500)
 
   new window.Swiper('.resume-swiper .swiper-container', {
     spaceBetween: 50,
@@ -345,4 +370,36 @@ defineExpose({
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.loading-progress {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 200px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress {
+  height: 100%;
+  background: var(--maincolor);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  color: #fff;
+  font-size: 14px;
+}
+</style>

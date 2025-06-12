@@ -53,12 +53,45 @@ const router = createRouter({
 
     // 如果目標路由有指定滾動位置的 hash，則滾動到該元素
     if (to.hash) {
-      return { el: to.hash, behavior: 'smooth' }
+      return {
+        el: to.hash,
+        behavior: 'smooth',
+        top: 0,
+      }
+    }
+
+    // 如果目標路由與來源路由相同，則不滾動
+    if (to.path === from.path) {
+      return false
     }
 
     // 否則滾動到頁面頂部
-    return { top: 0, behavior: 'smooth' }
+    return {
+      top: 0,
+      behavior: 'smooth',
+    }
   },
+})
+
+// 添加全局前置守衛
+router.beforeEach(async (to, from, next) => {
+  try {
+    const component = to.matched[0]?.components?.default
+    if (component && typeof component === 'function') {
+      await component()
+    }
+    next()
+  } catch (error) {
+    // 靜默處理錯誤，繼續導航
+    next()
+  }
+})
+
+// 添加全局後置守衛
+router.afterEach(to => {
+  if (!to.matched.length) {
+    router.push('/404')
+  }
 })
 
 export default router

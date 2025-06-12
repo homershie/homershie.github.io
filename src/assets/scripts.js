@@ -17,19 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
       --------------------------------  Performance & Error Handling   --------------------------------
       ============================================================================= */
 
-  // Image error handling
-  function handleImageErrors() {
-    const images = document.querySelectorAll('img')
-    images.forEach(img => {
-      img.addEventListener('error', function () {
-        // 可以設置備用圖片
-        // this.src = 'assets/imgs/placeholder.jpg';
-        this.alt = '圖片載入失敗'
-        this.style.display = 'none' // 隱藏無法載入的圖片
-      })
-    })
-  }
-
   // External link security
   function secureExternalLinks() {
     const externalLinks = document.querySelectorAll(
@@ -43,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Initialize performance optimizations
-  handleImageErrors()
   secureExternalLinks()
 
   /* =============================================================================
@@ -57,6 +43,13 @@ document.addEventListener('DOMContentLoaded', function () {
     link.addEventListener('click', function (e) {
       const targetId = this.getAttribute('href')
       if (targetId && targetId !== '#') {
+        // 檢查是否為路由連結（以 #/ 開頭）
+        if (targetId.startsWith('#/')) {
+          // 讓 Vue Router 處理路由導航
+          return
+        }
+
+        // 處理頁面內錨點
         e.preventDefault()
         const targetEl = document.querySelector(targetId)
         if (targetEl) {
@@ -199,24 +192,18 @@ document.addEventListener('DOMContentLoaded', function () {
       allAccordionInfos.forEach(info => {
         if (info !== accordionInfo) {
           info.style.display = 'none'
+          info.previousElementSibling.classList.remove('active')
         }
       })
 
       // Toggle current accordion item
-      if (accordionInfo) {
-        accordionInfo.style.display = accordionInfo.style.display === 'block' ? 'none' : 'block'
+      if (accordionInfo.style.display === 'block') {
+        accordionInfo.style.display = 'none'
+        this.classList.remove('active')
+      } else {
+        accordionInfo.style.display = 'block'
+        this.classList.add('active')
       }
-    })
-  })
-
-  const accordionItems = document.querySelectorAll('.accordion .item')
-
-  accordionItems.forEach(item => {
-    item.addEventListener('click', function () {
-      // Remove active class from all items
-      accordionItems.forEach(i => i.classList.remove('active'))
-      // Add active class to clicked item
-      this.classList.add('active')
     })
   })
 
