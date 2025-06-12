@@ -1,17 +1,26 @@
 {
-  "name": "portfolio-vue",
+  "name": "hodes",
   "version": "1.0.0",
-  "description": "現代化的 Vue.js 個人作品集網站，展示設計和開發專案",
-  "author": "Homer Shie",
+  "description": "Homer Shie 的個人作品集網站 - 展示平面設計、UI/UX 設計、前端開發專案與創作成果",
+  "author": "Homer Shie <homerxworkshop@gmail.com>",
   "private": true,
   "type": "module",
   "homepage": "https://homershie.github.io/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/homershie/homershie.github.io.git"
+  },
   "keywords": [
-    "vue",
+    "vue3",
     "portfolio",
-    "website",
+    "personal-website",
+    "ui-ux-design",
+    "frontend-development",
     "vite",
-    "scss"
+    "scss",
+    "pwa",
+    "responsive-design",
+    "creative-portfolio"
   ],
   "scripts": {
     "dev": "vite",

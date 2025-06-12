@@ -22,26 +22,26 @@ export default defineConfig({
       devOptions: {
         enabled: true,
       },
-      // 設定自動更新
       registerType: 'autoUpdate',
       workbox: {
-        // 清除過期的快取
         cleanupOutdatedCaches: true,
-        // 快取檔案的路徑
-        globPatterns: ['**/*.{js,css,html,ico,png,jpg,jpeg,svg,webp}'],
-        // 忽略網址參數，不同參數當作相同檔案
-        // a.jpg = a.jpg?fbclid=1234
+        // 排除大圖片檔案
+        globPatterns: ['**/*.{js,css,html,ico}', '**/imgs/**/*.{png,jpg,jpeg,svg,webp}'],
+        globIgnores: [
+          '**/imgs/works/work_*.{jpg,png}', // 排除作品大圖
+          '**/imgs/blog/**/*.png', // 排除部落格大圖
+        ],
         ignoreURLParametersMatching: [/.*/],
-        // 快取策略
         runtimeCaching: [
           {
+            // 所有圖片都用執行時快取
             urlPattern: /\.(?:png|jpg|jpeg|svg|webp)$/,
             handler: 'CacheFirst',
             options: {
               cacheName: 'images',
               expiration: {
-                maxEntries: 100,
-                maxAgeSeconds: 60 * 60 * 24 * 30, // 30天
+                maxEntries: 50, // 減少快取數量
+                maxAgeSeconds: 60 * 60 * 24 * 7, // 7天
               },
             },
           },
