@@ -199,24 +199,18 @@ document.addEventListener('DOMContentLoaded', function () {
       allAccordionInfos.forEach(info => {
         if (info !== accordionInfo) {
           info.style.display = 'none'
+          info.previousElementSibling.classList.remove('active')
         }
       })
 
       // Toggle current accordion item
-      if (accordionInfo) {
-        accordionInfo.style.display = accordionInfo.style.display === 'block' ? 'none' : 'block'
+      if (accordionInfo.style.display === 'block') {
+        accordionInfo.style.display = 'none'
+        this.classList.remove('active')
+      } else {
+        accordionInfo.style.display = 'block'
+        this.classList.add('active')
       }
-    })
-  })
-
-  const accordionItems = document.querySelectorAll('.accordion .item')
-
-  accordionItems.forEach(item => {
-    item.addEventListener('click', function () {
-      // Remove active class from all items
-      accordionItems.forEach(i => i.classList.remove('active'))
-      // Add active class to clicked item
-      this.classList.add('active')
     })
   })
 
