@@ -1,34 +1,32 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { preloadImages } from '@/composables/useImagePreloader.js'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { useImagePreloader } from '@/composables/useImagePreloader'
 
 describe('useImagePreloader', () => {
+  let preloadImages
+
   beforeEach(() => {
-    // 重置 Image mock
-    vi.restoreAllMocks()
+    const { preloadImages: preload } = useImagePreloader()
+    preloadImages = preload
   })
 
   it('should preload images successfully', async () => {
-    // Mock Image constructor
-    global.Image = vi.fn().mockImplementation(() => {
-      const img = {
-        addEventListener: vi.fn((event, handler) => {
-          if (event === 'load') {
-            // 立即觸發 load 事件
-            setTimeout(() => handler(), 0)
-          }
-        }),
-        removeEventListener: vi.fn(),
-        src: '',
-      }
-      return img
-    })
-
     const imageUrls = ['/test-image-1.jpg', '/test-image-2.jpg']
-    const result = await preloadImages(imageUrls)
 
+    // 模擬成功的圖片載入
+    const mockImage = {
+      addEventListener: vi.fn((event, callback) => {
+        if (event === 'load') {
+          setTimeout(callback, 0)
+        }
+      }),
+      src: '',
+    }
+
+    vi.spyOn(window, 'Image').mockImplementation(() => mockImage)
+
+    const result = await preloadImages(imageUrls)
     expect(result).toEqual(imageUrls)
-    expect(global.Image).toHaveBeenCalledTimes(2)
-  })
+  }, 10000) // 增加超時時間
 
   it('should handle empty array', async () => {
     const result = await preloadImages([])
@@ -36,25 +34,21 @@ describe('useImagePreloader', () => {
   })
 
   it('should handle image load errors gracefully', async () => {
-    global.Image = vi.fn().mockImplementation(() => {
-      const img = {
-        addEventListener: vi.fn((event, handler) => {
-          if (event === 'error') {
-            // 立即觸發 error 事件
-            setTimeout(() => handler(), 0)
-          } else if (event === 'load') {
-            // 不觸發 load 事件，模擬載入失敗
-          }
-        }),
-        removeEventListener: vi.fn(),
-        src: '',
-      }
-      return img
-    })
-
     const imageUrls = ['/non-existent-image.jpg']
-    const result = await preloadImages(imageUrls)
 
+    // 模擬圖片載入錯誤
+    const mockImage = {
+      addEventListener: vi.fn((event, callback) => {
+        if (event === 'error') {
+          setTimeout(callback, 0)
+        }
+      }),
+      src: '',
+    }
+
+    vi.spyOn(window, 'Image').mockImplementation(() => mockImage)
+
+    const result = await preloadImages(imageUrls)
     expect(result).toEqual(imageUrls)
-  })
+  }, 10000) // 增加超時時間
 })

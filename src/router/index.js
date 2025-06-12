@@ -76,29 +76,21 @@ const router = createRouter({
 // 添加全局前置守衛
 router.beforeEach(async (to, from, next) => {
   try {
-    // 確保組件已經加載
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-      // 這裡可以添加身份驗證邏輯
-    }
-
-    // 等待組件加載完成
-    const component = to.matched[to.matched.length - 1]?.components?.default
+    const component = to.matched[0]?.components?.default
     if (component && typeof component === 'function') {
       await component()
     }
-
     next()
   } catch (error) {
-    console.error('路由導航錯誤:', error)
-    next(false) // 取消導航
+    // 靜默處理錯誤，繼續導航
+    next()
   }
 })
 
 // 添加全局後置守衛
-router.afterEach((to, _from) => {
-  // 確保組件已經正確加載
+router.afterEach(to => {
   if (!to.matched.length) {
-    console.error('找不到匹配的路由:', to.path)
+    router.push('/404')
   }
 })
 

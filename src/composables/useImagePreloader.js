@@ -34,7 +34,9 @@ export function useImagePreloader() {
             resolve()
           })
           img.addEventListener('error', () => {
-            console.warn(`Failed to load image: ${src}`)
+            // 靜默處理錯誤，但仍計入進度
+            loadedUrls.push(src)
+            loadingProgress.value = Math.round((loadedUrls.length / totalImages) * 100)
             resolve()
           })
           img.src = src
