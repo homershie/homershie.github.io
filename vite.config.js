@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import { VitePluginRadar } from 'vite-plugin-radar'
 import { VitePWA } from 'vite-plugin-pwa'
-import { viteImagemin } from 'vite-plugin-imagemin'
+import viteImagemin from 'vite-plugin-imagemin'
 
 // https://vite.dev/config/
 export default defineConfig({
