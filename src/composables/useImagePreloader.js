@@ -40,7 +40,7 @@ export function useImagePreloader() {
         const batchUrls = urls.slice(start, end)
 
         const batchPromises = batchUrls.map(src => {
-          return new Promise((resolve, reject) => {
+          return new Promise(resolve => {
             const img = new Image()
 
             const handleLoad = () => {
@@ -73,7 +73,7 @@ export function useImagePreloader() {
         await Promise.all(batchPromises)
       }
     } catch (error) {
-      console.error('Error preloading images:', error)
+      // 靜默處理錯誤
     } finally {
       isPreloading.value = false
       // 確保進度條在完成時是 100%
