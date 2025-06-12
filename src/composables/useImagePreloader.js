@@ -5,48 +5,83 @@ export function useImagePreloader() {
   const isPreloading = ref(false)
 
   /**
+   * 重置進度條
+   */
+  const resetProgress = () => {
+    loadingProgress.value = 0
+    isPreloading.value = false
+  }
+
+  /**
    * 預載入圖片
    * @param {string[]} urls - 要預載入的圖片URL陣列
    * @param {number} batchSize - 每批次處理的圖片數量
    * @returns {Promise<string[]>} - 預載入完成的圖片URL陣列
    */
   const preloadImages = async (urls = [], batchSize = 6) => {
-    if (!Array.isArray(urls) || urls.length === 0) return []
+    if (!Array.isArray(urls) || urls.length === 0) {
+      resetProgress()
+      return []
+    }
 
+    // 重置狀態
+    resetProgress()
     isPreloading.value = true
-    loadingProgress.value = 0
 
     const totalImages = urls.length
     const batches = Math.ceil(totalImages / batchSize)
     const loadedUrls = []
+    let loadedCount = 0
 
-    for (let i = 0; i < batches; i++) {
-      const start = i * batchSize
-      const end = Math.min(start + batchSize, totalImages)
-      const batchUrls = urls.slice(start, end)
+    try {
+      for (let i = 0; i < batches; i++) {
+        const start = i * batchSize
+        const end = Math.min(start + batchSize, totalImages)
+        const batchUrls = urls.slice(start, end)
 
-      const batchPromises = batchUrls.map(src => {
-        return new Promise(resolve => {
-          const img = new Image()
-          img.addEventListener('load', () => {
-            loadedUrls.push(src)
-            loadingProgress.value = Math.round((loadedUrls.length / totalImages) * 100)
-            resolve()
+        const batchPromises = batchUrls.map(src => {
+          return new Promise((resolve, reject) => {
+            const img = new Image()
+
+            const handleLoad = () => {
+              loadedCount++
+              loadedUrls.push(src)
+              loadingProgress.value = Math.round((loadedCount / totalImages) * 100)
+              cleanup()
+              resolve()
+            }
+
+            const handleError = () => {
+              loadedCount++
+              loadedUrls.push(src)
+              loadingProgress.value = Math.round((loadedCount / totalImages) * 100)
+              cleanup()
+              resolve()
+            }
+
+            const cleanup = () => {
+              img.removeEventListener('load', handleLoad)
+              img.removeEventListener('error', handleError)
+            }
+
+            img.addEventListener('load', handleLoad)
+            img.addEventListener('error', handleError)
+            img.src = src
           })
-          img.addEventListener('error', () => {
-            // 靜默處理錯誤，但仍計入進度
-            loadedUrls.push(src)
-            loadingProgress.value = Math.round((loadedUrls.length / totalImages) * 100)
-            resolve()
-          })
-          img.src = src
         })
-      })
 
-      await Promise.all(batchPromises)
+        await Promise.all(batchPromises)
+      }
+    } catch (error) {
+      console.error('Error preloading images:', error)
+    } finally {
+      isPreloading.value = false
+      // 確保進度條在完成時是 100%
+      if (loadedCount === totalImages) {
+        loadingProgress.value = 100
+      }
     }
 
-    isPreloading.value = false
     return loadedUrls
   }
 
@@ -69,5 +104,6 @@ export function useImagePreloader() {
     preloadElementImages,
     loadingProgress,
     isPreloading,
+    resetProgress,
   }
 }

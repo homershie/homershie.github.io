@@ -3,13 +3,8 @@
     <ReadingProgress />
     <BackToTop />
     <div class="container with-pad">
-      <!-- 載入進度顯示 -->
-      <div v-if="isPreloading" class="loading-progress">
-        <div class="progress-bar">
-          <div class="progress" :style="{ width: `${loadingProgress}%` }"></div>
-        </div>
-        <div class="progress-text">{{ Math.round(loadingProgress) }}%</div>
-      </div>
+      <!-- 閱讀進度條 -->
+      <div class="reading-progress-bar" :style="{ width: progress + '%' }"></div>
 
       <div class="row justify-content-center">
         <div class="col-lg-10">
@@ -121,20 +116,29 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch, nextTick } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { articles } from '@/data/articleData.js'
 import { useImagePreloader } from '@/composables/useImagePreloader.js'
 import { useHead } from '@vueuse/head'
 import { enableImageLightbox } from '@/composables/useLightBox.js'
 import { useImageFormat } from '@/composables/useImageFormat.js'
+import { useScroll } from '@vueuse/core'
 import ReadingProgress from '@/components/ReadingProgress.vue'
 import BackToTop from '@/components/BackToTop.vue'
 
 const route = useRoute()
 const router = useRouter()
-const { preloadImages, loadingProgress, isPreloading } = useImagePreloader()
+const { preloadImages } = useImagePreloader()
 const { toWebP } = useImageFormat()
+
+// 使用 useScroll 來計算閱讀進度
+const { y } = useScroll(window)
+const progress = computed(() => {
+  const scrollTop = y.value
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight
+  return docHeight > 0 ? (scrollTop / docHeight) * 100 : 0
+})
 
 const article = ref(null)
 const articleIds = Object.keys(articles)
@@ -202,9 +206,14 @@ function updateMetaTags(seo) {
 }
 
 // 監聽路由變化
-watch(() => route.params.id, loadArticle)
+watch(
+  () => route.params.id,
+  () => {
+    loadArticle()
+  }
+)
 
-watch(article, a => {
+watch(article, async a => {
   if (!a) return
   useHead({
     title: `${a.title} – 荷馬桑 Homer Shie`,
@@ -217,23 +226,16 @@ watch(article, a => {
       { name: 'twitter:card', content: 'summary_large_image' },
     ],
   })
-  enableImageLightbox()
-})
 
-// 1. 監聽 article 變動
-watch(article, async a => {
-  if (!a) return
-
-  // 2. 等 v-html 渲染完
-  await nextTick()
-
-  // 3. 收集所有文章內圖片 URL
+  // 收集所有文章內圖片 URL
   const urls = Array.from(document.querySelectorAll('.cont .image img')).map(img => img.src)
 
-  // 4. 預載入圖片
-  await preloadImages(urls)
+  // 預載入圖片
+  if (urls.length > 0) {
+    await preloadImages(urls)
+  }
 
-  // 5. 轉換所有文章內圖片為WebP格式
+  // 轉換所有文章內圖片為WebP格式
   const imageElements = document.querySelectorAll('.cont .image img')
   imageElements.forEach(img => {
     // 記錄原始圖片路徑作為後備
@@ -247,7 +249,7 @@ watch(article, async a => {
     }
   })
 
-  // 6. 圖片載完後才開 lightbox
+  // 圖片載完後才開 lightbox
   enableImageLightbox()
 })
 
@@ -503,33 +505,13 @@ article {
   }
 }
 
-.loading-progress {
+.reading-progress-bar {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  z-index: 1000;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 10px;
-  text-align: center;
-
-  .progress-bar {
-    height: 4px;
-    background: #eee;
-    border-radius: 2px;
-    overflow: hidden;
-    margin-bottom: 5px;
-
-    .progress {
-      height: 100%;
-      background: var(--maincolor);
-      transition: width 0.3s ease;
-    }
-  }
-
-  .progress-text {
-    font-size: 12px;
-    color: #666;
-  }
+  height: 4px;
+  background: var(--maincolor);
+  z-index: 9999;
+  transition: width 0.2s;
 }
 </style>
