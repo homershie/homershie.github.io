@@ -100,7 +100,7 @@ import { watch } from 'vue'
 const route = useRoute()
 const project = ref(null)
 const { getWorkById } = usePortfolio()
-const { toWebP } = useImageFormat()
+const { toWebP, getBestImagePath } = useImageFormat()
 const { preloadImages, loadingProgress, isPreloading } = useImagePreloader()
 
 // 獲取WebP格式的圖片路徑
@@ -133,6 +133,29 @@ const formatDate = dateString => {
   })
 }
 
+// 預載入圖片並處理格式
+const preloadAndProcessImages = async images => {
+  if (!images.length) return
+
+  // 先檢查並獲取最佳圖片路徑
+  const processedImages = await Promise.all(
+    images.map(async img => {
+      if (!img) return null
+      return await getBestImagePath(img)
+    })
+  )
+
+  // 過濾掉無效的圖片
+  const validImages = processedImages.filter(Boolean)
+
+  if (validImages.length) {
+    // 預載入圖片
+    await preloadImages(validImages)
+    // 啟用 lightbox
+    enableImageLightbox(validImages)
+  }
+}
+
 watch(
   () => project.value,
   async newProject => {
@@ -144,12 +167,7 @@ watch(
         images.push(...newProject.gallery.filter(Boolean))
       }
 
-      if (images.length) {
-        // 預載入圖片
-        await preloadImages(images)
-        // 啟用 lightbox
-        enableImageLightbox(images)
-      }
+      await preloadAndProcessImages(images)
     }
   },
   { immediate: true }
