@@ -115,30 +115,26 @@
 </template>
 
 <script setup>
-import { ref, watch, nextTick, onMounted, onBeforeUnmount } from 'vue'
+import { ref, watch, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
+import { useBreakpoints, breakpointsTailwind } from '@vueuse/core'
 import gsap from 'gsap'
 
 const route = useRoute()
 const isMenuOpen = ref(false)
-const isDesktop = ref(window.innerWidth > 991)
 const bgRef = ref(null)
+
+// 使用 VueUse 的響應式斷點偵測
+const breakpoints = useBreakpoints(breakpointsTailwind)
+const isDesktop = breakpoints.greater('lg') // lg = 1024px，相當於原來的 991px
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
 }
 
-const handleResize = () => {
-  isDesktop.value = window.innerWidth > 991
-  if (isDesktop.value) isMenuOpen.value = false
-}
-
-onMounted(() => {
-  window.addEventListener('resize', handleResize)
-  handleResize()
-})
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', handleResize)
+// 監聽桌面版切換，自動關閉手機版選單
+watch(isDesktop, newValue => {
+  if (newValue) isMenuOpen.value = false
 })
 
 // 當打開手機版選單時做 GSAP 動畫

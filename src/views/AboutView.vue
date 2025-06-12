@@ -111,7 +111,7 @@
 
   <!-- ==================== End About ==================== -->
   <!-- ==================== Start Skills ==================== -->
-  <section class="skills section-padding pt-0">
+  <section ref="skillsRef" class="skills section-padding pt-0">
     <div class="container with-pad">
       <div class="sec-head mb-80">
         <div class="row justify-content-center">
@@ -139,11 +139,7 @@
               </div>
             </div>
             <div class="skill-progress">
-              <span
-                class="progres"
-                :data-value="skill.percentage + '%'"
-                :style="{ width: animatedSkills ? skill.percentage + '%' : '0%' }"
-              ></span>
+              <span class="progres" :data-value="skill.percentage + '%'"></span>
             </div>
             <span class="value">{{ skill.percentage }}%</span>
           </div>
@@ -197,9 +193,13 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
+import { useProgressBar } from '@/composables/useProgressBar'
+
+// 使用進度條 composable
+const { setupProgressBar } = useProgressBar()
 
 // 響應式資料
-const animatedSkills = ref(false)
+const skillsRef = ref()
 
 // 技能資料
 const skills = ref([
@@ -302,18 +302,12 @@ const addExperience = newExperience => {
 }
 
 onMounted(() => {
-  // 使用 IntersectionObserver 監測技能區域是否進入視窗範圍
-  const skillsSection = document.querySelector('.skills')
-  const observer = new IntersectionObserver(
-    entries => {
-      if (entries[0].isIntersecting) {
-        animatedSkills.value = true
-        observer.disconnect() // 監測到後停止監測
-      }
-    },
-    { threshold: 0.5 } // 50% 可見時觸發
-  )
-  observer.observe(skillsSection)
+  // 使用 VueUse 進度條 composable 設置技能動畫
+  setupProgressBar(skillsRef, {
+    threshold: 0.3,
+    animationDuration: 1500,
+    animationEasing: 'cubic-bezier(0.77, 0, 0.175, 1)',
+  })
 
   new window.Swiper('.resume-swiper .swiper-container', {
     spaceBetween: 50,

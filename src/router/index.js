@@ -44,6 +44,11 @@ const router = createRouter({
       name: 'project',
       component: () => import('@/views/ProjectDetailView.vue'),
     },
+    {
+      path: '/test-composables',
+      name: 'test-composables',
+      component: () => import('@/components/TestComposables.vue'),
+    },
   ],
   scrollBehavior(to, from, savedPosition) {
     // 如果有 savedPosition (使用瀏覽器的前進/後退按鈕)，則使用它

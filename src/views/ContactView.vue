@@ -205,9 +205,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useForm, useField } from 'vee-validate'
 import { useReCaptcha } from 'vue-recaptcha-v3'
+import { useDocumentVisibility } from '@vueuse/core'
 import { useFormValidation } from '@/composables/useFormValidation.js'
 
 const isSubmitting = ref(false)
@@ -215,6 +216,9 @@ const formMessage = ref('')
 const messageClass = ref('')
 const recaptchaToken = ref('')
 const honeypot = ref('') // 蜜罐欄位
+
+// 使用 VueUse 監控文件可見性
+const visibility = useDocumentVisibility()
 
 // 追蹤欄位是否已被觸碰
 const touched = ref({
