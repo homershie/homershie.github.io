@@ -33,33 +33,6 @@ document.addEventListener('DOMContentLoaded', function () {
   secureExternalLinks()
 
   /* =============================================================================
-      -----------------------------  Smooth Scroll nav   -----------------------------
-      ============================================================================= */
-
-  // Initialize smooth scroll without external dependencies
-  const anchorLinks = document.querySelectorAll('a[href^="#"]')
-
-  anchorLinks.forEach(link => {
-    link.addEventListener('click', function (e) {
-      const targetId = this.getAttribute('href')
-      if (targetId && targetId !== '#') {
-        // 檢查是否為路由連結（以 #/ 開頭）
-        if (targetId.startsWith('#/')) {
-          // 讓 Vue Router 處理路由導航
-          return
-        }
-
-        // 處理頁面內錨點
-        e.preventDefault()
-        const targetEl = document.querySelector(targetId)
-        if (targetEl) {
-          targetEl.scrollIntoView({ behavior: 'smooth' })
-        }
-      }
-    })
-  })
-
-  /* =============================================================================
       --------------------------------  Navbar Menu   --------------------------------
       ============================================================================= */
 
