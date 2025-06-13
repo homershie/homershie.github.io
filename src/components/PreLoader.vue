@@ -15,7 +15,10 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
+import { useTextFade } from '@/composables/useTextFade'
+
 const visible = ref(true)
+const { fadeOutText } = useTextFade()
 
 onMounted(() => {
   const tl = gsap.timeline({
@@ -23,8 +26,9 @@ onMounted(() => {
       visible.value = false
     },
   })
+
   // 1. 文字往上淡出
-  tl.to('.loader-wrap-heading .load-text', { y: -100, opacity: 0, delay: 1.5 })
+  tl.add(fadeOutText('.loader-wrap-heading .load-text', { delay: 1.5 }))
     // 2. SVG 曲線展開收合
     .to('#loader-path', {
       attr: { d: 'M0 502S175 272 500 272s500 230 500 230V0H0Z' },

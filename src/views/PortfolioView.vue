@@ -27,10 +27,6 @@
       <div class="portfolio-list">
         <PortfolioList :works="portfolioData" @view-details="handleViewDetails" />
       </div>
-
-      <button v-if="showBackToTop" class="back-to-top" aria-label="回到頂部" @click="scrollToTop">
-        ↑
-      </button>
     </div>
   </section>
 </template>
@@ -39,7 +35,7 @@
 import { useRouter } from 'vue-router'
 import PortfolioList from '@/components/PortfolioList.vue'
 import { usePortfolio } from '@/composables/usePortfolio.js'
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useScroll, useIntersectionObserver } from '@vueuse/core'
 import ReadingProgress from '@/components/ReadingProgress.vue'
 import BackToTop from '@/components/BackToTop.vue'
@@ -54,18 +50,8 @@ const progress = computed(() => {
   return docHeight > 0 ? (scrollTop / docHeight) * 100 : 0
 })
 
-const showBackToTop = ref(false)
-
-watch(y, val => {
-  showBackToTop.value = val > 300
-})
-
 function handleViewDetails(work) {
   router.push(`/project/${work.id}`)
-}
-
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 const workRefs = ref([])

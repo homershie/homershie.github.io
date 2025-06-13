@@ -8,9 +8,9 @@
 
 <script setup>
 import { ref, watch } from 'vue'
-import { useScroll } from '@vueuse/core'
+import { useWindowScroll } from '@vueuse/core'
 
-const { y } = useScroll(window)
+const { y } = useWindowScroll()
 const showButton = ref(false)
 
 // 監聽滾動位置，當超過 300px 時顯示按鈕
@@ -20,7 +20,10 @@ watch(y, val => {
 
 // 平滑滾動到頂部
 function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  })
 }
 </script>
 

@@ -44,32 +44,60 @@ const router = createRouter({
       name: 'project',
       component: () => import('@/views/ProjectDetailView.vue'),
     },
+    {
+      path: '/404',
+      name: 'NotFound',
+      component: () => import('@/views/NotFoundView.vue'),
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/404',
+    },
   ],
   scrollBehavior(to, from, savedPosition) {
     // 如果有 savedPosition (使用瀏覽器的前進/後退按鈕)，則使用它
     if (savedPosition) {
-      return savedPosition
+      window.scrollTo({
+        top: savedPosition.top,
+        behavior: 'smooth',
+      })
+      return
     }
 
     // 如果目標路由有指定滾動位置的 hash，則滾動到該元素
     if (to.hash) {
-      return {
-        el: to.hash,
-        behavior: 'smooth',
-        top: 0,
+      const element = document.querySelector(to.hash)
+      if (element) {
+        window.scrollTo({
+          top: element.offsetTop,
+          behavior: 'smooth',
+        })
+        return
       }
     }
 
     // 如果目標路由與來源路由相同，則不滾動
     if (to.path === from.path) {
-      return false
+      return
     }
 
-    // 否則滾動到頁面頂部
-    return {
+    // 處理特定路由的滾動行為
+    if (to.name === 'contact' && to.hash === '#contact-form') {
+      const element = document.querySelector('#contact-form')
+      if (element) {
+        window.scrollTo({
+          top: element.offsetTop,
+          behavior: 'smooth',
+        })
+        return
+      }
+    }
+
+    // 其他情況滾動到頁面頂部
+    window.scrollTo({
       top: 0,
       behavior: 'smooth',
-    }
+    })
   },
 })
 

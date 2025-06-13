@@ -31,14 +31,20 @@ export default defineConfig({
         ignoreURLParametersMatching: [/.*/],
         runtimeCaching: [
           {
-            // 所有圖片都只用執行時快取
+            // 作品集圖片 - 完全忽略快取
+            urlPattern: /\/assets\/imgs\/works\/.*\.(png|jpg|jpeg|webp)$/,
+            handler: 'NetworkOnly',
+          },
+          {
+            // 其他圖片資源
             urlPattern: /\.(?:png|jpg|jpeg|webp)$/,
-            handler: 'CacheFirst',
+            handler: 'NetworkFirst',
             options: {
               cacheName: 'images',
+              networkTimeoutSeconds: 3,
               expiration: {
-                maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 * 7,
+                maxEntries: 30,
+                maxAgeSeconds: 60 * 60 * 24 * 3, // 3天
               },
             },
           },

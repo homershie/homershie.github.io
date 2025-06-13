@@ -11,7 +11,7 @@
 
 document.addEventListener('DOMContentLoaded', function () {
   'use strict'
-  /* global Swiper, gsap */
+  /* global Swiper */
 
   /* =============================================================================
       --------------------------------  Performance & Error Handling   --------------------------------
@@ -33,51 +33,13 @@ document.addEventListener('DOMContentLoaded', function () {
   secureExternalLinks()
 
   /* =============================================================================
-      -----------------------------  Smooth Scroll nav   -----------------------------
-      ============================================================================= */
-
-  // Initialize smooth scroll without external dependencies
-  const anchorLinks = document.querySelectorAll('a[href^="#"]')
-
-  anchorLinks.forEach(link => {
-    link.addEventListener('click', function (e) {
-      const targetId = this.getAttribute('href')
-      if (targetId && targetId !== '#') {
-        // 檢查是否為路由連結（以 #/ 開頭）
-        if (targetId.startsWith('#/')) {
-          // 讓 Vue Router 處理路由導航
-          return
-        }
-
-        // 處理頁面內錨點
-        e.preventDefault()
-        const targetEl = document.querySelector(targetId)
-        if (targetEl) {
-          targetEl.scrollIntoView({ behavior: 'smooth' })
-        }
-      }
-    })
-  })
-
-  /* =============================================================================
       --------------------------------  Navbar Menu   --------------------------------
       ============================================================================= */
 
   // Mobile menu visibility is handled by Vue components, so avoid
   // manually toggling navbar elements here to prevent conflicts.
 
-  // Navbar scroll effect
-  const navbar = document.querySelector('.navbar-chang')
-
-  window.addEventListener('scroll', function () {
-    const bodyScroll = window.pageYOffset || document.documentElement.scrollTop
-
-    if (bodyScroll > 300) {
-      if (navbar) navbar.classList.add('nav-scroll')
-    } else {
-      if (navbar) navbar.classList.remove('nav-scroll')
-    }
-  })
+  // Navbar scroll effect is now handled by AppNavbar.vue component
 
   /* =============================================================================
       --------------------------------  Navbar Tabs   --------------------------------
@@ -110,14 +72,15 @@ document.addEventListener('DOMContentLoaded', function () {
       ------------------------------  Data Background   ------------------------------
       ============================================================================= */
 
-  const bgElements = document.querySelectorAll('.bg-img, section')
-
-  bgElements.forEach(element => {
-    const bgImage = element.getAttribute('data-background')
-    if (bgImage) {
-      element.style.backgroundImage = `url(${bgImage})`
-    }
-  })
+  // 背景圖片處理已移至 OptimizedImage.vue 組件
+  // 請使用 OptimizedImage 組件處理所有圖片，包括背景圖片
+  // 例如：
+  // <OptimizedImage
+  //   :src="imageUrl"
+  //   :alt="imageAlt"
+  //   class="bg-img"
+  //   :isBackground="true"
+  // />
 
   /* =============================================================================
       -----------------------------------  Tabs  -------------------------------------
@@ -722,38 +685,6 @@ document.addEventListener('DOMContentLoaded', function () {
       -------------------------------  Preloader svg   -------------------------------
       ============================================================================= */
 
-  // Check if GSAP is available before using it
-  if (typeof gsap !== 'undefined') {
-    const svg = document.getElementById('svg')
-    if (svg) {
-      const tl = gsap.timeline()
-      const curve = 'M0 502S175 272 500 272s500 230 500 230V0H0Z'
-      const flat = 'M0 2S175 1 500 1s500 1 500 1V0H0Z'
-
-      tl.to('.loader-wrap-heading .load-text , .loader-wrap-heading .cont', {
-        delay: 1.5,
-        y: -100,
-        opacity: 0,
-      })
-      tl.to(svg, {
-        duration: 0.5,
-        attr: { d: curve },
-        ease: 'power2.easeIn',
-      }).to(svg, {
-        duration: 0.5,
-        attr: { d: flat },
-        ease: 'power2.easeOut',
-      })
-      tl.to('.loader-wrap', {
-        y: -1500,
-      })
-      tl.to('.loader-wrap', {
-        zIndex: -1,
-        display: 'none',
-      })
-    }
-  }
-
   // Mobile navbar dropdown functionality
   function handleMobileNavbar() {
     const windowWidth = window.innerWidth
@@ -805,76 +736,4 @@ window.addEventListener('load', function () {
   setTimeout(function () {
     body.classList.remove('loaded')
   }, 1500)
-
-  /* =============================================================================
-      -----------------------------  Contact Validation   -----------------------------
-      ============================================================================= */
-
-  const contactForm = document.getElementById('contact-form')
-  if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault()
-
-      // Basic form validation
-      const nameField = this.querySelector('input[name="name"]')
-      const emailField = this.querySelector('input[name="email"]')
-      const messageField = this.querySelector('textarea[name="message"]')
-
-      let isValid = true
-
-      if (!nameField.value.trim()) {
-        nameField.style.borderColor = 'red'
-        isValid = false
-      } else {
-        nameField.style.borderColor = ''
-      }
-
-      if (!emailField.value.trim() || !emailField.value.includes('@')) {
-        emailField.style.borderColor = 'red'
-        isValid = false
-      } else {
-        emailField.style.borderColor = ''
-      }
-
-      if (!messageField.value.trim()) {
-        messageField.style.borderColor = 'red'
-        isValid = false
-      } else {
-        messageField.style.borderColor = ''
-      }
-
-      if (isValid) {
-        // Submit form via fetch API
-        const formData = new FormData(this)
-
-        fetch('contact.php', {
-          method: 'POST',
-          body: formData,
-        })
-          .then(response => response.json())
-          .then(data => {
-            const messageAlert = `alert-${data.type}`
-            const messageText = data.message
-            const alertBox = `<div class="alert ${messageAlert} alert-dismissable">
-                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                          ${messageText}
-                      </div>`
-
-            const messagesDiv = this.querySelector('.messages')
-            if (messagesDiv && messageAlert && messageText) {
-              messagesDiv.innerHTML = alertBox
-              this.reset()
-            }
-          })
-          .catch(_error => {
-            // Handle form submission error gracefully
-            const messagesDiv = this.querySelector('.messages')
-            if (messagesDiv) {
-              messagesDiv.innerHTML =
-                '<div class="alert alert-danger">表單提交失敗，請稍後重試。</div>'
-            }
-          })
-      }
-    })
-  }
 })
