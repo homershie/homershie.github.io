@@ -273,15 +273,15 @@ onMounted(() => {
   // 收集首頁所有圖片URL
   const imageUrls = [
     // 主視覺圖片
-    '/src/assets/imgs/hero/1.jpg',
+    '/assets/imgs/hero/1.jpg',
     // 個人照片
-    '/src/assets/imgs/header/profile.jpg',
+    '/assets/imgs/header/profile.jpg',
     // 作品集縮圖
     ...portfolio.slice(0, 6).map(work => work.image),
     // 其他首頁圖片
-    '/src/assets/imgs/about/1.jpg',
-    '/src/assets/imgs/about/2.jpg',
-    '/src/assets/imgs/about/3.jpg',
+    '/assets/imgs/about/1.jpg',
+    '/assets/imgs/about/2.jpg',
+    '/assets/imgs/about/3.jpg',
   ]
     .filter(Boolean)
     .map(url => toWebP(url))
