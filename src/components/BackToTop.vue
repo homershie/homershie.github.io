@@ -8,13 +8,9 @@
 
 <script setup>
 import { ref, watch } from 'vue'
-import { useScroll } from '@vueuse/core'
-import { gsap } from 'gsap'
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+import { useWindowScroll } from '@vueuse/core'
 
-gsap.registerPlugin(ScrollToPlugin)
-
-const { y } = useScroll(window)
+const { y } = useWindowScroll()
 const showButton = ref(false)
 
 // 監聽滾動位置，當超過 300px 時顯示按鈕
@@ -22,9 +18,12 @@ watch(y, val => {
   showButton.value = val > 300
 })
 
-// 平滑滾動到頂部 - 使用 GSAP 實現平滑動畫
+// 平滑滾動到頂部
 function scrollToTop() {
-  gsap.to(window, { duration: 1, scrollTo: 0, ease: 'power2.out' })
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  })
 }
 </script>
 

@@ -300,7 +300,7 @@ const getProjectCount = targetCategory => {
 }
 
 function scrollToContact() {
-  // 導航到聯絡頁面
-  router.push('/contact')
+  // 導航到聯絡頁面並滾動到表單區域
+  router.push('/contact#contact-form')
 }
 </script>

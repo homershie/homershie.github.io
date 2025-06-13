@@ -61,7 +61,7 @@
         </div>
         <div class="col-lg-7 valign">
           <div class="full-width">
-            <form @submit.prevent="submitForm">
+            <form id="contact-form" @submit.prevent="submitForm">
               <div v-if="formMessage" class="messages">
                 <div :class="messageClass">{{ formMessage }}</div>
               </div>
