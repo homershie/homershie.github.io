@@ -1,5 +1,4 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { useScroll } from '@vueuse/core'
 import HomeView from '@/views/HomeView.vue'
 
 const router = createRouter({
@@ -56,11 +55,12 @@ const router = createRouter({
     },
   ],
   scrollBehavior(to, from, savedPosition) {
-    const { scrollTo } = useScroll(window)
-
     // 如果有 savedPosition (使用瀏覽器的前進/後退按鈕)，則使用它
     if (savedPosition) {
-      scrollTo({ top: savedPosition.top, behavior: 'smooth' })
+      window.scrollTo({
+        top: savedPosition.top,
+        behavior: 'smooth',
+      })
       return
     }
 
@@ -68,7 +68,10 @@ const router = createRouter({
     if (to.hash) {
       const element = document.querySelector(to.hash)
       if (element) {
-        scrollTo({ top: element.offsetTop, behavior: 'smooth' })
+        window.scrollTo({
+          top: element.offsetTop,
+          behavior: 'smooth',
+        })
         return
       }
     }
@@ -82,13 +85,19 @@ const router = createRouter({
     if (to.name === 'contact' && to.hash === '#contact-form') {
       const element = document.querySelector('#contact-form')
       if (element) {
-        scrollTo({ top: element.offsetTop, behavior: 'smooth' })
+        window.scrollTo({
+          top: element.offsetTop,
+          behavior: 'smooth',
+        })
         return
       }
     }
 
     // 其他情況滾動到頁面頂部
-    scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
   },
 })
 

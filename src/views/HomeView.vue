@@ -162,7 +162,7 @@
               </div>
             </div>
             <div class="butns mt-30">
-              <router-link to="/contact" class="inf-butn">
+              <router-link to="/contact#contact-form" class="inf-butn">
                 <span>聯絡我</span>
               </router-link>
               <a href="/assets/resume/Homer_Shie_Resume.pdf" class="inf-butn" target="_blank">
@@ -176,13 +176,15 @@
             <h5 class="cd-headline slide">
               <span>哈囉, 我是</span>
               <span class="cd-words-wrapper main-color">
-                <b class="is-visible">荷馬桑</b>
-                <b>Homer Shie</b>
-                <b>視覺設計師</b>
-                <b>動態設計師</b>
-                <b>遊戲玩家</b>
-                <b>宅宅</b>
-                <b>Fingerstyle學生</b>
+                <b
+                  v-for="(word, idx) in headlineWords"
+                  :key="word"
+                  :class="{
+                    'is-visible': idx === currentWordIndex,
+                    'is-hidden': idx !== currentWordIndex,
+                  }"
+                  >{{ word }}</b
+                >
               </span>
             </h5>
             <h1>
@@ -214,7 +216,10 @@
                 </div>
                 <div class="ml-auto">
                   <div class="butn-presv">
-                    <router-link to="/contact" class="butn butn-md butn-bord radius-5 skew">
+                    <router-link
+                      to="/contact#contact-form"
+                      class="butn butn-md butn-bord radius-5 skew"
+                    >
                       <span>跟我聯繫！</span>
                     </router-link>
                   </div>
@@ -238,7 +243,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { portfolio } from '@/data/portfolioData.js'
 import { useImagePreloader } from '@/composables/useImagePreloader.js'
 import { useImageFormat } from '@/composables/useImageFormat.js'
@@ -246,19 +251,25 @@ import { useImageFormat } from '@/composables/useImageFormat.js'
 const { preloadImages, loadingProgress, isPreloading } = useImagePreloader()
 const { toWebP } = useImageFormat()
 
-// 計算工作年資
-const experienceYear = computed(() => {
-  const startYear = 2020
-  const currentYear = new Date().getFullYear()
-  return currentYear - startYear
-})
+// headline 輪播文字
+const headlineWords = [
+  '荷馬桑',
+  'Homer Shie',
+  '視覺設計師',
+  '動態設計師',
+  '遊戲玩家',
+  '動漫宅宅',
+  '前端工程學生',
+]
+const currentWordIndex = ref(0)
+let headlineInterval = null
 
-// 計算專案數量
-const projectCount = computed(() => {
-  return portfolio.length
-})
+onMounted(() => {
+  // headline 輪播
+  headlineInterval = setInterval(() => {
+    currentWordIndex.value = (currentWordIndex.value + 1) % headlineWords.length
+  }, 2000)
 
-onMounted(async () => {
   // 收集首頁所有圖片URL
   const imageUrls = [
     // 主視覺圖片
@@ -276,7 +287,23 @@ onMounted(async () => {
     .map(url => toWebP(url))
 
   // 預載入圖片
-  await preloadImages(imageUrls)
+  preloadImages(imageUrls)
+})
+
+onUnmounted(() => {
+  if (headlineInterval) clearInterval(headlineInterval)
+})
+
+// 計算工作年資
+const experienceYear = computed(() => {
+  const startYear = 2020
+  const currentYear = new Date().getFullYear()
+  return currentYear - startYear
+})
+
+// 計算專案數量
+const projectCount = computed(() => {
+  return portfolio.length
 })
 </script>
 
