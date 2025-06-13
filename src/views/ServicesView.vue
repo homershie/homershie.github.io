@@ -169,13 +169,13 @@
             <div class="content d-flex align-items-center">
               <div class="amount mr-40">
                 <h2 class="main-color">議價</h2>
-                <a
-                  href="#0"
+                <button
+                  type="button"
                   class="butn butn-md butn-bord radius-30 text-u text-center mt-30"
                   @click="scrollToContact"
                 >
                   <span>聯絡我</span>
-                </a>
+                </button>
               </div>
               <div class="feat">
                 <ul class="rest">
@@ -206,13 +206,13 @@
             <div class="content d-flex align-items-center">
               <div class="amount mr-40">
                 <h2 class="main-color">議價</h2>
-                <a
-                  href="#0"
+                <button
+                  type="button"
                   class="butn butn-md butn-bord radius-30 text-u text-center mt-30"
                   @click="scrollToContact"
                 >
                   <span>聯絡我</span>
-                </a>
+                </button>
               </div>
               <div class="feat">
                 <ul class="rest">
@@ -272,9 +272,11 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { portfolio } from '@/data/portfolioData.js'
 import { useImageFormat } from '@/composables/useImageFormat.js'
 
+const router = useRouter()
 const portfolioData = ref(portfolio)
 const { toWebP } = useImageFormat()
 
@@ -298,6 +300,7 @@ const getProjectCount = targetCategory => {
 }
 
 function scrollToContact() {
-  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+  // 導航到聯絡頁面
+  router.push('/contact')
 }
 </script>

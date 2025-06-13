@@ -9,6 +9,10 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { useScroll } from '@vueuse/core'
+import { gsap } from 'gsap'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+
+gsap.registerPlugin(ScrollToPlugin)
 
 const { y } = useScroll(window)
 const showButton = ref(false)
@@ -18,9 +22,9 @@ watch(y, val => {
   showButton.value = val > 300
 })
 
-// 平滑滾動到頂部
+// 平滑滾動到頂部 - 使用 GSAP 實現平滑動畫
 function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+  gsap.to(window, { duration: 1, scrollTo: 0, ease: 'power2.out' })
 }
 </script>
 

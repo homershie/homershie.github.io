@@ -44,6 +44,15 @@ const router = createRouter({
       name: 'project',
       component: () => import('@/views/ProjectDetailView.vue'),
     },
+    {
+      path: '/404',
+      name: 'NotFound',
+      component: () => import('@/views/NotFoundView.vue'),
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/404',
+    },
   ],
   scrollBehavior(to, from, savedPosition) {
     // 如果有 savedPosition (使用瀏覽器的前進/後退按鈕)，則使用它

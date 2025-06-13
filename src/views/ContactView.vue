@@ -208,6 +208,7 @@
 import { ref, onMounted } from 'vue'
 import { useForm, useField } from 'vee-validate'
 import { useReCaptcha } from 'vue-recaptcha-v3'
+import { useTimeoutFn } from '@vueuse/core'
 import { useFormValidation } from '@/composables/useFormValidation.js'
 
 const isSubmitting = ref(false)
@@ -310,7 +311,8 @@ const submitForm = handleSubmit(async formValues => {
     messageClass.value = 'alert alert-danger'
   } finally {
     isSubmitting.value = false
-    setTimeout(() => (formMessage.value = ''), 5000)
+    // 使用 VueUse 的 useTimeoutFn 替代 setTimeout
+    useTimeoutFn(() => (formMessage.value = ''), 5000)
   }
 })
 </script>

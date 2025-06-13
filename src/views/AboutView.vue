@@ -207,6 +207,7 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
+import { useTimeoutFn } from '@vueuse/core'
 import { useImagePreloader } from '@/composables/useImagePreloader.js'
 import { useImageFormat } from '@/composables/useImageFormat.js'
 
@@ -335,8 +336,8 @@ onMounted(async () => {
   // 預載入圖片
   await preloadImages(imageUrls)
 
-  // 啟動技能動畫
-  setTimeout(() => {
+  // 啟動技能動畫 - 使用 VueUse 的 useTimeoutFn 替代 setTimeout
+  useTimeoutFn(() => {
     animatedSkills.value = true
   }, 500)
 

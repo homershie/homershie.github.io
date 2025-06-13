@@ -59,6 +59,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Masonry from 'masonry-layout'
 import { useImagePreloader } from '@/composables/useImagePreloader'
+import { useEventListener, useIntersectionObserver, useTimeoutFn } from '@vueuse/core'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -83,7 +84,6 @@ const sortedWorks = computed(() => {
 const { preloadImages, loadingProgress, isPreloading } = useImagePreloader()
 
 let masonryInstance = null
-let resizeHandler = null
 
 // 初始化 Masonry
 const initMasonry = () => {
@@ -108,8 +108,7 @@ const initMasonry = () => {
 // 等待短暫延遲，用於確保 DOM 更新
 const waitForDomUpdate = () => {
   return new Promise(resolve => {
-    // 短暫延遲，讓瀏覽器有時間處理布局
-    setTimeout(resolve, 50)
+    useTimeoutFn(resolve, 50)
   })
 }
 
@@ -126,40 +125,36 @@ const setupAnimationsForNewItems = (specificItems = null) => {
     }
   })
 
-  // 使用 Intersection Observer
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
-          entry.target.classList.add('animated')
-
-          gsap.to(entry.target, {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: 'power2.out',
-            onComplete: () => {
-              // 動畫完成後重新布局 Masonry
-              if (masonryInstance) {
-                masonryInstance.layout()
-              }
-            },
-          })
-
-          observer.unobserve(entry.target)
-        }
-      })
-    },
-    {
-      threshold: 0.1,
-      rootMargin: '0px 0px -10% 0px',
-    }
-  )
-
-  // 開始觀察未動畫的項目
+  // 使用 VueUse 的 useIntersectionObserver
   itemsToAnimate.forEach(item => {
     if (!item.classList.contains('animated')) {
-      observer.observe(item)
+      const { stop } = useIntersectionObserver(
+        item,
+        ([{ isIntersecting, target }]) => {
+          if (isIntersecting && !target.classList.contains('animated')) {
+            target.classList.add('animated')
+
+            gsap.to(target, {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              ease: 'power2.out',
+              onComplete: () => {
+                // 動畫完成後重新布局 Masonry
+                if (masonryInstance) {
+                  masonryInstance.layout()
+                }
+              },
+            })
+
+            stop()
+          }
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -10% 0px',
+        }
+      )
     }
   })
 }
@@ -184,25 +179,22 @@ onMounted(async () => {
   initMasonry()
   setupAnimationsForNewItems()
 
-  // 窗口大小改變時重新布局
-  resizeHandler = () => {
+  // 使用 VueUse 的 useEventListener 監聽窗口大小改變
+  useEventListener(window, 'resize', () => {
     if (masonryInstance) {
+      // 使用 setTimeout 進行防抖處理
       setTimeout(() => {
         masonryInstance.layout()
       }, 100)
     }
-  }
-
-  window.addEventListener('resize', resizeHandler)
+  })
 })
 
 onUnmounted(() => {
   if (masonryInstance) {
     masonryInstance.destroy()
   }
-  if (resizeHandler) {
-    window.removeEventListener('resize', resizeHandler)
-  }
+  // useEventListener 會自動清理事件監聽器，不需要手動移除
 })
 </script>
 

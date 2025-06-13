@@ -66,18 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Mobile menu visibility is handled by Vue components, so avoid
   // manually toggling navbar elements here to prevent conflicts.
 
-  // Navbar scroll effect
-  const navbar = document.querySelector('.navbar-chang')
-
-  window.addEventListener('scroll', function () {
-    const bodyScroll = window.pageYOffset || document.documentElement.scrollTop
-
-    if (bodyScroll > 300) {
-      if (navbar) navbar.classList.add('nav-scroll')
-    } else {
-      if (navbar) navbar.classList.remove('nav-scroll')
-    }
-  })
+  // Navbar scroll effect is now handled by AppNavbar.vue component
 
   /* =============================================================================
       --------------------------------  Navbar Tabs   --------------------------------

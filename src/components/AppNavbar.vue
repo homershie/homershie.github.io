@@ -115,30 +115,42 @@
 </template>
 
 <script setup>
-import { ref, watch, nextTick, onMounted, onBeforeUnmount } from 'vue'
+import { ref, watch, nextTick, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { useScroll, useEventListener } from '@vueuse/core'
 import gsap from 'gsap'
 
 const route = useRoute()
 const isMenuOpen = ref(false)
 const isDesktop = ref(window.innerWidth > 991)
 const bgRef = ref(null)
+const { y } = useScroll(window)
+
+// 監聽滾動，控制 navbar 樣式
+watch(y, scrollY => {
+  const navbar = document.querySelector('.navbar-chang')
+  if (navbar) {
+    if (scrollY > 300) {
+      navbar.classList.add('nav-scroll')
+    } else {
+      navbar.classList.remove('nav-scroll')
+    }
+  }
+})
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
 }
 
-const handleResize = () => {
+// 使用 VueUse 的 useEventListener 替代原生事件監聽
+useEventListener(window, 'resize', () => {
   isDesktop.value = window.innerWidth > 991
   if (isDesktop.value) isMenuOpen.value = false
-}
+})
 
 onMounted(() => {
-  window.addEventListener('resize', handleResize)
-  handleResize()
-})
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', handleResize)
+  // 初始化
+  isDesktop.value = window.innerWidth > 991
 })
 
 // 當打開手機版選單時做 GSAP 動畫
