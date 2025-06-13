@@ -72,14 +72,15 @@ document.addEventListener('DOMContentLoaded', function () {
       ------------------------------  Data Background   ------------------------------
       ============================================================================= */
 
-  const bgElements = document.querySelectorAll('.bg-img, section')
-
-  bgElements.forEach(element => {
-    const bgImage = element.getAttribute('data-background')
-    if (bgImage) {
-      element.style.backgroundImage = `url(${bgImage})`
-    }
-  })
+  // 背景圖片處理已移至 OptimizedImage.vue 組件
+  // 請使用 OptimizedImage 組件處理所有圖片，包括背景圖片
+  // 例如：
+  // <OptimizedImage
+  //   :src="imageUrl"
+  //   :alt="imageAlt"
+  //   class="bg-img"
+  //   :isBackground="true"
+  // />
 
   /* =============================================================================
       -----------------------------------  Tabs  -------------------------------------
