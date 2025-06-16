@@ -119,18 +119,16 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { articles } from '@/data/articleData.js'
-import { useImagePreloader } from '@/composables/useImagePreloader.js'
+import { useImageCache } from '@/composables/useImageCache'
 import { useHead } from '@vueuse/head'
 import { enableImageLightbox } from '@/composables/useLightBox.js'
-import { useImageFormat } from '@/composables/useImageFormat.js'
 import { useScroll } from '@vueuse/core'
 import ReadingProgress from '@/components/ReadingProgress.vue'
 import BackToTop from '@/components/BackToTop.vue'
 
 const route = useRoute()
 const router = useRouter()
-const { preloadImages } = useImagePreloader()
-const { toWebP } = useImageFormat()
+const { preloadImages, loadImage, startCacheCleanup } = useImageCache()
 
 // 使用 useScroll 來計算閱讀進度
 const { y } = useScroll(window)
@@ -235,19 +233,18 @@ watch(article, async a => {
     await preloadImages(urls)
   }
 
-  // 轉換所有文章內圖片為WebP格式
+  // 轉換所有文章內圖片為WebP格式並使用快取
   const imageElements = document.querySelectorAll('.cont .image img')
-  imageElements.forEach(img => {
-    // 記錄原始圖片路徑作為後備
+  for (const img of imageElements) {
     const originalSrc = img.src
-    // 設置WebP路徑
-    img.src = toWebP(originalSrc)
-    // 如果WebP載入失敗，使用原始圖片
-    img.onerror = function () {
-      this.onerror = null
-      this.src = originalSrc
+    try {
+      const cachedUrl = await loadImage(originalSrc)
+      img.src = cachedUrl
+    } catch {
+      // 如果快取載入失敗，使用原始圖片
+      img.src = originalSrc
     }
-  })
+  }
 
   // 圖片載完後才開 lightbox
   enableImageLightbox()
@@ -255,6 +252,7 @@ watch(article, async a => {
 
 onMounted(() => {
   loadArticle()
+  startCacheCleanup()
 })
 </script>
 

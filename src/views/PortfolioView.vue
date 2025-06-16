@@ -34,12 +34,14 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import PortfolioList from '@/components/PortfolioList.vue'
+import { useImageCache } from '@/composables/useImageCache'
 import { usePortfolio } from '@/composables/usePortfolio.js'
 import { ref, computed, onMounted } from 'vue'
 import { useScroll, useIntersectionObserver } from '@vueuse/core'
 import ReadingProgress from '@/components/ReadingProgress.vue'
 import BackToTop from '@/components/BackToTop.vue'
 
+const { preloadImages, startCacheCleanup } = useImageCache()
 const { portfolioData } = usePortfolio()
 const router = useRouter()
 
@@ -67,6 +69,19 @@ onMounted(() => {
       { threshold: 0.1 }
     )
   })
+})
+
+// 預載入多張圖片
+const preloadGalleryImages = async () => {
+  const imageUrls = portfolioData.value.map(work => work.image)
+  await preloadImages(imageUrls)
+}
+
+// 在元件掛載時預載入圖片
+onMounted(async () => {
+  await preloadGalleryImages()
+  // 初始化快取清理
+  startCacheCleanup()
 })
 </script>
 

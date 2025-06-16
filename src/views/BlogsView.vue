@@ -93,7 +93,7 @@
             >
               <router-link :to="`/article/${post.id}`">
                 <div class="img">
-                  <img :src="toWebP(post.image)" :alt="post.title" />
+                  <img :src="cachedImageUrl[post.image] || post.image" :alt="post.title" />
                 </div>
               </router-link>
               <div class="cont mt-30">
@@ -195,13 +195,14 @@
 import { ref, computed, onMounted } from 'vue'
 import { articles } from '@/data/articleData.js'
 import { useImageFormat } from '@/composables/useImageFormat.js'
-import { useImagePreloader } from '@/composables/useImagePreloader.js'
+import { useImageCache } from '@/composables/useImageCache'
 import BackToTop from '@/components/BackToTop.vue'
 
 const searchQuery = ref('')
 const selectedCategory = ref('all')
 const { toWebP } = useImageFormat()
-const { preloadImages, loadingProgress, isPreloading } = useImagePreloader()
+const { preloadImages, loadImage, startCacheCleanup } = useImageCache()
+const cachedImageUrl = ref({})
 
 // 將 articles 轉換為陣列格式
 const allPosts = ref(Object.values(articles).sort((a, b) => new Date(b.date) - new Date(a.date)))
@@ -255,16 +256,37 @@ const toLocalString = date => {
   })
 }
 
+// 載入圖片並使用快取
+const loadCachedImage = async url => {
+  try {
+    const cachedUrl = await loadImage(url)
+    cachedImageUrl.value[url] = cachedUrl
+    return cachedUrl
+  } catch {
+    // 如果快取載入失敗，使用 WebP 格式
+    const webpUrl = toWebP(url)
+    cachedImageUrl.value[url] = webpUrl
+    return webpUrl
+  }
+}
+
 onMounted(async () => {
   // 收集所有文章圖片URL
   const imageUrls = allPosts.value
     .map(post => [post.image, post.thumbnail])
     .flat()
     .filter(Boolean)
-    .map(url => toWebP(url))
 
   // 預載入圖片
   await preloadImages(imageUrls)
+
+  // 初始化快取清理
+  startCacheCleanup()
+
+  // 預載入所有圖片到快取
+  for (const url of imageUrls) {
+    await loadCachedImage(url)
+  }
 })
 </script>
 
