@@ -9,7 +9,7 @@ import viteImagemin from 'vite-plugin-imagemin'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: process.env.VITE_BASE_URL || '/',
+  base: '/',
   plugins: [
     vue(),
     vueDevTools(),
