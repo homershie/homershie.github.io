@@ -81,7 +81,20 @@ export default defineConfig({
     assetsDir: 'assets',
     rollupOptions: {
       output: {
-        manualChunks: undefined,
+        manualChunks: {
+          vendor: ['vue', 'vue-router', '@vueuse/core'],
+          components: [
+            './src/components/ReadingProgress.vue',
+            './src/components/BackToTop.vue',
+            './src/components/PortfolioList.vue',
+          ],
+          views: [
+            './src/views/AboutView.vue',
+            './src/views/PortfolioView.vue',
+            './src/views/BlogsView.vue',
+            './src/views/ContactView.vue',
+          ],
+        },
         format: 'es',
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',
@@ -90,4 +103,9 @@ export default defineConfig({
     },
   },
   publicDir: 'public',
+  preview: {
+    port: 4173,
+    strictPort: true,
+    host: true,
+  },
 })
