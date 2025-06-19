@@ -47,6 +47,17 @@ library.add(
   faMapMarkerAlt
 )
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .getRegistrations()
+    .then(registrations => {
+      registrations.forEach(reg => {
+        reg.unregister().catch(() => {})
+      })
+    })
+    .catch(() => {})
+}
+
 const app = createApp(App)
 
 // 註冊 FontAwesome 組件
