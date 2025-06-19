@@ -201,7 +201,7 @@ export function useImageCache() {
         await saveImageToCache(url, blob)
         return URL.createObjectURL(blob)
       } catch (err) {
-        console.error(`預載入圖片失敗 ${url}:`, err)
+        // 預載入圖片失敗，靜默處理
         return null
       }
     })
