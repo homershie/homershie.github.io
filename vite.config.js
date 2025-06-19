@@ -10,26 +10,38 @@ import viteImagemin from 'vite-plugin-imagemin'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   const base = env.VITE_BASE_URL || '/'
+  const isProduction = mode === 'production'
 
-  return {
-    base,
-    plugins: [
-      vue(),
-      vueDevTools(),
-      VitePluginRadar({
-        // Google Analytics tag injection
-        analytics: {
-          id: 'G-8YSG21XKMM',
-        },
-      }),
-      // 圖片優化插件
+  const plugins = [
+    vue(),
+    VitePluginRadar({
+      // Google Analytics tag injection
+      analytics: {
+        id: 'G-8YSG21XKMM',
+      },
+    }),
+  ]
+
+  // 只在開發環境中添加開發工具插件
+  if (!isProduction) {
+    plugins.push(vueDevTools())
+  }
+
+  // 只在生產環境中添加圖片優化插件
+  if (isProduction) {
+    plugins.push(
       viteImagemin({
         gifsicle: { optimizationLevel: 7 },
         mozjpeg: { quality: 85 },
         pngquant: { quality: [0.65, 0.8] },
         webp: { quality: 85 },
-      }),
-    ],
+      })
+    )
+  }
+
+  return {
+    base,
+    plugins,
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -38,12 +50,12 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: 'dist',
       assetsDir: 'assets',
-      sourcemap: mode === 'development',
-      minify: mode === 'production' ? 'terser' : false,
+      sourcemap: !isProduction,
+      minify: isProduction ? 'terser' : false,
       terserOptions: {
         compress: {
-          drop_console: mode === 'production',
-          drop_debugger: mode === 'production',
+          drop_console: isProduction,
+          drop_debugger: isProduction,
         },
       },
       rollupOptions: {
