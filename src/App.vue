@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterView } from 'vue-router'
 import AppNavbar from '@/components/AppNavbar.vue'
 import AppFooter from '@/components/AppFooter.vue'
@@ -11,7 +11,7 @@ import { useImageCache } from '@/composables/useImageCache'
 const showLoader = ref(true)
 const { handleCursorHover } = useCustomCursor()
 const { handleHoverAnimation } = useHoverAnimation()
-const { startCacheCleanup } = useImageCache()
+const { startCacheCleanup, stopCacheCleanup } = useImageCache()
 
 onMounted(() => {
   // 初始化游標懸停效果
@@ -24,6 +24,10 @@ onMounted(() => {
 
   // 初始化快取清理
   startCacheCleanup()
+})
+
+onUnmounted(() => {
+  stopCacheCleanup()
 })
 </script>
 

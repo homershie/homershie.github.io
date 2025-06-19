@@ -192,7 +192,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { articles } from '@/data/articleData.js'
 import { useImageFormat } from '@/composables/useImageFormat.js'
 import { useImageCache } from '@/composables/useImageCache'
@@ -201,7 +201,7 @@ import BackToTop from '@/components/BackToTop.vue'
 const searchQuery = ref('')
 const selectedCategory = ref('all')
 const { toWebP } = useImageFormat()
-const { preloadImages, loadImage, startCacheCleanup } = useImageCache()
+const { preloadImages, loadImage, startCacheCleanup, stopCacheCleanup } = useImageCache()
 const cachedImageUrl = ref({})
 
 // 將 articles 轉換為陣列格式
@@ -287,6 +287,10 @@ onMounted(async () => {
   for (const url of imageUrls) {
     await loadCachedImage(url)
   }
+})
+
+onUnmounted(() => {
+  stopCacheCleanup()
 })
 </script>
 

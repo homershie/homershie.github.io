@@ -36,12 +36,12 @@ import { useRouter } from 'vue-router'
 import PortfolioList from '@/components/PortfolioList.vue'
 import { useImageCache } from '@/composables/useImageCache'
 import { usePortfolio } from '@/composables/usePortfolio.js'
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useScroll, useIntersectionObserver } from '@vueuse/core'
 import ReadingProgress from '@/components/ReadingProgress.vue'
 import BackToTop from '@/components/BackToTop.vue'
 
-const { preloadImages, startCacheCleanup } = useImageCache()
+const { preloadImages, startCacheCleanup, stopCacheCleanup } = useImageCache()
 const { portfolioData } = usePortfolio()
 const router = useRouter()
 
@@ -82,6 +82,10 @@ onMounted(async () => {
   await preloadGalleryImages()
   // 初始化快取清理
   startCacheCleanup()
+})
+
+onUnmounted(() => {
+  stopCacheCleanup()
 })
 </script>
 

@@ -128,7 +128,7 @@ import BackToTop from '@/components/BackToTop.vue'
 
 const route = useRoute()
 const router = useRouter()
-const { preloadImages, loadImage, startCacheCleanup } = useImageCache()
+const { preloadImages, loadImage, startCacheCleanup, stopCacheCleanup } = useImageCache()
 
 // 使用 useScroll 來計算閱讀進度
 const { y } = useScroll(window)
@@ -253,6 +253,10 @@ watch(article, async a => {
 onMounted(() => {
   loadArticle()
   startCacheCleanup()
+})
+
+onUnmounted(() => {
+  stopCacheCleanup()
 })
 </script>
 
