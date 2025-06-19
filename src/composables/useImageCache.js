@@ -241,15 +241,23 @@ export function useImageCache() {
   }
 
   // 定期清理過期快取
+  let cleanupInterval = null
   const startCacheCleanup = () => {
-    // 每天清理一次過期快取
-    setInterval(
+    if (cleanupInterval) return
+    cleanupInterval = setInterval(
       async () => {
         await cleanExpiredCache()
         await cleanOversizedCache()
       },
       24 * 60 * 60 * 1000
     )
+  }
+
+  const stopCacheCleanup = () => {
+    if (cleanupInterval) {
+      clearInterval(cleanupInterval)
+      cleanupInterval = null
+    }
   }
 
   return {
@@ -259,6 +267,7 @@ export function useImageCache() {
     loadImage,
     preloadImages,
     startCacheCleanup,
+    stopCacheCleanup,
     getCacheSize,
   }
 }
