@@ -1,7 +1,5 @@
 <template>
   <section class="portfolio section-padding">
-    <ReadingProgress />
-    <BackToTop />
     <div class="container">
       <div class="sec-head mb-40">
         <div class="row justify-content-center">
@@ -38,8 +36,6 @@ import { useImageCache } from '@/composables/useImageCache'
 import { usePortfolio } from '@/composables/usePortfolio.js'
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useScroll, useIntersectionObserver } from '@vueuse/core'
-import ReadingProgress from '@/components/ReadingProgress.vue'
-import BackToTop from '@/components/BackToTop.vue'
 
 const { preloadImages, startCacheCleanup, stopCacheCleanup } = useImageCache()
 const { portfolioData } = usePortfolio()

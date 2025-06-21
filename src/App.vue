@@ -4,6 +4,8 @@ import { RouterView } from 'vue-router'
 import AppNavbar from '@/components/AppNavbar.vue'
 import AppFooter from '@/components/AppFooter.vue'
 import PreLoader from '@/components/PreLoader.vue'
+import BackToTop from '@/components/BackToTop.vue'
+import ReadingProgress from '@/components/ReadingProgress.vue'
 import { useCustomCursor } from '@/composables/useCustomCursor'
 import { useHoverAnimation } from '@/composables/useHoverAnimation'
 import { useImageCache } from '@/composables/useImageCache'
@@ -36,6 +38,9 @@ onUnmounted(() => {
     <!-- 全局 Loading -->
     <PreLoader @loaded="showLoader = false" />
 
+    <!-- 全域閱讀進度條 -->
+    <ReadingProgress />
+
     <!-- Navigation -->
     <AppNavbar />
 
@@ -46,6 +51,9 @@ onUnmounted(() => {
 
     <!-- Footer -->
     <AppFooter />
+
+    <!-- 全域回到頂部按鈕 -->
+    <BackToTop />
   </div>
 </template>
 

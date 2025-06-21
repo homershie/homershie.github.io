@@ -1,7 +1,5 @@
 <template>
   <section v-if="article" class="main-post section-padding">
-    <ReadingProgress />
-    <BackToTop />
     <div class="container with-pad">
       <!-- 閱讀進度條 -->
       <div class="reading-progress-bar" :style="{ width: progress + '%' }"></div>
@@ -123,8 +121,6 @@ import { useImageCache } from '@/composables/useImageCache'
 import { useHead } from '@vueuse/head'
 import { enableImageLightbox } from '@/composables/useLightBox.js'
 import { useScroll } from '@vueuse/core'
-import ReadingProgress from '@/components/ReadingProgress.vue'
-import BackToTop from '@/components/BackToTop.vue'
 
 const route = useRoute()
 const router = useRouter()
