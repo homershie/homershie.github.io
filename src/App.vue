@@ -52,7 +52,15 @@ onUnmounted(() => {
 <style>
 /* Global styles will be imported from main.js */
 #app {
-  height: 100vh;
   width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* 確保 body 沒有預設的 margin/padding 影響 navbar */
+body {
+  margin: 0;
+  padding: 0;
+  /* 移除 padding-top，讓 navbar 完全固定在最上方 */
 }
 </style>

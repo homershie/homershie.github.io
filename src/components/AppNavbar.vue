@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-chang navbar-expand-lg">
+  <nav class="navbar navbar-chang navbar-expand-lg" :class="{ 'nav-scroll': isScrolled }">
     <div class="container position-re">
       <div class="row">
         <div class="col-lg-3 col-6 order1">
@@ -7,7 +7,7 @@
             <!-- Logo -->
             <router-link class="logo icon-img-120" to="/">
               <img
-                src="/assets/imgs/logo-light.png"
+                src="https://images.homershie.com/assets/imgs/logo-light.png"
                 alt="荷馬桑 Homer Shie - 視覺設計師標誌"
                 loading="eager"
               />
@@ -124,18 +124,12 @@ const route = useRoute()
 const isMenuOpen = ref(false)
 const isDesktop = ref(window.innerWidth > 991)
 const bgRef = ref(null)
+const isScrolled = ref(false)
 const { y } = useScroll(window)
 
-// 監聽滾動，控制 navbar 樣式
+// 監聽滾動，控制 navbar 樣式 (與原版 JS 保持一致：300px)
 watch(y, scrollY => {
-  const navbar = document.querySelector('.navbar-chang')
-  if (navbar) {
-    if (scrollY > 300) {
-      navbar.classList.add('nav-scroll')
-    } else {
-      navbar.classList.remove('nav-scroll')
-    }
-  }
+  isScrolled.value = scrollY > 300
 })
 
 const toggleMenu = () => {
@@ -186,31 +180,74 @@ watch(
   -webkit-backdrop-filter: blur(3px);
 }
 
-.bg {
-  display: none;
-  @media (min-width: 992px) {
-    display: flex;
-  }
-  &.open {
-    display: flex;
-  }
-}
-
+/* 整合 style.css 中的 navbar 相關 CSS */
 .navbar {
-  position: relative;
-  z-index: 20;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 15px 0;
+  /* 基礎樣式 */
+  margin: 0;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  z-index: 999;
 
-  .logo {
-    img {
-      height: auto;
-      width: 100%;
+  /* bord 樣式 */
+  .bord {
+    padding: 10px 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  /* bg 樣式 */
+  .bg {
+    padding: 10px 0;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(2px);
+    border-radius: 5px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    /* 手機版隱藏，桌面版顯示 */
+    display: none;
+    @media (min-width: 992px) {
+      display: flex;
+    }
+    &.open {
+      display: flex;
     }
   }
 
+  /* social 樣式 */
+  .social {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-left: 5px;
+
+      a {
+        color: #fff;
+        font-size: 1.1rem;
+        transition: color 0.5s ease;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+
+        &:hover {
+          color: var(--maincolor);
+        }
+      }
+    }
+  }
+
+  /* navbar-toggler 樣式 */
   .navbar-toggler {
     border: none;
     background: none;
@@ -218,7 +255,11 @@ watch(
     font-size: 1.2rem;
     padding: 5px;
 
-    &:focus {
+    &:hover,
+    &:focus,
+    &:active,
+    &:visited {
+      outline: none !important;
       box-shadow: none;
     }
 
@@ -230,6 +271,7 @@ watch(
       border-radius: 1px;
       transition: all 0.3s ease;
       position: relative;
+      color: #fff;
 
       &:not(:last-child) {
         margin-bottom: 4px;
@@ -248,61 +290,117 @@ watch(
       }
     }
   }
-  .rolling-text {
-    vertical-align: middle;
+
+  /* container 樣式 */
+  .container,
+  .container-fluid {
+    display: block !important;
   }
 
-  .nav-link {
-    color: #fff !important;
-    font-weight: 500;
-    margin: 0 15px;
-    position: relative;
-    transition: all 0.3s ease;
+  /* navbar-nav 樣式 */
+  .navbar-nav {
+    justify-content: center;
 
-    &:hover,
-    &.router-link-active {
-      color: var(--maincolor) !important;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--maincolor);
-      transition: width 0.3s ease;
-    }
-  }
-
-  .social {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-
-    li {
+    .nav-link {
+      font-size: 15px;
+      color: #fff !important;
       margin: 0 10px;
+      padding: 0 5px;
+      font-weight: 500;
+      position: relative;
+      transition: all 0.5s ease;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 
-      a {
-        color: #fff;
-        font-size: 1.1rem;
-        transition: color 0.3s ease;
-
-        &:hover {
-          color: var(--maincolor);
-        }
+      .rolling-text {
+        height: 30px;
+        line-height: 30px;
+        vertical-align: middle;
       }
+
+      .block:last-of-type {
+        color: var(--maincolor);
+      }
+
+      &:hover,
+      &.router-link-active {
+        color: var(--maincolor) !important;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--maincolor);
+        transition: width 0.3s ease;
+      }
+
+      &:hover::after,
+      &.router-link-active::after {
+        width: 100%;
+      }
+    }
+  }
+
+  .logo {
+    transition: all 0.5s ease-in-out;
+
+    img {
+      height: auto;
+      width: 100%;
+      transition: all 0.5s ease-in-out;
     }
   }
 }
 
+/* navbar-chang 樣式 - 關鍵的動畫部分 */
+.navbar-chang {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: transform 0.4s;
+
+  /* 滾動後的樣式 - 保留原版的上往下動畫 */
+  &.nav-scroll {
+    backdrop-filter: blur(15px);
+    background: rgba(0, 0, 0, 0.15);
+    position: fixed;
+    top: -80px;
+    transform: translateY(80px) !important;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* 滾動後移除文字陰影 */
+    .nav-link,
+    .social a {
+      text-shadow: none;
+    }
+  }
+}
+
+/* 手機版響應式樣式 */
 @media (max-width: 991px) {
-  .navbar-collapse {
-    background: rgba(0, 0, 0, 0.95);
-    margin-top: 20px;
-    border-radius: 10px;
-    padding: 20px;
+  .navbar {
+    .bg {
+      position: absolute;
+      left: 0;
+      top: 65px;
+      display: none;
+      width: 100%;
+      height: auto;
+      background: #0c0c0c;
+      padding: 20px 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .social {
+      display: none !important;
+    }
   }
 
   .navbar-nav {
