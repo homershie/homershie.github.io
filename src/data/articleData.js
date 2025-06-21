@@ -7,15 +7,15 @@ export const articles = {
     categoryName: '視覺風格大全',
     excerpt:
       '早在第一次世界大戰期間產生的達達主義思潮，杜象（Henri-Robert-Marcel Duchamp）就用《噴泉》，連鎖店購買的小便斗，使用現成物、日常生活用品試圖傳統藝術拉下崇高的殿堂，提問什麼是藝術？',
-    image: '/assets/imgs/blog/pop-art.jpg',
-    thumbnail: '/assets/imgs/blog/pop-art.jpg',
+    image: 'https://images.homershie.com/assets/imgs/blog/pop-art.jpg',
+    thumbnail: 'https://images.homershie.com/assets/imgs/blog/pop-art.jpg',
     author: 'Homer Shie',
     content: `
 <article>
   <!-- 首圖 -->
   <figure class="image">
     <img
-      src="/assets/imgs/blog/Pop_Art/cri_000000229136.jpg"
+      src="https://images.homershie.com/assets/imgs/blog/Pop_Art/cri_000000229136.jpg"
       alt="Sweet Dreams, Baby! by Roy Lichtenstein"
       loading="lazy"
     />
@@ -36,7 +36,7 @@ export const articles = {
   </p>
   <figure class="image">
     <img
-      src="/assets/imgs/blog/Pop_Art/300px-Fontaine_Duchamp.jpg"
+      src="https://images.homershie.com/assets/imgs/blog/Pop_Art/300px-Fontaine_Duchamp.jpg"
       alt="Fountain by Marcel Duchamp"
       loading="lazy"
     />
@@ -64,7 +64,7 @@ export const articles = {
   <div class="image-gallery">
   <figure class="image">
     <img
-      src="/assets/imgs/blog/Pop_Art/Campbells_Soup_Cans_MOMA_reduced_80%.jpg"
+      src="https://images.homershie.com/assets/imgs/blog/Pop_Art/Campbells_Soup_Cans_MOMA_reduced_80%.jpg"
       alt="Campbells Soup Cans by Andy Warhol"
       loading="lazy"
     />
@@ -76,7 +76,7 @@ export const articles = {
   </figure>
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/Pop_Art/file1.jpg" alt="Monroe in Warhol style" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/Pop_Art/file1.jpg" alt="Monroe in Warhol style" loading="lazy" />
       <figcaption>
         《Monroe in Warhol style》 Andy Warhol from
         <a href="https://www.ss.net.tw/paint-167_136-9094.html" target="_blank">Here</a>.
@@ -84,7 +84,7 @@ export const articles = {
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Pop_Art/Hamilton-appealing2.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Pop_Art/Hamilton-appealing2.jpg"
         alt="Just what is it that makes today's homes so different, so appealing? by Richard Hamilton"
         loading="lazy"
       />
@@ -100,7 +100,7 @@ export const articles = {
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Pop_Art/Oh,_Jeff...I_Love_You,_Too...But....jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Pop_Art/Oh,_Jeff...I_Love_You,_Too...But....jpg"
         alt="Oh, Jeff…I Love You, Too…But.."
         loading="lazy"
       />
@@ -123,19 +123,19 @@ export const articles = {
   </p>
 
   <figure class="image">
-    <img src="/assets/imgs/blog/Pop_Art/takashi-murakami-superflat.jpg" loading="lazy" />
+    <img src="https://images.homershie.com/assets/imgs/blog/Pop_Art/takashi-murakami-superflat.jpg" loading="lazy" />
     <figcaption>《Flower》by 村上隆, 2004</figcaption>
   </figure>
   <figure class="image">
     <img
-      src="/assets/imgs/blog/Pop_Art/草間彌生_Yayoi_KUSAMA｜No.327_南瓜_A_Pumpkin_YB-B｜2004｜絲網版畫_Screenprint｜24x28.5cm｜限量120版_Edition_of_120.jpg"
+      src="https://images.homershie.com/assets/imgs/blog/Pop_Art/草間彌生_Yayoi_KUSAMA｜No.327_南瓜_A_Pumpkin_YB-B｜2004｜絲網版畫_Screenprint｜24x28.5cm｜限量120版_Edition_of_120.jpg"
       loading="lazy"
     />
     <figcaption>《A pumpkin》by 草間彌生, 2004</figcaption>
   </figure>
   <figure class="image">
     <img
-      src="/assets/imgs/blog/Pop_Art/aya-takano-secrets-of-the-thousand-year-spiral_-ozuka.jpg"
+      src="https://images.homershie.com/assets/imgs/blog/Pop_Art/aya-takano-secrets-of-the-thousand-year-spiral_-ozuka.jpg"
       loading="lazy"
     />
     <figcaption>《SECRETS OF THE THOUSAND YEAR SPIRAL: OZUKA》by タカノ綾, 2013</figcaption>
@@ -150,7 +150,7 @@ export const articles = {
     >
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Pop_Art/f193c8be9057dba3b88f25d1ac18439c.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Pop_Art/f193c8be9057dba3b88f25d1ac18439c.jpg"
           loading="lazy"
           alt="poster by Magdiel Lopez"
         />
@@ -160,7 +160,7 @@ export const articles = {
     <a href="http://cristinadaura.tumblr.com/?amp_see_more=1" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Pop_Art/9cb5ac8554888b57fda0cdf9f736bae9.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Pop_Art/9cb5ac8554888b57fda0cdf9f736bae9.jpg"
           loading="lazy"
           alt="Cristina Daura-illustration"
         />
@@ -172,7 +172,7 @@ export const articles = {
     <a href="https://www.kkbox.com/tw/tc/song/zbv00OK8XSX-b4UP-b4UP0XL-index.html" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Pop_Art/Release_小老虎專輯封面_2.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Pop_Art/Release_小老虎專輯封面_2.jpg"
           loading="lazy"
           alt="逍遙客小老虎專輯封面"
         />
@@ -182,7 +182,7 @@ export const articles = {
     <a href="https://www.instagram.com/utomaru/?hl=zh-tw" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Pop_Art/e3b49e366e5e2c92395b90d33341acb6.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Pop_Art/e3b49e366e5e2c92395b90d33341acb6.jpg"
           loading="lazy"
           alt="Utomaru-illustration"
         />
@@ -195,7 +195,7 @@ export const articles = {
     >
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Pop_Art/b9197a8dcd92ad277eab026b419ee5e9.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Pop_Art/b9197a8dcd92ad277eab026b419ee5e9.jpg"
           loading="lazy"
           alt="Fun Magazine Cover Doodle Art"
         />
@@ -208,7 +208,7 @@ export const articles = {
     >
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Pop_Art/18fc0c154cef98f75f48ba77c7699971.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Pop_Art/18fc0c154cef98f75f48ba77c7699971.jpg"
           loading="lazy"
           alt="Anitta Bang - Ilustração"
         />
@@ -218,7 +218,7 @@ export const articles = {
     <a href="https://agentpekka.com/artist/craig-karl/variety/" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Pop_Art/35df3b718225fa0ea9296b6a62895353.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Pop_Art/35df3b718225fa0ea9296b6a62895353.jpg"
           loading="lazy"
           alt="Variety Craig & Karl"
         />
@@ -231,7 +231,7 @@ export const articles = {
     <a href="https://agentpekka.com/artist/craig-karl/jay-z/" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Pop_Art/e60a1177be6f1ad2dd25777a91ae8882.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Pop_Art/e60a1177be6f1ad2dd25777a91ae8882.jpg"
           loading="lazy"
           alt="Jay-Z by Craig & Karl"
         />
@@ -243,7 +243,7 @@ export const articles = {
     <a href="https://www.canva.com/learn/ways-pop-art-changed-modern-design/" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Pop_Art/d5c5be67edc035c9a431d2865827b656.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Pop_Art/d5c5be67edc035c9a431d2865827b656.jpg"
           loading="lazy"
           alt="10 ways to apply the lessons of pop art to your design"
         />
@@ -256,7 +256,7 @@ export const articles = {
     <a href="http://illustrationfriday.com/2015/01/kendra-dandy/" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Pop_Art/8fde8aa908614bc35e4209bbe36049e0.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Pop_Art/8fde8aa908614bc35e4209bbe36049e0.jpg"
           loading="lazy"
           alt="by Bryna Shields"
         />
@@ -266,7 +266,7 @@ export const articles = {
     <a href="https://www.cinra.net/news/gallery/62646/0" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Pop_Art/c776fa06a6f84993736d9362a518c49a.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Pop_Art/c776fa06a6f84993736d9362a518c49a.jpg"
           loading="lazy"
           alt="＊ASTERISK Poster"
         />
@@ -276,7 +276,7 @@ export const articles = {
     <a href="https://www.flickr.com/photos/bobeightpop/3290484170/" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Pop_Art/789bfd23e8202927f96de99aa78e29a5.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Pop_Art/789bfd23e8202927f96de99aa78e29a5.jpg"
           loading="lazy"
           alt="Oh Me Oh My | James Joyce"
         />
@@ -330,15 +330,15 @@ export const articles = {
     categoryName: '視覺風格大全',
     excerpt:
       '這幾年的設計風格漸漸走向扁平化、單一化、抽象化，其中可能包含了文化因素、社會因素等等深層的原因，要論說其原因不是三言兩語就可以帶過，所以我將自己推測，加上部分照記憶引用大學時馮老師在上課時介紹的設計史與設計趨勢，簡單歸納出以下2點，因為沒有統計數據佐證所以可以當作參考就好：...',
-    image: '/assets/imgs/blog/mbe.jpg',
-    thumbnail: '/assets/imgs/blog/mbe.jpg',
+    image: 'https://images.homershie.com/assets/imgs/blog/mbe.jpg',
+    thumbnail: 'https://images.homershie.com/assets/imgs/blog/mbe.jpg',
     author: 'Homer Shie',
     content: `
 <article>
   <!-- 首圖 -->
   <figure class="image">
     <img
-      src="/assets/imgs/blog/MBE/beer.jpg"
+      src="https://images.homershie.com/assets/imgs/blog/MBE/beer.jpg"
       alt="Sweet Dreams, Baby! by Roy Lichtenstein"
       loading="lazy"
     />
@@ -365,11 +365,11 @@ export const articles = {
     馮老師將這種扁平化、單一化、抽象化的設計風格命名為「輕現代」，是一種融合現代與後現代主義的視覺風格，同時也認為輕現代是未來設計風格的強勢風格。
   </p>
   <figure class="image">
-    <img src="/assets/imgs/blog/MBE/01_Pepsi-tb-752x0.jpg" alt="pepsi-Logo" loading="lazy" />
+    <img src="https://images.homershie.com/assets/imgs/blog/MBE/01_Pepsi-tb-752x0.jpg" alt="pepsi-Logo" loading="lazy" />
     <figcaption>《pepsi Logo》</figcaption>
   </figure>
   <figure class="image">
-    <img src="/assets/imgs/blog/MBE/Memphis-Grizzlies.jpg" alt="Memphis-Grizzlies" loading="lazy" />
+    <img src="https://images.homershie.com/assets/imgs/blog/MBE/Memphis-Grizzlies.jpg" alt="Memphis-Grizzlies" loading="lazy" />
     <figcaption>《Memphis Grizzlies Logo》</figcaption>
   </figure>
 
@@ -399,39 +399,39 @@ export const articles = {
   <!-- 圖庫展示 -->
   <div class="image-gallery-3">
     <figure class="image">
-      <img src="/assets/imgs/blog/MBE/mountains.jpg" alt="mountains" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/MBE/mountains.jpg" alt="mountains" loading="lazy" />
       <figcaption>mountains</figcaption>
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/MBE/fruit.jpg" alt="fruit" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/MBE/fruit.jpg" alt="fruit" loading="lazy" />
       <figcaption>fruit</figcaption>
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/MBE/banarabit.jpg" alt="banarabit" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/MBE/banarabit.jpg" alt="banarabit" loading="lazy" />
       <figcaption>banarabit</figcaption>
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/MBE/mario.jpg" alt="mario" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/MBE/mario.jpg" alt="mario" loading="lazy" />
       <figcaption>Mario</figcaption>
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/MBE/rocket.jpg" alt="rocket" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/MBE/rocket.jpg" alt="rocket" loading="lazy" />
       <figcaption>rocket</figcaption>
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/MBE/searchwhat.jpg" alt="searchwhat" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/MBE/searchwhat.jpg" alt="searchwhat" loading="lazy" />
       <figcaption>searchwhat</figcaption>
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/MBE/beer.jpg" alt="beer" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/MBE/beer.jpg" alt="beer" loading="lazy" />
       <figcaption>beer</figcaption>
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/MBE/ghost.jpg" alt="ghost" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/MBE/ghost.jpg" alt="ghost" loading="lazy" />
       <figcaption>ghost</figcaption>
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/MBE/ice-cream.jpg" alt="ice-cream" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/MBE/ice-cream.jpg" alt="ice-cream" loading="lazy" />
       <figcaption>ice-cream</figcaption>
     </figure>
   </div>
@@ -487,15 +487,15 @@ export const articles = {
     categoryName: '視覺風格大全',
     excerpt:
       '什麼是像素風格？ 像素風格起源於電子遊戲，早期的作品有像小精靈Pac-Man (1980)、太空侵略者Space Invaders (1978)等等知名的遊戲，早期的電腦跟電子遊戲機沒有辦法像現代的電腦一樣動輒1080p或是4k，於是像素藝術家通過從有限數量的像素創作圖像，找到解決方案，讓遊戲畫面能夠在有限的像素下呈現出更好的畫面，這些像素藝術家也被稱為像素藝術家（Pixel Artist）。',
-    image: '/assets/imgs/blog/pixel-art.jpg',
-    thumbnail: '/assets/imgs/blog/pixel-art.jpg',
+    image: 'https://images.homershie.com/assets/imgs/blog/pixel-art.jpg',
+    thumbnail: 'https://images.homershie.com/assets/imgs/blog/pixel-art.jpg',
     author: 'Homer Shie',
     content: `
 <article>
   <!-- 首圖 -->
   <figure class="image">
     <img
-      src="/assets/imgs/blog/Pixel_Art/4c9211f3ff33b6e85d2ed5d108a57a71.jpg"
+      src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/4c9211f3ff33b6e85d2ed5d108a57a71.jpg"
       alt="Super Mario Bros Pixel Art"
       loading="lazy"
     />
@@ -516,7 +516,7 @@ export const articles = {
   </p>
   <figure class="image">
     <img
-      src="/assets/imgs/blog/Pixel_Art/pointillism-496x273.jpg"
+      src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/pointillism-496x273.jpg"
       alt="A Sunday on La Grande Jatte"
       loading="lazy"
     />
@@ -524,7 +524,7 @@ export const articles = {
   </figure>
   <figure class="image">
     <img
-      src="/assets/imgs/blog/Pixel_Art/1280px-Paul_Signac_-_L'Hirondelle_Steamer_on_the_Seine.jpg"
+      src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/1280px-Paul_Signac_-_L'Hirondelle_Steamer_on_the_Seine.jpg"
       alt="L'Hirondelle Steamer on the Seine"
       loading="lazy"
     />
@@ -538,7 +538,7 @@ export const articles = {
 
   <figure class="image">
     <img
-      src="/assets/imgs/blog/Pixel_Art/2523822-7471044340-m01WP.png"
+      src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/2523822-7471044340-m01WP.png"
       alt="Paper, please"
       loading="lazy"
     />
@@ -565,7 +565,7 @@ export const articles = {
 
   <figure class="image">
     <img
-      src="/assets/imgs/blog/Pixel_Art/eboy-london.jpg"
+      src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/eboy-london.jpg"
       alt="pixelated cityscapes"
       loading="lazy"
     />
@@ -578,25 +578,25 @@ export const articles = {
   <!-- 圖庫展示 -->
   <div class="image-gallery">
     <figure class="image">
-      <img src="/assets/imgs/blog/Pixel_Art/Mucha.jpg" alt="Mucha" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/Mucha.jpg" alt="Mucha" loading="lazy" />
 
       <figcaption>Mucha</figcaption>
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Pixel_Art/The-starry-night.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/The-starry-night.jpg"
         alt="The-starry-night"
         loading="lazy"
       />
       <figcaption>The starry night</figcaption>
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/Pixel_Art/vin-gogh.jpg" alt="Vin Gogh" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/vin-gogh.jpg" alt="Vin Gogh" loading="lazy" />
       <figcaption>Vin Gogh</figcaption>
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Pixel_Art/Jaebum-copy-of-George-seurat.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/Jaebum-copy-of-George-seurat.jpg"
         alt="Jaebum copy of George seurat"
         loading="lazy"
       />
@@ -610,12 +610,12 @@ export const articles = {
   <!-- 圖庫展示 -->
   <div class="image-gallery">
     <figure class="image">
-      <img src="/assets/imgs/blog/Pixel_Art/pixel_7_web.jpg" alt="pixel_7_web" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/pixel_7_web.jpg" alt="pixel_7_web" loading="lazy" />
 
       <figcaption>pixel 7</figcaption>
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/Pixel_Art/pixel_5_web.jpg" alt="pixel_5_web" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/pixel_5_web.jpg" alt="pixel_5_web" loading="lazy" />
       <figcaption>pixel 5</figcaption>
     </figure>
     <p class="text-center artist">
@@ -627,7 +627,7 @@ export const articles = {
   <div class="image-gallery">
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Pixel_Art/Svard-self-portrait.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/Svard-self-portrait.jpg"
         alt="Svard-self-portrait"
         loading="lazy"
       />
@@ -635,7 +635,7 @@ export const articles = {
       <figcaption>Svard self portrait</figcaption>
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/Pixel_Art/Wacek-by-Js.jpg" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/Wacek-by-Js.jpg" loading="lazy" />
       <figcaption>Wacek by Js</figcaption>
     </figure>
     <p class="text-center artist">
@@ -648,7 +648,7 @@ export const articles = {
   <div class="image-gallery">
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Pixel_Art/40463940_1833753923409701_180006859673960448_n.png"
+        src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/40463940_1833753923409701_180006859673960448_n.png"
         alt="Kamen-Rider-EX-AID"
         loading="lazy"
       />
@@ -657,7 +657,7 @@ export const articles = {
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Pixel_Art/40400243_1832381480213612_3443973995072847872_n.png"
+        src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/40400243_1832381480213612_3443973995072847872_n.png"
         alt="Rutile"
         loading="lazy"
       />
@@ -665,7 +665,7 @@ export const articles = {
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Pixel_Art/39950275_1821673161284444_2233793236311212032_n.png"
+        src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/39950275_1821673161284444_2233793236311212032_n.png"
         alt="太陽餅店"
         loading="lazy"
       />
@@ -673,7 +673,7 @@ export const articles = {
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Pixel_Art/38500060_1791025477682546_2073601470250352640_n.png"
+        src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/38500060_1791025477682546_2073601470250352640_n.png"
         alt="台中州廳"
         loading="lazy"
       />
@@ -687,13 +687,13 @@ export const articles = {
   <!-- 圖庫展示 -->
   <div class="image-gallery">
     <figure class="image">
-      <img src="/assets/imgs/blog/Pixel_Art/photo.jpg" alt="中秋拜拜" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/photo.jpg" alt="中秋拜拜" loading="lazy" />
 
       <figcaption>中秋拜拜</figcaption>
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Pixel_Art/28336363_1590431064383218_5369127127752856553_o.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/28336363_1590431064383218_5369127127752856553_o.jpg"
         alt="祈福"
         loading="lazy"
       />
@@ -701,7 +701,7 @@ export const articles = {
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Pixel_Art/38032720_1770762416350081_543049535987908608_o.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/38032720_1770762416350081_543049535987908608_o.jpg"
         alt="深夜福利"
         loading="lazy"
       />
@@ -709,7 +709,7 @@ export const articles = {
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Pixel_Art/37245024_1752707358155587_4754501536514572288_o.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/37245024_1752707358155587_4754501536514572288_o.jpg"
         alt="水果攤 "
         loading="lazy"
       />
@@ -723,20 +723,20 @@ export const articles = {
   <!-- 圖庫展示 -->
   <div class="image-gallery">
     <figure class="image">
-      <img src="/assets/imgs/blog/Pixel_Art/attackM01.gif" alt="attackM01" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/attackM01.gif" alt="attackM01" loading="lazy" />
       <figcaption>attackM01</figcaption>
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/Pixel_Art/朱雀羽扇II.png" alt="朱雀羽扇II" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/朱雀羽扇II.png" alt="朱雀羽扇II" loading="lazy" />
       <figcaption>朱雀羽扇II</figcaption>
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/Pixel_Art/飛雲.png" alt="飛雲" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/飛雲.png" alt="飛雲" loading="lazy" />
       <figcaption>飛雲</figcaption>
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Pixel_Art/冒險介面_對話狀態2.png"
+        src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/冒險介面_對話狀態2.png"
         alt="冒險介面_對話狀態2"
         loading="lazy"
       />
@@ -751,7 +751,7 @@ export const articles = {
   <div class="image-gallery">
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Pixel_Art/21149929_1559297130758725_1565544402944185110_n.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/21149929_1559297130758725_1565544402944185110_n.jpg"
         alt="doodle"
         loading="lazy"
       />
@@ -759,7 +759,7 @@ export const articles = {
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Pixel_Art/11234866_969179516437159_7734001953992364884_n.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/11234866_969179516437159_7734001953992364884_n.jpg"
         alt="doodle_workflow"
         loading="lazy"
       />
@@ -774,40 +774,40 @@ export const articles = {
 
   <div class="image-masonry">
     <figure class="image">
-      <img src="/assets/imgs/blog/Pixel_Art/4507c42540f6e41874d3a35e501f05d1.jpg" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/4507c42540f6e41874d3a35e501f05d1.jpg" loading="lazy" />
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/Pixel_Art/4787d162af1f8decb2210ff666dee18e.jpg" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/4787d162af1f8decb2210ff666dee18e.jpg" loading="lazy" />
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/Pixel_Art/1f27de955a69ab27d9c198f0aa0zg7g4.JPG" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/1f27de955a69ab27d9c198f0aa0zg7g4.JPG" loading="lazy" />
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Pixel_Art/6350F5E3-4EAC-40A7-BDA9-1EDF94B41667.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/6350F5E3-4EAC-40A7-BDA9-1EDF94B41667.jpg"
         loading="lazy"
       />
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/Pixel_Art/41222bda42b53e2f8e8a972b5fda3780.jpg" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/41222bda42b53e2f8e8a972b5fda3780.jpg" loading="lazy" />
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/Pixel_Art/d4ac0b9b0dd126b91bd766e5481eefe9.jpg" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/d4ac0b9b0dd126b91bd766e5481eefe9.jpg" loading="lazy" />
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Pixel_Art/40683911_10216879875133773_3031083511709696000_n.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/40683911_10216879875133773_3031083511709696000_n.jpg"
         loading="lazy"
       />
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/Pixel_Art/d55cc1a84ddcfd497cc2681a05967246.jpg" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/d55cc1a84ddcfd497cc2681a05967246.jpg" loading="lazy" />
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/Pixel_Art/uisdc-sq-20180607-2.jpg" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/uisdc-sq-20180607-2.jpg" loading="lazy" />
     </figure>
     <figure class="image">
-      <img src="/assets/imgs/blog/Pixel_Art/mariopixelartbymetinseven.png" loading="lazy" />
+      <img src="https://images.homershie.com/assets/imgs/blog/Pixel_Art/mariopixelartbymetinseven.png" loading="lazy" />
     </figure>
   </div>
 
@@ -858,14 +858,14 @@ export const articles = {
     categoryName: '視覺風格大全',
     excerpt:
       '​「對酒當歌，人生幾何！譬如朝露，去日苦多。」 有些專家說我們這代二十幾歲的人是Z世代、90後、數位原生世代。有些人對未來感到迷茫，找不到生活的重心，對什麼事情都提不起勁；有些人看到房子、車子的價格對現實感到挫折無力。於是我們專注在享受當下，領到薪水馬上吃一頓千元的大餐...',
-    image: '/assets/imgs/blog/vaporwave.jpg',
-    thumbnail: '/assets/imgs/blog/vaporwave.jpg',
+    image: 'https://images.homershie.com/assets/imgs/blog/vaporwave.jpg',
+    thumbnail: 'https://images.homershie.com/assets/imgs/blog/vaporwave.jpg',
     author: 'Homer Shie',
     content: `
 <article>
   <!-- 首圖 -->
   <figure class="image">
-    <img src="/assets/imgs/blog/Vapowave/01.png" alt="Am I Kawaiiiiiiii?" loading="lazy" />
+    <img src="https://images.homershie.com/assets/imgs/blog/Vapowave/01.png" alt="Am I Kawaiiiiiiii?" loading="lazy" />
     <figcaption>《Am I Kawaiiiiiiii?》 by Homer Shie</figcaption>
   </figure>
 
@@ -875,7 +875,7 @@ export const articles = {
     so serious？
   </p>
   <figure class="image">
-    <img src="/assets/imgs/blog/Vapowave/02.jpg" alt="Way out" loading="lazy" />
+    <img src="https://images.homershie.com/assets/imgs/blog/Vapowave/02.jpg" alt="Way out" loading="lazy" />
     <figcaption>《Way out》by Homer Shie.</figcaption>
   </figure>
 
@@ -897,7 +897,7 @@ export const articles = {
   </p>
 
   <figure class="image">
-    <img src="/assets/imgs/blog/Vapowave/03.jpg" alt="You can’t afford love" loading="lazy" />
+    <img src="https://images.homershie.com/assets/imgs/blog/Vapowave/03.jpg" alt="You can’t afford love" loading="lazy" />
     <figcaption>
       <a
         href="https://www.instagram.com/p/Bw67tICDpcK/?utm_source=ig_web_options_share_sheet"
@@ -912,7 +912,7 @@ export const articles = {
   <p>取自邁阿密的明媚風光，尤如1984年邁阿密風雲劇集嚮往的生活。</p>
 
   <figure class="image">
-    <img src="/assets/imgs/blog/Vapowave/04.jpg" alt="Vaporwave by unknown" loading="lazy" />
+    <img src="https://images.homershie.com/assets/imgs/blog/Vapowave/04.jpg" alt="Vaporwave by unknown" loading="lazy" />
     <figcaption>
       <a href="https://aesthetik133.tumblr.com/post/179603317992" target="_blank"
         >Vaporwave by unknown
@@ -926,7 +926,7 @@ export const articles = {
   </p>
 
   <figure class="image">
-    <img src="/assets/imgs/blog/Vapowave/05.png" alt="Crying folders" loading="lazy" />
+    <img src="https://images.homershie.com/assets/imgs/blog/Vapowave/05.png" alt="Crying folders" loading="lazy" />
     <figcaption>
       <a
         href="https://itguidesandnews.tumblr.com/post/169732604704/crying-folders-itguidesandnewstumblrcom"
@@ -941,7 +941,7 @@ export const articles = {
   <p>模仿舊時代的陰極射線管電視機和VHS家用錄影系統。</p>
 
   <figure class="image">
-    <img src="/assets/imgs/blog/Vapowave/06.jpg" alt="There’s a disconnect" loading="lazy" />
+    <img src="https://images.homershie.com/assets/imgs/blog/Vapowave/06.jpg" alt="There’s a disconnect" loading="lazy" />
     <figcaption>
       <a
         href="https://www.tumblr.com/gothravendarkholme/167167720159/namelessbutnoah-theres-a-disconnect"
@@ -955,7 +955,7 @@ export const articles = {
   <p>使用數位的符號對未來表達無限可能性的嚮往，或是風刺高度發展的資訊社會。</p>
 
   <figure class="image">
-    <img src="/assets/imgs/blog/Vapowave/07.gif" alt="80S Glitch GIF" loading="lazy" />
+    <img src="https://images.homershie.com/assets/imgs/blog/Vapowave/07.gif" alt="80S Glitch GIF" loading="lazy" />
     <figcaption>
       <a href="https://giphy.com/gifs/80s-glitch-retro-l41lSv6cb1eUGoLTi" target="_blank">
         《80S Glitch GIF》by Barth
@@ -967,7 +967,7 @@ export const articles = {
   <p>緬懷資本主義的盛世，或是諷刺消費主義和物質主義嘗試塑造的美好願景。</p>
 
   <figure class="image">
-    <img src="/assets/imgs/blog/Vapowave/08.gif" alt="Mc Donalds Art GIF" loading="lazy" />
+    <img src="https://images.homershie.com/assets/imgs/blog/Vapowave/08.gif" alt="Mc Donalds Art GIF" loading="lazy" />
     <figcaption>
       <a href="https://giphy.com/gifs/gif-art-vaporwave-r9clNYxqOO4qk" target="_blank">
         《Mc Donalds Art GIF》
@@ -979,7 +979,7 @@ export const articles = {
   <p>表達日本文化的喜好，緬懷舊時代兒時記憶中純樸美好虛幻的娛樂活動，或是讚揚世界主義。</p>
 
   <figure class="image">
-    <img src="/assets/imgs/blog/Vapowave/09.jpg" alt="unknown from Pinterest" loading="lazy" />
+    <img src="https://images.homershie.com/assets/imgs/blog/Vapowave/09.jpg" alt="unknown from Pinterest" loading="lazy" />
     <figcaption>
       <a href="https://www.pinterest.com/pin/71072500355880345/" target="_blank">
         unknown from Pinterest.
@@ -991,7 +991,7 @@ export const articles = {
   <p>模仿舊時代的作業系統Windows 95和數位藝術開始發展時的簡易3D模型。</p>
 
   <figure class="image">
-    <img src="/assets/imgs/blog/Vapowave/10.jpg" alt="Women's Fashion notitle" loading="lazy" />
+    <img src="https://images.homershie.com/assets/imgs/blog/Vapowave/10.jpg" alt="Women's Fashion notitle" loading="lazy" />
     <figcaption>
       <a href="http://4.allepin.site/20619-2/" target="_blank"> Women's Fashion notitle </a>
     </figcaption>
@@ -1009,7 +1009,7 @@ export const articles = {
   </p>
 
   <figure class="image">
-    <img src="/assets/imgs/blog/Vapowave/11.gif" alt="Loop Aesthetics" loading="lazy" />
+    <img src="https://images.homershie.com/assets/imgs/blog/Vapowave/11.gif" alt="Loop Aesthetics" loading="lazy" />
     <figcaption>
       <a href="https://giphy.com/gifs/seapunk-vaporwave-webpunk-3oBUVMNuHNSuY" target="_blank">
         《Loop Aesthetics》</a
@@ -1023,7 +1023,7 @@ export const articles = {
     <a href="https://www.facebook.com/simpleinfo/posts/1273973496112088" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Vapowave/12.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Vapowave/12.jpg"
           alt="圖文不符-能自動駕駛的AI智慧車"
           loading="lazy"
         />
@@ -1035,20 +1035,20 @@ export const articles = {
       target="_blank"
     >
       <figure class="image">
-        <img src="/assets/imgs/blog/Vapowave/richard.png" alt="Richard發小財" loading="lazy" />
+        <img src="https://images.homershie.com/assets/imgs/blog/Vapowave/richard.png" alt="Richard發小財" loading="lazy" />
         <figcaption>Richard 發小財- 影片及網頁設計</figcaption>
       </figure>
     </a>
     <a href="https://www.behance.net/gallery/50977253/TRIP-TRIP-TRIP" target="_blank">
       <figure class="image">
-        <img src="/assets/imgs/blog/Vapowave/13.png" alt="TRIP TRIP TRIP" loading="lazy" />
+        <img src="https://images.homershie.com/assets/imgs/blog/Vapowave/13.png" alt="TRIP TRIP TRIP" loading="lazy" />
         <figcaption>TRIP TRIP TRIP</figcaption>
       </figure>
     </a>
     <a href="https://www.behance.net/gallery/81720815/portfolio-2019" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Vapowave/15.png"
+          src="https://images.homershie.com/assets/imgs/blog/Vapowave/15.png"
           alt="Laura Giordani portfolio 2019"
           loading="lazy"
         />
@@ -1058,7 +1058,7 @@ export const articles = {
     <a href="https://www.behance.net/gallery/64375303/Birthday-Invitation-Posters" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Vapowave/17.png"
+          src="https://images.homershie.com/assets/imgs/blog/Vapowave/17.png"
           alt="Birthday Invitation Posters"
           loading="lazy"
         />
@@ -1067,14 +1067,14 @@ export const articles = {
     </a>
     <a href="https://www.behance.net/gallery/42174781/Loop-the-loop" target="_blank">
       <figure class="image">
-        <img src="/assets/imgs/blog/Vapowave/18.gif" alt="Loop-the-loop" loading="lazy" />
+        <img src="https://images.homershie.com/assets/imgs/blog/Vapowave/18.gif" alt="Loop-the-loop" loading="lazy" />
         <figcaption>Loop-the-loop</figcaption>
       </figure>
     </a>
     <a href="https://www.behance.net/gallery/48568067/Mtv-Breaks" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Vapowave/19.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Vapowave/19.jpg"
           alt="Mtv Breaks
 "
           loading="lazy"
@@ -1084,20 +1084,20 @@ export const articles = {
     </a>
     <a href="https://www.behance.net/gallery/44298589/Craft-Beer-Festival" target="_blank">
       <figure class="image">
-        <img src="/assets/imgs/blog/Vapowave/21.jpg" alt="Craft Beer Festival" loading="lazy" />
+        <img src="https://images.homershie.com/assets/imgs/blog/Vapowave/21.jpg" alt="Craft Beer Festival" loading="lazy" />
         <figcaption>Craft Beer Festival</figcaption>
       </figure>
     </a>
     <a href="https://www.behance.net/gallery/82078403/Post-Up" target="_blank">
       <figure class="image">
-        <img src="/assets/imgs/blog/Vapowave/22.png" alt="Post Up" loading="lazy" />
+        <img src="https://images.homershie.com/assets/imgs/blog/Vapowave/22.png" alt="Post Up" loading="lazy" />
         <figcaption>Post Up</figcaption>
       </figure>
     </a>
     <a href="https://www.behance.net/gallery/36846143/Bubbaloo-da-California" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Vapowave/23.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Vapowave/23.jpg"
           alt="Bubbaloo da Califórnia
 "
           loading="lazy"
@@ -1107,20 +1107,20 @@ export const articles = {
     </a>
     <a href="https://www.behance.net/gallery/68743479/Kiehls-Youth-Dose" target="_blank">
       <figure class="image">
-        <img src="/assets/imgs/blog/Vapowave/24.jpg" alt="Kiehl’s “Youth Dose”" loading="lazy" />
+        <img src="https://images.homershie.com/assets/imgs/blog/Vapowave/24.jpg" alt="Kiehl’s “Youth Dose”" loading="lazy" />
         <figcaption>Kiehl’s “Youth Dose”</figcaption>
       </figure>
     </a>
     <a href="https://www.behance.net/gallery/36113145/Synchrotron-design" target="_blank">
       <figure class="image">
-        <img src="/assets/imgs/blog/Vapowave/25.jpg" alt="Synchrotron design" loading="lazy" />
+        <img src="https://images.homershie.com/assets/imgs/blog/Vapowave/25.jpg" alt="Synchrotron design" loading="lazy" />
         <figcaption>Synchrotron design</figcaption>
       </figure>
     </a>
     <a href="https://www.behance.net/gallery/29872467/Remorses-Dreams-Expectations" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Vapowave/26.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Vapowave/26.jpg"
           alt="Remorses • Dreams • Expectations"
           loading="lazy"
         />
@@ -1133,7 +1133,7 @@ export const articles = {
     >
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Vapowave/27.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Vapowave/27.jpg"
           alt="Sistemas de identidad | Espacio Cult"
           loading="lazy"
         />
@@ -1143,7 +1143,7 @@ export const articles = {
     <a href="https://www.behance.net/gallery/47692513/-82-99" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Vapowave/28.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Vapowave/28.jpg"
           alt="レトロフューチャー 82 99
 "
           loading="lazy"
@@ -1154,7 +1154,7 @@ export const articles = {
     <a href="https://www.behance.net/gallery/29856031/V-A-P-O-R-W-A-V-E-9-6-" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Vapowave/29.png"
+          src="https://images.homershie.com/assets/imgs/blog/Vapowave/29.png"
           alt="V A P O R W A V E • '9 6 🌴📼"
           loading="lazy"
         />
@@ -1164,7 +1164,7 @@ export const articles = {
     <a href="https://www.behance.net/gallery/85463211/MACROSS-82-99" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Vapowave/30.png"
+          src="https://images.homershie.com/assets/imgs/blog/Vapowave/30.png"
           alt="マクロスMACROSS 82-99 Cham! album"
           loading="lazy"
         />
@@ -1173,14 +1173,14 @@ export const articles = {
     </a>
     <a href="https://www.behance.net/gallery/41023081/Instagram-for-Win95" target="_blank">
       <figure class="image">
-        <img src="/assets/imgs/blog/Vapowave/31.jpg" alt="Instagram for Win95" loading="lazy" />
+        <img src="https://images.homershie.com/assets/imgs/blog/Vapowave/31.jpg" alt="Instagram for Win95" loading="lazy" />
         <figcaption>Instagram for Win95</figcaption>
       </figure>
     </a>
     <a href="https://www.behance.net/gallery/58140225/WISH-YOU-1111-HAPPY" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Vapowave/32.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Vapowave/32.jpg"
           alt="マクロスMACROSS 82–99 Cham! album、Instagram for Win95、WISH YOU 11.11 HAPPY"
           loading="lazy"
         />
@@ -1252,15 +1252,15 @@ export const articles = {
     categoryName: '世界視界',
     excerpt:
       '常常被各種「現代」搞的烏煙瘴氣？這個系列主要幫助大家釐清各種「現代」運動對視覺傳達領域所帶來的明顯影響，以及瞭解正在萌芽的新時代文化思潮－元現代主義，讓大家不只是認識視覺設計歷史，還能實實在在的把歷史活用在你的專案。',
-    image: '/assets/imgs/blog/modern-design-intro.jpg',
-    thumbnail: '/assets/imgs/blog/modern-design-intro.jpg',
+    image: 'https://images.homershie.com/assets/imgs/blog/modern-design-intro.jpg',
+    thumbnail: 'https://images.homershie.com/assets/imgs/blog/modern-design-intro.jpg',
     author: 'Homer Shie',
     content: `
 <article>
   <figure class="image">
     <img
       class="w-100"
-      src="/assets/imgs/blog/World_Vision/IntroImage.png"
+      src="https://images.homershie.com/assets/imgs/blog/World_Vision/IntroImage.png"
       alt="IntroImage"
       loading="lazy"
     />
@@ -1293,7 +1293,7 @@ export const articles = {
   <figure class="image">
     <img
       class="w-100"
-      src="/assets/imgs/blog/World_Vision/年表.png"
+      src="https://images.homershie.com/assets/imgs/blog/World_Vision/年表.png"
       alt="年表"
       loading="lazy"
     />
@@ -1306,7 +1306,7 @@ export const articles = {
   <figure class="image">
     <img
       class="w-100"
-      src="/assets/imgs/blog/World_Vision/traditional_01.png"
+      src="https://images.homershie.com/assets/imgs/blog/World_Vision/traditional_01.png"
       alt="traditional_01"
       loading="lazy"
     />
@@ -1345,7 +1345,7 @@ export const articles = {
   <figure class="image">
     <img
       class="w-100"
-      src="/assets/imgs/blog/World_Vision/traditional_02.png"
+      src="https://images.homershie.com/assets/imgs/blog/World_Vision/traditional_02.png"
       alt="traditional_02"
       loading="lazy"
     />
@@ -1365,7 +1365,7 @@ export const articles = {
   <figure class="image">
     <img
       class="w-100"
-      src="/assets/imgs/blog/World_Vision/traditional_03.png"
+      src="https://images.homershie.com/assets/imgs/blog/World_Vision/traditional_03.png"
       alt="traditional_03"
       loading="lazy"
     />
@@ -1400,7 +1400,7 @@ export const articles = {
   <figure class="image">
     <img
       class="w-100"
-      src="/assets/imgs/blog/World_Vision/modern_01.png"
+      src="https://images.homershie.com/assets/imgs/blog/World_Vision/modern_01.png"
       alt="modern_01"
       loading="lazy"
     />
@@ -1421,7 +1421,7 @@ export const articles = {
   <figure class="image">
     <img
       class="w-100"
-      src="/assets/imgs/blog/World_Vision/modern_02.png"
+      src="https://images.homershie.com/assets/imgs/blog/World_Vision/modern_02.png"
       alt="modern_02"
       loading="lazy"
     />
@@ -1459,7 +1459,7 @@ export const articles = {
   <figure class="image">
     <img
       class="w-100"
-      src="/assets/imgs/blog/World_Vision/modern_03.png"
+      src="https://images.homershie.com/assets/imgs/blog/World_Vision/modern_03.png"
       alt="modern_03"
       loading="lazy"
     />
@@ -1480,7 +1480,7 @@ export const articles = {
   <figure class="image">
     <img
       class="w-100"
-      src="/assets/imgs/blog/World_Vision/modern_04.png"
+      src="https://images.homershie.com/assets/imgs/blog/World_Vision/modern_04.png"
       alt="modern_04"
       loading="lazy"
     />
@@ -1506,7 +1506,7 @@ export const articles = {
   <figure class="image">
     <img
       class="w-100"
-      src="/assets/imgs/blog/World_Vision/postmodern_01.png"
+      src="https://images.homershie.com/assets/imgs/blog/World_Vision/postmodern_01.png"
       alt="postmodern_01"
       loading="lazy"
     />
@@ -1529,7 +1529,7 @@ export const articles = {
   <figure class="image">
     <img
       class="w-100"
-      src="/assets/imgs/blog/World_Vision/postmodern_02.png"
+      src="https://images.homershie.com/assets/imgs/blog/World_Vision/postmodern_02.png"
       alt="postmodern_02"
       loading="lazy"
     />
@@ -1548,7 +1548,7 @@ export const articles = {
   <figure class="image">
     <img
       class="w-100"
-      src="/assets/imgs/blog/World_Vision/postmodern_03.png"
+      src="https://images.homershie.com/assets/imgs/blog/World_Vision/postmodern_03.png"
       alt="postmodern_03"
       loading="lazy"
     />
@@ -1578,7 +1578,7 @@ export const articles = {
   <figure class="image">
     <img
       class="w-100"
-      src="/assets/imgs/blog/World_Vision/postmodern_04.png"
+      src="https://images.homershie.com/assets/imgs/blog/World_Vision/postmodern_04.png"
       alt="postmodern_04"
       loading="lazy"
     />
@@ -1609,7 +1609,7 @@ export const articles = {
   <figure class="image">
     <img
       class="w-100"
-      src="/assets/imgs/blog/World_Vision/metamodern_01.png"
+      src="https://images.homershie.com/assets/imgs/blog/World_Vision/metamodern_01.png"
       alt="metamodern_01"
       loading="lazy"
     />
@@ -1646,7 +1646,7 @@ export const articles = {
   <figure class="image">
     <img
       class="w-100"
-      src="/assets/imgs/blog/World_Vision/metamodern_02.png"
+      src="https://images.homershie.com/assets/imgs/blog/World_Vision/metamodern_02.png"
       alt="metamodern_02"
       loading="lazy"
     />
@@ -1666,7 +1666,7 @@ export const articles = {
   <figure class="image">
     <img
       class="w-100"
-      src="/assets/imgs/blog/World_Vision/metamodern_03.png"
+      src="https://images.homershie.com/assets/imgs/blog/World_Vision/metamodern_03.png"
       alt="metamodern_03"
       loading="lazy"
     />
@@ -1689,7 +1689,7 @@ export const articles = {
   <figure class="image">
     <img
       class="w-100"
-      src="/assets/imgs/blog/World_Vision/motion_logo.gif"
+      src="https://images.homershie.com/assets/imgs/blog/World_Vision/motion_logo.gif"
       alt="motion_logo.gif"
       loading="lazy"
     />
@@ -1780,14 +1780,14 @@ export const articles = {
     categoryName: '視覺風格大全',
     excerpt:
       '少女、花朵和植物不管何時都是藝術家和設計師們喜愛的元素，新藝術運動可以被視作開山始祖，但在一百多年前則是受人唾棄的商業藝術、應用美術。究竟新藝術運動如何翻身一躍變成世界範圍的美術運動，直到今天還能在庫洛魔法使的牌組等等流行文化一探新藝術的身影，就讓我們繼續看下去🕵️‍♀️',
-    image: '/assets/imgs/blog/art-nouveau.jpg',
-    thumbnail: '/assets/imgs/blog/art-nouveau.jpg',
+    image: 'https://images.homershie.com/assets/imgs/blog/art-nouveau.jpg',
+    thumbnail: 'https://images.homershie.com/assets/imgs/blog/art-nouveau.jpg',
     author: 'Homer Shie',
     content: `
 <article>
   <figure class="image">
     <img
-      src="/assets/imgs/blog/Art_Nouveau/ad7hftxdivxxvm.cloudfront.jpg"
+      src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/ad7hftxdivxxvm.cloudfront.jpg"
       alt="Alphonse Mucha, Le Zodiaque, 1896. © Mucha Trust 2018."
       loading="lazy"
     />
@@ -1811,7 +1811,7 @@ export const articles = {
 
   <figure class="image">
     <img
-      src="/assets/imgs/blog/Art_Nouveau/2b2895_0c88584924384c6cb459e121fc9ec286~mv2.jpg"
+      src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/2b2895_0c88584924384c6cb459e121fc9ec286~mv2.jpg"
       alt="Alphonse Mucha, Rêverie, 1897. © Mucha Trust 2018."
       loading="lazy"
     />
@@ -1828,7 +1828,7 @@ export const articles = {
   <figure class="image">
     <img
       class="img-fluid"
-      src="/assets/imgs/blog/Art_Nouveau/1863_Alexandre_Cabanel_-_The_Birth_of_Venus.jpg"
+      src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/1863_Alexandre_Cabanel_-_The_Birth_of_Venus.jpg"
       alt="維納斯的誕生 by Alexandre Cabanel, 1863"
       loading="lazy"
     />
@@ -1847,7 +1847,7 @@ export const articles = {
   <div class="image-gallery">
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Art_Nouveau/Henri_de_Toulouse-Lautrec_Yvette_Guilbert_Gants_noirs.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/Henri_de_Toulouse-Lautrec_Yvette_Guilbert_Gants_noirs.jpg"
         alt="朗讀狀的依薇特·吉爾貝 by 羅特列克, 1894"
         loading="lazy"
       />
@@ -1861,7 +1861,7 @@ export const articles = {
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Art_Nouveau/800px-The_Yellow_Christ,_Paul_Gauguin.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/800px-The_Yellow_Christ,_Paul_Gauguin.jpg"
         alt="黃色的基督 by 高更, 1889"
         loading="lazy"
       />
@@ -1875,7 +1875,7 @@ export const articles = {
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Art_Nouveau/800px-Utamaro1.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/800px-Utamaro1.jpg"
         alt="寬政三美人 by 喜多川歌麿"
         loading="lazy"
       />
@@ -1889,7 +1889,7 @@ export const articles = {
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Art_Nouveau/800px-LindisfarneFol27rIncipitMatt.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/800px-LindisfarneFol27rIncipitMatt.jpg"
         alt="凱爾經"
         loading="lazy"
       />
@@ -1914,7 +1914,7 @@ export const articles = {
     <a href="https://en.wikipedia.org/wiki/Aubrey_Beardsley" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/Aubrey_Beardsley_-_The_Stomach_Dance.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/Aubrey_Beardsley_-_The_Stomach_Dance.jpg"
           alt="Aubrey Beardsley, 1893–4"
           loading="lazy"
         />
@@ -1927,7 +1927,7 @@ export const articles = {
     >
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/800px-Eugene_Grasset,_poster_for_Grafton_Galleries,_1893.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/800px-Eugene_Grasset,_poster_for_Grafton_Galleries,_1893.jpg"
           alt="Eugène Grasset, 1893"
           loading="lazy"
         />
@@ -1940,7 +1940,7 @@ export const articles = {
     >
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/426px-Otto_Eckmann_-_Jugend_Nr._14,_1896.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/426px-Otto_Eckmann_-_Jugend_Nr._14,_1896.jpg"
           alt="德國Jugend雜誌封面, 1896"
           loading="lazy"
         />
@@ -1953,7 +1953,7 @@ export const articles = {
     >
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/Lautrec_moulin_rouge%2C_la_goulue_%28poster%29_1891.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/Lautrec_moulin_rouge%2C_la_goulue_%28poster%29_1891.jpg"
           alt="羅特列克, 1891"
           loading="lazy"
         />
@@ -1963,7 +1963,7 @@ export const articles = {
     <a href="https://en.wikipedia.org/wiki/Will_H._Bradley" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/800px-William_Henry_Bradley_-_The_Blue_Lady,_poster_for_The_Chap-Book_-_Google_Art_Project.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/800px-William_Henry_Bradley_-_The_Blue_Lady,_poster_for_The_Chap-Book_-_Google_Art_Project.jpg"
           alt="Will H. Bradley, 1894"
           loading="lazy"
         />
@@ -1976,7 +1976,7 @@ export const articles = {
     >
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/800px-Alfons_Mucha_-_1898_-_Dance.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/800px-Alfons_Mucha_-_1898_-_Dance.jpg"
           alt="穆夏, 1898"
           loading="lazy"
         />
@@ -1989,7 +1989,7 @@ export const articles = {
     >
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/Jules_Chéret-Fete_des_Fleurs.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/Jules_Chéret-Fete_des_Fleurs.jpg"
           alt="切雷 aka. 現代海報之父"
           loading="lazy"
         />
@@ -2002,7 +2002,7 @@ export const articles = {
     >
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/800px-Kolo_Moser_-_Mädchenkopf_-_1899.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/800px-Kolo_Moser_-_Mädchenkopf_-_1899.jpg"
           alt="Koloman Moser, 1899"
           loading="lazy"
         />
@@ -2012,7 +2012,7 @@ export const articles = {
     <a href="https://en.wikipedia.org/wiki/Art_Nouveau#" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/800px-Richard_Strauss-Woche,_festival_poster,_1910_by_Ludwig_Hohlwein.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/800px-Richard_Strauss-Woche,_festival_poster,_1910_by_Ludwig_Hohlwein.jpg"
           alt="Ludwig Hohlwein, 1910"
           loading="lazy"
         />
@@ -2035,7 +2035,7 @@ export const articles = {
     <figure class="image">
     <img
       class="img-fluid"
-      src="/assets/imgs/blog/Art_Nouveau/1834019_orig.jpg"
+      src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/1834019_orig.jpg"
       alt="Wes Wilson－海報, 1966"
       loading="lazy"
     />
@@ -2057,7 +2057,7 @@ export const articles = {
   <div class="image-gallery">
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Art_Nouveau/3002465_orig.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/3002465_orig.jpg"
         alt="Wes Wilson－海報, 1967"
         loading="lazy"
       />
@@ -2069,7 +2069,7 @@ export const articles = {
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Art_Nouveau/4138034_orig.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/4138034_orig.jpg"
         alt="Wes Wilson－海報, 1967"
         loading="lazy"
       />
@@ -2081,7 +2081,7 @@ export const articles = {
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Art_Nouveau/686a355ffa7ce251276ed1b465b7aa9c.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/686a355ffa7ce251276ed1b465b7aa9c.jpg"
         alt="Victor Moscoso－海報, 1967
 "
         loading="lazy"
@@ -2094,7 +2094,7 @@ export const articles = {
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Art_Nouveau/Left-Victor-Moscoso-Avalon-Ballroom-Big-Brother-and-the-Holding-Company-1966-Right-Wes-Wilson-Poster-c.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/Left-Victor-Moscoso-Avalon-Ballroom-Big-Brother-and-the-Holding-Company-1966-Right-Wes-Wilson-Poster-c.jpg"
         alt="Victor Moscoso－海報, 1966"
         loading="lazy"
       />
@@ -2104,7 +2104,7 @@ export const articles = {
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Art_Nouveau/il_794xN.540723011_s2uf.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/il_794xN.540723011_s2uf.jpg"
         alt="Pink Floyd樂團海報"
         loading="lazy"
       />
@@ -2118,7 +2118,7 @@ export const articles = {
     </figure>
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Art_Nouveau/il_794xN.2399336779_s1wk.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/il_794xN.2399336779_s1wk.jpg"
         alt="Fleetwood Mac樂團海報"
         loading="lazy"
       />
@@ -2138,7 +2138,7 @@ export const articles = {
   </p>
   <figure class="image">
     <img
-      src="/assets/imgs/blog/Art_Nouveau/21742220851431_607.jpg"
+      src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/21742220851431_607.jpg"
       alt="Romantic 乙女 Style by 高橋真琴"
       loading="lazy"
     />
@@ -2157,7 +2157,7 @@ export const articles = {
   <div class="image-masonry">
     <figure class="image">
       <img
-        src="/assets/imgs/blog/Art_Nouveau/1456974983_4693.jpg"
+        src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/1456974983_4693.jpg"
         alt="生活蘇格蘭紅茶－舊包裝"
         loading="lazy"
       />
@@ -2166,7 +2166,7 @@ export const articles = {
     <a href="https://www.facebook.com/heartmeltinging/" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/42545078_2131430963783134_8619102956152684544_o.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/42545078_2131430963783134_8619102956152684544_o.jpg"
           alt="生活蘇格蘭紅茶－包裝設計1 by 心融"
           loading="lazy"
         />
@@ -2176,7 +2176,7 @@ export const articles = {
     <a href="https://www.facebook.com/heartmeltinging/" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/42636669_2131430993783131_1491868490972266496_o.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/42636669_2131430993783131_1491868490972266496_o.jpg"
           alt="生活蘇格蘭紅茶－包裝設計2 by 心融"
           loading="lazy"
         />
@@ -2189,7 +2189,7 @@ export const articles = {
     >
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/d19zad9-dfa6762a-a72a-405e-85e8-f11072927283.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/d19zad9-dfa6762a-a72a-405e-85e8-f11072927283.jpg"
           alt="Nokia l’amour L’Amour "
           loading="lazy"
         />
@@ -2199,7 +2199,7 @@ export const articles = {
     <a href="https://monochrome-watches.com/personalize-jaeger-lecoultre-reverso/" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/JLC_reverso_Enamelling_8.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/JLC_reverso_Enamelling_8.jpg"
           alt="Jaeger Reservo Mucha"
           loading="lazy"
         />
@@ -2209,7 +2209,7 @@ export const articles = {
     <a href="https://411posters.com/tag/chuck-sperry/page/4/" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/sperry-MAENADS-LA-WEB.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/sperry-MAENADS-LA-WEB.jpg"
           alt="Maenad (Blue), 2015"
           loading="lazy"
         />
@@ -2219,7 +2219,7 @@ export const articles = {
     <a href="https://indieground.net/blog/weekly-inspiration-dose-067/" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/weekly-inspiration-dose-067_indiegroundblog_01.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/weekly-inspiration-dose-067_indiegroundblog_01.jpg"
           alt="Lana Del Rey by Unknown"
           loading="lazy"
         />
@@ -2229,7 +2229,7 @@ export const articles = {
     <a href="https://www.etsy.com/listing/604536725/" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/il_794xN.1467196978_lv4q.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/il_794xN.1467196978_lv4q.jpg"
           alt="神力女超人海報 by Unknown"
           loading="lazy"
         />
@@ -2238,26 +2238,26 @@ export const articles = {
     </a>
     <a href="https://zh.moegirl.org.cn/zh-tw/%E5%BA%93%E6%B4%9B%E7%89%8C" target="_blank">
       <figure class="image">
-        <img src="/assets/imgs/blog/Art_Nouveau/CWood.jpg" alt="庫洛牌-木" loading="lazy" />
+        <img src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/CWood.jpg" alt="庫洛牌-木" loading="lazy" />
         <figcaption>庫洛牌-木</figcaption>
       </figure>
     </a>
     <a href="https://zh.moegirl.org.cn/zh-tw/%E5%BA%93%E6%B4%9B%E7%89%8C" target="_blank">
       <figure class="image">
-        <img src="/assets/imgs/blog/Art_Nouveau/CIllusion.jpg" alt="庫洛牌-幻" loading="lazy" />
+        <img src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/CIllusion.jpg" alt="庫洛牌-幻" loading="lazy" />
         <figcaption>庫洛牌-幻</figcaption>
       </figure>
     </a>
     <a href="https://zh.moegirl.org.cn/zh-tw/%E5%BA%93%E6%B4%9B%E7%89%8C" target="_blank">
       <figure class="image">
-        <img src="/assets/imgs/blog/Art_Nouveau/CLight.jpg" alt="庫洛牌-光" loading="lazy" />
+        <img src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/CLight.jpg" alt="庫洛牌-光" loading="lazy" />
         <figcaption>庫洛牌-光</figcaption>
       </figure>
     </a>
     <a href="https://www.instagram.com/takumitoxin.tm/" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/mmbiz.qpic.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/mmbiz.qpic.jpg"
           alt="吉普力系列插畫1 by TAKUMI"
           loading="lazy"
         />
@@ -2267,7 +2267,7 @@ export const articles = {
     <a href="https://www.instagram.com/takumitoxin.tm/" target="_blank">
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/170e-hymscpq3379640.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/170e-hymscpq3379640.jpg"
           alt="吉普力系列插畫2 by TAKUMI"
           loading="lazy"
         />
@@ -2280,7 +2280,7 @@ export const articles = {
     >
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/cc550216663633.562af947e8364.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/cc550216663633.562af947e8364.jpg"
           alt="Mucha x Pixel Art"
           loading="lazy"
         />
@@ -2293,7 +2293,7 @@ export const articles = {
     >
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/d35ff587835469.5dc4007143250.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/d35ff587835469.5dc4007143250.jpg"
           alt="Microsoft x Surface"
           loading="lazy"
         />
@@ -2306,7 +2306,7 @@ export const articles = {
     >
       <figure class="image">
         <img
-          src="/assets/imgs/blog/Art_Nouveau/a4224088168751.5dcdcd41d7f95.jpg"
+          src="https://images.homershie.com/assets/imgs/blog/Art_Nouveau/a4224088168751.5dcdcd41d7f95.jpg"
           alt="Samsung × Mercedes Bazan"
           loading="lazy"
         />
