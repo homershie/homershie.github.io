@@ -1,4 +1,4 @@
-const w = file => `/assets/imgs/works/${file}`
+const w = file => `https://images.homershie.com/assets/imgs/works/${file}`
 
 export const portfolio = [
   {

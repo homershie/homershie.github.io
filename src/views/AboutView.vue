@@ -15,19 +15,34 @@
           <div class="col-lg-5 valign">
             <div class="profile-img">
               <div class="img">
-                <img :src="toWebP('/assets/imgs/header/profile.jpg')" alt="荷馬桑個人照片" />
+                <img
+                  :src="toWebP('https://images.homershie.com/assets/imgs/header/profile.jpg')"
+                  alt="荷馬桑個人照片"
+                />
               </div>
               <span class="icon">
-                <img :src="toWebP('/assets/imgs/header/icon1.png')" alt="" />
+                <img
+                  :src="toWebP('https://images.homershie.com/assets/imgs/header/icon1.png')"
+                  alt=""
+                />
               </span>
               <span class="icon">
-                <img :src="toWebP('/assets/imgs/header/icon2.png')" alt="" />
+                <img
+                  :src="toWebP('https://images.homershie.com/assets/imgs/header/icon2.png')"
+                  alt=""
+                />
               </span>
               <span class="icon">
-                <img :src="toWebP('/assets/imgs/header/icon3.png')" alt="" />
+                <img
+                  :src="toWebP('https://images.homershie.com/assets/imgs/header/icon3.png')"
+                  alt=""
+                />
               </span>
               <span class="icon">
-                <img :src="toWebP('/assets/imgs/header/icon4.png')" alt="" />
+                <img
+                  :src="toWebP('https://images.homershie.com/assets/imgs/header/icon4.png')"
+                  alt=""
+                />
               </span>
             </div>
           </div>
@@ -223,37 +238,37 @@ const skills = ref([
     id: 1,
     name: '平面設計',
     percentage: 95,
-    icon: '/assets/imgs/resume/s1.png',
+    icon: 'https://images.homershie.com/assets/imgs/resume/s1.png',
   },
   {
     id: 2,
     name: '插畫',
     percentage: 85,
-    icon: '/assets/imgs/resume/s2.png',
+    icon: 'https://images.homershie.com/assets/imgs/resume/s2.png',
   },
   {
     id: 3,
     name: '動態設計',
     percentage: 80,
-    icon: '/assets/imgs/resume/s3.png',
+    icon: 'https://images.homershie.com/assets/imgs/resume/s3.png',
   },
   {
     id: 4,
     name: '3D動畫',
     percentage: 72,
-    icon: '/assets/imgs/resume/s4.png',
+    icon: 'https://images.homershie.com/assets/imgs/resume/s4.png',
   },
   {
     id: 5,
     name: 'UI設計',
     percentage: 65,
-    icon: '/assets/imgs/resume/s5.png',
+    icon: 'https://images.homershie.com/assets/imgs/resume/s5.png',
   },
   {
     id: 6,
     name: '網頁開發',
     percentage: 60,
-    icon: '/assets/imgs/resume/s6.png',
+    icon: 'https://images.homershie.com/assets/imgs/resume/s6.png',
   },
 ])
 
@@ -321,12 +336,12 @@ onMounted(async () => {
   // 收集所有圖片URL
   const imageUrls = [
     // 個人照片
-    '/assets/imgs/header/profile.jpg',
+    'https://images.homershie.com/assets/imgs/header/profile.jpg',
     // 圖示
-    '/assets/imgs/header/icon1.png',
-    '/assets/imgs/header/icon2.png',
-    '/assets/imgs/header/icon3.png',
-    '/assets/imgs/header/icon4.png',
+    'https://images.homershie.com/assets/imgs/header/icon1.png',
+    'https://images.homershie.com/assets/imgs/header/icon2.png',
+    'https://images.homershie.com/assets/imgs/header/icon3.png',
+    'https://images.homershie.com/assets/imgs/header/icon4.png',
     // 技能圖示
     ...skills.value.map(skill => skill.icon),
   ]

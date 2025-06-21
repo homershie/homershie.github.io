@@ -31,3 +31,10 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# Wrangler & Cloudflare
+.wrangler/
+wrangler.toml.bak
+
+# R2 upload cache
+scripts/.r2-cache.json
