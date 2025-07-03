@@ -121,6 +121,7 @@ import { useImageCache } from '@/composables/useImageCache'
 import { useHead } from '@vueuse/head'
 import { enableImageLightbox } from '@/composables/useLightBox.js'
 import { useScroll } from '@vueuse/core'
+import { BASE_TITLE } from '@/router/index.js'
 
 const route = useRoute()
 const router = useRouter()
@@ -169,18 +170,29 @@ const shareUrls = computed(() => {
   }
 })
 
+// 更新頁面標題的函數
+const updatePageTitle = () => {
+  if (article.value && article.value.title) {
+    document.title = `${article.value.title}|${BASE_TITLE}`
+  } else {
+    document.title = `文章詳情|${BASE_TITLE}`
+  }
+}
+
 // 載入文章
 function loadArticle() {
   const articleId = route.params.id
   if (articles[articleId]) {
     article.value = articles[articleId]
-    // 更新頁面標題和 SEO
-    document.title = `${article.value.title} - 荷馬桑 Homer Shie`
+    // 更新頁面標題
+    updatePageTitle()
+    // 更新 SEO meta 標籤
     if (article.value.seo) {
       updateMetaTags(article.value.seo)
     }
   } else {
     article.value = null
+    document.title = `文章不存在|${BASE_TITLE}`
   }
 }
 
@@ -209,8 +221,13 @@ watch(
 
 watch(article, async a => {
   if (!a) return
+
+  // 更新頁面標題
+  updatePageTitle()
+
+  // 更新 useHead
   useHead({
-    title: `${a.title} – 荷馬桑 Homer Shie`,
+    title: `${a.title}|${BASE_TITLE}`,
     meta: [
       { name: 'description', content: a.seo.description },
       { name: 'keywords', content: a.seo.keywords },
