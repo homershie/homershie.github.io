@@ -133,29 +133,6 @@ const formatDate = dateString => {
   })
 }
 
-// 預載入圖片並處理格式
-const preloadAndProcessImages = async images => {
-  if (!images.length) return
-
-  // 先檢查並獲取最佳圖片路徑
-  const processedImages = await Promise.all(
-    images.map(async img => {
-      if (!img) return null
-      return await getBestImagePath(img)
-    })
-  )
-
-  // 過濾掉無效的圖片
-  const validImages = processedImages.filter(Boolean)
-
-  if (validImages.length) {
-    // 預載入圖片
-    await preloadImages(validImages)
-    // 啟用 lightbox
-    enableImageLightbox(validImages)
-  }
-}
-
 // 更新頁面標題的函數
 const updatePageTitle = () => {
   if (project.value && project.value.title) {
@@ -165,11 +142,41 @@ const updatePageTitle = () => {
   }
 }
 
-// 監聽 project 變化，更新標題
+// 監聽 project 變化，更新標題和預載入圖片
 watch(
   () => project.value,
-  () => {
+  async newProject => {
+    // 更新頁面標題
     updatePageTitle()
+
+    if (newProject) {
+      // 收集主圖與 gallery 圖片
+      const images = []
+      if (newProject.mainImage) images.push(newProject.mainImage)
+      if (Array.isArray(newProject.gallery)) {
+        images.push(...newProject.gallery.filter(Boolean))
+      }
+
+      if (images.length > 0) {
+        // 先檢查並獲取最佳圖片路徑
+        const processedImages = await Promise.all(
+          images.map(async img => {
+            if (!img) return null
+            return await getBestImagePath(img)
+          })
+        )
+
+        // 過濾掉無效的圖片
+        const validImages = processedImages.filter(Boolean)
+
+        if (validImages.length) {
+          // 預載入圖片
+          await preloadImages(validImages)
+          // 啟用 lightbox
+          enableImageLightbox(validImages)
+        }
+      }
+    }
   },
   { immediate: true }
 )
@@ -191,9 +198,6 @@ onMounted(() => {
   if (!project.value.gallery || !Array.isArray(project.value.gallery)) {
     project.value.gallery = []
   }
-
-  // 更新頁面標題
-  updatePageTitle()
 })
 </script>
 
