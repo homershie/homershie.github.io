@@ -136,9 +136,9 @@ const formatDate = dateString => {
 // 更新頁面標題的函數
 const updatePageTitle = () => {
   if (project.value && project.value.title) {
-    document.title = `${project.value.title} | ${BASE_TITLE}`
+    document.title = `${project.value.title}|${BASE_TITLE}`
   } else {
-    document.title = `專案詳情 | ${BASE_TITLE}`
+    document.title = `專案詳情|${BASE_TITLE}`
   }
 }
 
