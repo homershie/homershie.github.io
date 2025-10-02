@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import { VitePluginRadar } from 'vite-plugin-radar'
 import viteImagemin from 'vite-plugin-imagemin'
+import imagesFormat from 'vite-plugin-images-format'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
@@ -30,11 +31,12 @@ export default defineConfig(({ mode }) => {
   // 只在生產環境中添加圖片優化插件
   if (isProduction) {
     plugins.push(
-      viteImagemin({
-        gifsicle: { optimizationLevel: 7 },
-        mozjpeg: { quality: 85 },
-        pngquant: { quality: [0.65, 0.8] },
+      // 使用圖片格式轉換插件
+      imagesFormat({
         webp: { quality: 85 },
+        avif: false,
+        include: ['**/*.{png,jpg,jpeg}'], // 只處理這些格式
+        exclude: ['**/*.gif'], // 排除 gif
       })
     )
   }

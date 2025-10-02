@@ -37,10 +37,7 @@
     "ci": "npm run lint:check && npm run format:check && npm run test:run",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "r2:upload": "node scripts/upload-to-r2.js",
-    "r2:sync": "node scripts/sync-r2.js",
-    "r2:create-bucket": "wrangler r2 bucket create hodes-images",
-    "r2:list": "wrangler r2 object list hodes-images"
+    "convert:webp": "node scripts/convert-to-webp-simple.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -50,10 +47,10 @@
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "@vee-validate/i18n": "^4.15.1",
     "@vee-validate/rules": "^4.15.1",
+    "@vitejs/plugin-vue": "^5.2.3",
     "@vitest/coverage-v8": "^3.2.3",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
-    "@vitejs/plugin-vue": "^5.2.3",
     "@vueuse/core": "^13.3.0",
     "@vueuse/head": "^2.0.0",
     "axios": "^1.9.0",
@@ -88,6 +85,8 @@
     "jsdom": "^26.1.0",
     "prettier": "3.5.3",
     "sass-embedded": "^1.89.1",
+    "terser": "^5.44.0",
+    "vite-plugin-images-format": "^1.0.4",
     "vitest": "^3.2.3"
   }
 }
