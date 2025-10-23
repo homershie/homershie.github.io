@@ -7,7 +7,7 @@
             <!-- Logo -->
             <router-link class="logo icon-img-120" to="/">
               <img
-                src="https://images.homershie.com/assets/imgs/logo-light.png"
+                src="https://r2bucket.homershie.com/assets/imgs/logo-light.png"
                 alt="荷馬桑 Homer Shie - 視覺設計師標誌"
                 loading="eager"
               />
